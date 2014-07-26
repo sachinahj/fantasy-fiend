@@ -1,7 +1,7 @@
-class ProjectionsTables < ActiveRecord::Migration
+class CreateProjectionForQbs < ActiveRecord::Migration
   def change
-    create_table :qb_projections do |t|
-      t.belongs_to :player
+    create_table :projection_for_qbs do |t|
+      t.references :player, index: true
 
       t.float :pass_attempts
       t.integer :pass_attempts_high
@@ -42,7 +42,7 @@ class ProjectionsTables < ActiveRecord::Migration
       t.float :fantasy_points
       t.integer :fantasy_points_high
       t.integer :fantasy_points_low
-    
+
       t.timestamps
     end
   end
