@@ -8,6 +8,8 @@ class PlayersController < ApplicationController
     @player = Player.find(params[:id])
     find_projections
     find_stats
+    puts "stats --------------"
+    p @stats
 
 
   end

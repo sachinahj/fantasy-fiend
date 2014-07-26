@@ -1,5 +1,22 @@
-<%= @params %>
-<br><br>
-<%= @projections.inspect %>
-<br><br>
-<%= @stats.inspect %>
+<h2><%= @player.name %> (<%=@player.position%>)</h3>
+<h3><%= @player.team %> (ByeWeek: <%= @player.bye_week %>)</h4>
+<br>
+<% if @projections != [] %>
+  <h4>Projections</h4>
+  <ul>
+  <% @projections.first.attributes.each do |key, value| %>
+    <li><%= key %>: <%= value %></li>
+  <% end %>
+  </ul>
+<% end %>
+<br>
+
+<% if @stats != [] %>
+  <h4>2013 Stats</h4>
+  <ul>
+  <% @stats.first.attributes.each do |key, value| %>
+    <li><%= key %>: <%= value %></li>
+  <% end %>
+  </ul>
+<% end %>
+<br>
