@@ -40,3 +40,4 @@ gem 'spring',        group: :development
 
 gem 'hirb'
 
+gem "select2-rails"
