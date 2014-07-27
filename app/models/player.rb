@@ -19,5 +19,6 @@ class Player < ActiveRecord::Base
     self.bye_week = teamObj.bye_week
     self.team = teamObj.team
   end
+
 end
 

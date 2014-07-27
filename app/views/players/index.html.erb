@@ -1,6 +1,27 @@
+<script type="text/javascript">
+  $(document).ready(function() { 
+    $("#e1").select2();
+  });
+</script>
 <h3>All Players </h3>
 
-<% @players.each do |player| %>
-  <%= link_to player.name, player %>
-  <br>
-<% end %>
+
+  <select id ="e1" style="width : 300px">
+    <% @players.each do |player| %>
+      <option value = "<%= player.id %>"><%= player.name %></option>
+    <% end %>
+  </select>
+
+<p>Selected Options: <span id="selectedText"></span></p>
+
+<script type="text/javascript">
+  $("#e1").change(function() {
+    var theID = $('#e1').select2('data').id
+    var theText = $('#e1').select2('data').text;
+    $('#selectedText').append('<br><a href="/players/'+theID +'">' + theText + '</a>')
+  });
+
+
+
+
+</script>

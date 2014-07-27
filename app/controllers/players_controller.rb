@@ -2,6 +2,11 @@ class PlayersController < ApplicationController
 
   def index
     @players = Player.all
+    @data = []
+    @players.each do |player|
+      object = {id: player.id, text: player.name}
+      @data << object
+    end
   end
 
   def show
