@@ -41,3 +41,4 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'hirb'
 
 gem "select2-rails"
+gem "highcharts-rails", "~> 3.0.0"

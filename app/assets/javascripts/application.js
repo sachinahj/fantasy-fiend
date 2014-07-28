@@ -15,3 +15,5 @@
 //= require turbolinks
 //= require_tree .
 //= require select2
+//= require highcharts
+//= require highcharts/highcharts-more
