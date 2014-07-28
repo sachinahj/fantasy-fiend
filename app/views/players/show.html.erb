@@ -1,20 +1,20 @@
 <h2><%= @player.display_name %> (<%=@player.position%>)</h3>
 <h3><%= @player.team %> (ByeWeek: <%= @player.bye_week %>)</h4>
 <br>
-<% if @projections != [] %>
+<% if @projections != nil %>
   <h4>Projections</h4>
   <ul>
-  <% @projections.first.attributes.each do |key, value| %>
+  <% @projections.attributes.each do |key, value| %>
     <li><%= key %>: <%= value %></li>
   <% end %>
   </ul>
 <% end %>
 <br>
 
-<% if @stats != [] %>
+<% if @stats != nil %>
   <h4>2013 Stats</h4>
   <ul>
-  <% @stats.first.attributes.each do |key, value| %>
+  <% @stats.attributes.each do |key, value| %>
     <li><%= key %>: <%= value %></li>
   <% end %>
   </ul>
