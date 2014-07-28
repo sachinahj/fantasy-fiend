@@ -24,18 +24,19 @@ namespace :projections do
       p projection
 
       player = nil
-      name = projection['name'].downcase
+      name = projection['name']
       team_abbreviation = projection['team_abbreviation']
       projection.delete("name")
       projection.delete("team_abbreviation")
 
-      player = Player.find_by name: name
+      player = Player.find_by name: name.downcase
 
       if player == nil 
           
         puts n.to_s + " player not found!!!"
         attributes = {
-          name: name,
+          name: name.downcase,
+          display_name: name,
           position: "QB",
           team: nil,
           team_abbreviation: team_abbreviation,
@@ -80,18 +81,19 @@ namespace :projections do
       p projection
 
       player = nil
-      name = projection['name'].downcase
+      name = projection['name']
       team_abbreviation = projection['team_abbreviation']
       projection.delete("name")
       projection.delete("team_abbreviation")
 
-      player = Player.find_by name: name
+      player = Player.find_by name: name.downcase
 
       if player == nil 
       
         puts n.to_s + " player not found!!!"
         attributes = {
-          name: name,
+          name: name.downcase,
+          display_name: name,
           position: "RB",
           team: nil,
           team_abbreviation: team_abbreviation,
@@ -136,18 +138,19 @@ namespace :projections do
       p projection
 
       player = nil
-      name = projection['name'].downcase
+      name = projection['name']
       team_abbreviation = projection['team_abbreviation']
       projection.delete("name")
       projection.delete("team_abbreviation")
 
-      player = Player.find_by name: name
+      player = Player.find_by name: name.downcase
 
       if player == nil 
       
         puts n.to_s + " player not found!!!"
         attributes = {
-          name: name,
+          name: name.downcase,
+          display_name: name,
           position: "WR",
           team: nil,
           team_abbreviation: team_abbreviation,
@@ -192,18 +195,19 @@ namespace :projections do
       p projection
 
       player = nil
-      name = projection['name'].downcase
+      name = projection['name']
       team_abbreviation = projection['team_abbreviation']
       projection.delete("name")
       projection.delete("team_abbreviation")
 
-      player = Player.find_by name: name
+      player = Player.find_by name: name.downcase
 
       if player == nil 
       
         puts n.to_s + " player not found!!!"
         attributes = {
-          name: name,
+          name: name.downcase,
+          display_name: name,
           position: "TE",
           team: nil,
           team_abbreviation: team_abbreviation,
@@ -248,18 +252,19 @@ namespace :projections do
       p projection
 
       player = nil
-      name = projection['name'].downcase
+      name = projection['name']
       team_abbreviation = projection['team_abbreviation']
       projection.delete("name")
       projection.delete("team_abbreviation")
 
-      player = Player.find_by name: name
+      player = Player.find_by name: name.downcase
 
       if player == nil 
       
         puts n.to_s + " player not found!!!"
         attributes = {
-          name: name,
+          name: name.downcase,
+          display_name: name,
           position: "K",
           team: nil,
           team_abbreviation: team_abbreviation,

@@ -3,11 +3,17 @@ namespace :csv do
 
   desc "import_initial_csvs"
   task setup: :environment do
-    
     Rake::Task["csv:teams"].invoke
     Rake::Task["csv:players"].invoke
-
   end
+
+  desc "import_initial_csvs"
+  task setup_all: :environment do
+    Rake::Task["csv:setup"].invoke
+    Rake::Task["projections:setup"].invoke
+    Rake::Task["stats:setup"].invoke
+  end
+
 
 # Imports teams from teams.csv into Teams table, no relationships
   desc "imports teams from teams.csv"
