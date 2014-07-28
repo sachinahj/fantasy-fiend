@@ -1,6 +1,7 @@
 namespace :stats do
-  desc "TODO"
+  desc "import_stats_csvs"
   task setup: :environment do
+
     Rake::Task["stats:qb"].invoke
     Rake::Task["stats:rb"].invoke
     Rake::Task["stats:wr"].invoke
