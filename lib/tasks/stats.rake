@@ -1,4 +1,5 @@
 namespace :stats do
+  
   desc "import_stats_csvs"
   task setup: :environment do
 
@@ -215,7 +216,26 @@ namespace :stats do
       player = Player.find_by name: name
 
       if player == nil 
+
         puts n.to_s + " player not found!!!"
+        attributes = {
+          name: name.downcase,
+          display_name: name,
+          position: "DST",
+          team: nil,
+          team_abbreviation: team_abbreviation,
+          bye_week: nil,
+          rank: nil,
+          best_rank: nil,
+          worst_rank: nil,
+          average_rank: nil,
+          rank_standard_deviation: nil,
+          average_draft_position: nil,
+        }
+
+        player = Player.new(attributes)
+        player.save
+        puts n.to_s + " player created!!"
       else 
         puts n.to_s + " player found!!!"
         stats["player"] = player

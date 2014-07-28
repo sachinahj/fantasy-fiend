@@ -7,8 +7,6 @@ namespace :projections do
     Rake::Task["projections:rb"].invoke
     Rake::Task["projections:wr"].invoke
     Rake::Task["projections:te"].invoke
-    Rake::Task["projections:d"].invoke
-
 
   end
 
@@ -34,7 +32,7 @@ namespace :projections do
       player = Player.find_by name: name
 
       if player == nil 
-      
+          
         puts n.to_s + " player not found!!!"
         attributes = {
           name: name,

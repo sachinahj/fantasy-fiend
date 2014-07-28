@@ -1,14 +1,23 @@
+<head>
 <script type="text/javascript">
-  $(document).ready(function() { 
-    $("#e1").select2();
+  $(document).ready(function () {
+    $("#e1").select2({
+      placeholder: "Select a Player",
+      allowClear: true
+    });
   });
 </script>
+</head>
+
+
 <h3>All Players </h3>
 
 
   <select id ="e1" style="width : 300px">
+  
+    <option></option>
     <% @players.each do |player| %>
-      <option value = "<%= player.id %>"><%= player.name %></option>
+      <option value = "<%= player.id %>"><%= player.display_name %></option>
     <% end %>
   </select>
 

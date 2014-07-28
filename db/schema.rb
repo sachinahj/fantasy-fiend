@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20140726183009) do
 
   create_table "players", force: true do |t|
     t.string   "name"
+    t.string   "display_name"
     t.string   "position"
     t.string   "team"
     t.string   "team_abbreviation"
@@ -79,8 +80,8 @@ ActiveRecord::Schema.define(version: 20140726183009) do
     t.integer  "fumbles_high"
     t.integer  "fumbles_low"
     t.float    "fantasy_points"
-    t.integer  "fantasy_points_high"
-    t.integer  "fantasy_points_low"
+    t.float    "fantasy_points_high"
+    t.float    "fantasy_points_low"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -111,8 +112,8 @@ ActiveRecord::Schema.define(version: 20140726183009) do
     t.integer  "fumbles_high"
     t.integer  "fumbles_low"
     t.float    "fantasy_points"
-    t.integer  "fantasy_points_high"
-    t.integer  "fantasy_points_low"
+    t.float    "fantasy_points_high"
+    t.float    "fantasy_points_low"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -134,8 +135,8 @@ ActiveRecord::Schema.define(version: 20140726183009) do
     t.integer  "fumbles_high"
     t.integer  "fumbles_low"
     t.float    "fantasy_points"
-    t.integer  "fantasy_points_high"
-    t.integer  "fantasy_points_low"
+    t.float    "fantasy_points_high"
+    t.float    "fantasy_points_low"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -166,8 +167,8 @@ ActiveRecord::Schema.define(version: 20140726183009) do
     t.integer  "fumbles_high"
     t.integer  "fumbles_low"
     t.float    "fantasy_points"
-    t.integer  "fantasy_points_high"
-    t.integer  "fantasy_points_low"
+    t.float    "fantasy_points_high"
+    t.float    "fantasy_points_low"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

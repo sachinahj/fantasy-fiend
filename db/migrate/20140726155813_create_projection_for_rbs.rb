@@ -32,8 +32,8 @@ class CreateProjectionForRbs < ActiveRecord::Migration
       t.integer :fumbles_low
 
       t.float :fantasy_points
-      t.integer :fantasy_points_high
-      t.integer :fantasy_points_low
+      t.float :fantasy_points_high
+      t.float :fantasy_points_low
 
       t.timestamps
     end

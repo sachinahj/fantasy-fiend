@@ -1,18 +1,17 @@
 require 'csv'
-
 namespace :csv do
 
   desc "import_initial_csvs"
   task setup: :environment do
     
-    Rake::Task["csv:from_teams"].invoke
-    Rake::Task["csv:from_rankings"].invoke
+    Rake::Task["csv:teams"].invoke
+    Rake::Task["csv:players"].invoke
 
   end
 
 # Imports teams from teams.csv into Teams table, no relationships
   desc "imports teams from teams.csv"
-  task from_teams: :environment do
+  task teams: :environment do
     
     csv_text = File.read('app/assets/CSVs/teams.csv')
     csv = CSV.parse(csv_text, :headers => true)
@@ -48,8 +47,8 @@ namespace :csv do
   end
 
 # Imports players from rankings.csv into Players table, has_one projection
-  desc "imports rankings from rankings.csv"
-  task from_rankings: :environment do
+  desc "imports players from rankings.csv"
+  task players: :environment do
     
     csv_text = File.read('app/assets/CSVs/rankings.csv')
     csv = CSV.parse(csv_text, :headers => true)
@@ -58,7 +57,7 @@ namespace :csv do
       ranking = ranking.to_hash
 
       p "----ranking " + n.to_s
-      ranking['name'] = ranking['name'].downcase
+      ranking['name'] = ranking['display_name'].downcase
       p ranking
 
       player = Player.new(ranking)
@@ -66,7 +65,7 @@ namespace :csv do
 
       n += 1 
     end
-    
+
   end
 
 
