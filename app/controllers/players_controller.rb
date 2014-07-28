@@ -55,7 +55,7 @@ class PlayersController < ApplicationController
     when 'K'
       @projections = ProjectionForK.where(player_id: @player.id)
     else 
-      @projections = nil
+      @projections = []
     end
   end
   def find_stats
@@ -74,7 +74,7 @@ class PlayersController < ApplicationController
     when 'DST'
       @stats = StatForD.where(player_id: @player.id)
     else 
-      @stats = nil
+      @stats = []
     end
 
   end

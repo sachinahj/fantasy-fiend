@@ -7,6 +7,7 @@ namespace :projections do
     Rake::Task["projections:rb"].invoke
     Rake::Task["projections:wr"].invoke
     Rake::Task["projections:te"].invoke
+    Rake::Task["projections:k"].invoke
 
   end
 

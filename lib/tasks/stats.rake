@@ -208,12 +208,12 @@ namespace :stats do
       p stats
 
       player = nil
-      name = stats['name'].downcase
+      name = stats['name']
       team_abbreviation = stats['team_abbreviation']
       stats.delete("name")
       stats.delete("team_abbreviation")
 
-      player = Player.find_by name: name
+      player = Player.find_by name: name.downcase
 
       if player == nil 
 
@@ -237,11 +237,14 @@ namespace :stats do
         player.save
         puts n.to_s + " player created!!"
       else 
+
         puts n.to_s + " player found!!!"
+
+      end
+
         stats["player"] = player
         StatForD.create(stats)
         puts n.to_s + " stats created!!"
-      end
 
       n += 1
     end
