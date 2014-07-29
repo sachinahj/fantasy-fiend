@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 table#adp {
-  text-align: center;
+  text-align: left;
 }
 tr.qb {
   color: red;
@@ -18,8 +18,16 @@ tr.te {
   color: blue;
 }
 tr.k {
+  color: purple;
+}
+tr.dst {
   color: black;
 }
 table.dataTable tbody tr.highlight {
-  background-color: #ffd6aa;
+  background-color: #a5ffe8;  
+}
+table.dataTable tbody td {
+  cursor: pointer;
+  -moz-user-select: none; /* mozilla browsers */
+  -webkit-user-select: none; /* webkit browsers */
 }

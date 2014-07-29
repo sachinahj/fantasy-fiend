@@ -34,8 +34,8 @@ class PlayersController < ApplicationController
   def show
 
     @player = Player.find(params[:id])
-    find_projections
-    find_stats
+    @projections = @player.season2014_projection
+    @stats = @player.season2013_stat
 
     respond_to do |format|
       format.html

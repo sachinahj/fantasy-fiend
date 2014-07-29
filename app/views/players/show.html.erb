@@ -8,7 +8,9 @@
   <h4>Projections</h4>
   <ul>
   <% @projections.attributes.each do |key, value| %>
-    <li><%= key %>: <%= value %></li>
+    <% if value != nil %>
+      <li><%= key %>: <%= value %></li>
+    <% end %>
   <% end %>
   </ul>
 <% end %>
@@ -18,13 +20,15 @@
   <h4>2013 Stats</h4>
   <ul>
   <% @stats.attributes.each do |key, value| %>
-    <li><%= key %>: <%= value %></li>
+    <% if value != nil %>
+      <li><%= key %>: <%= value %></li>
+    <% end %>
   <% end %>
   </ul>
 <% end %>
 <br>
 
-<script type="text/javascript"> 
+<!--<script type="text/javascript"> 
 $(function () {
   $.ajax({
     url: '/players/<%=@player.id%>',
@@ -33,7 +37,7 @@ $(function () {
     success: function(player) {
       player_projection = player.projection_for_qb
       console.log("player", player);
-      categories = ["Completions", "Attempts", "Yards", "Touchdowns", "Interceptions", "Fantasy Points"]
+      categories = ["one", "two", "three"]
       projection_high = [player_projection.pass_completions_high, player_projection.pass_attempts_high, player_projection.pass_yards_high, player_projection.pass_touchdowns_high, player_projection.pass_interceptions_high, player_projection.fantasy_points_high] 
 
       projection = [player_projection.pass_completions, player_projection.pass_attempts, player_projection.pass_yards, player_projection.pass_touchdowns, player_projection.pass_interceptions, player_projection.fantasy_points]
@@ -92,17 +96,17 @@ $(function () {
         },
         series: [{
           name: 'High',
-          data: projection_high
+          data: [1,2,3]
         }, {
           name: 'Projection',
-          data: projection
+          data: [1,2,3]
         }, {
           name: 'Low',
-          data: projection_low
+          data: [1,2,3]
         }]
       });
     }
   });
 
 });
-</script>
+</script>-->

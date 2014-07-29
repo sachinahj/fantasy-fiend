@@ -5,14 +5,10 @@ namespace :csv do
   task setup: :environment do
     Rake::Task["csv:teams"].invoke
     Rake::Task["adp:setup"].invoke
-
-  end
-
-  desc "import_initial_csvs"
-  task setup_all: :environment do
-    Rake::Task["csv:setup"].invoke
     Rake::Task["projections:setup"].invoke
     Rake::Task["stats:setup"].invoke
+    Rake::Task["snaps:setup"].invoke
+
   end
 
 

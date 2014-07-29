@@ -12,25 +12,5 @@ class Player < ActiveRecord::Base
 
   end
 
-  def to_json(options = nil)
-    if position == 'QB'
-      super(options || {include: [:stat_for_qb, :projection_for_qb]})
-    elsif position == 'RB'
-      super(options || {include: [:stat_for_rb, :projection_for_rb]})
-    elsif position == 'WR'
-      super(options || {include: [:stat_for_wr, :projection_for_wr]})
-    elsif position == 'TE'
-      super(options || {include: [:stat_for_te, :projection_for_te]})
-    elsif position == 'K'
-      super(options || {include: [:stat_for_k, :projection_for_k]})
-    elsif position == 'DST'
-      super(options || {include: :stat_for_d})
-    else
-      nil
-    end
-
-
-  end
-
 end
 

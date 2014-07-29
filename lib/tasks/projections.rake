@@ -13,7 +13,8 @@ namespace :projections do
 
   desc "import qb projections of 2014 season"
   task qb: :environment do
-    csv_text = File.read('app/assets/CSVs/projections/QB_projections.csv')
+
+    csv_text = File.read('app/assets/CSVs/2014projections/qb_projections.csv')
     csv = CSV.parse(csv_text, :headers => true)
     
     n = 1
@@ -21,7 +22,7 @@ namespace :projections do
     csv.each do |projection|
       projection = projection.to_hash
 
-      puts "----projection " + n.to_s
+      puts "----qb projection " + n.to_s + " ----"
       p projection
 
       player = nil
@@ -42,12 +43,8 @@ namespace :projections do
           team: nil,
           team_abbreviation: team_abbreviation,
           bye_week: nil,
-          rank: nil,
-          best_rank: nil,
-          worst_rank: nil,
-          average_rank: nil,
-          rank_standard_deviation: nil,
-          average_draft_position: nil,
+          position_draft_position: nil,
+          overall_draft_position: nil
         }
 
         player = Player.new(attributes)
@@ -59,8 +56,7 @@ namespace :projections do
         
       end
 
-      projection["player"] = player
-      ProjectionForQb.create(projection)
+      player.create_season2014_projection(projection)
       puts n.to_s + " projection created!!"
 
       n += 1
@@ -70,7 +66,8 @@ namespace :projections do
 
   desc "import rb projections of 2014 season"
   task rb: :environment do
-    csv_text = File.read('app/assets/CSVs/projections/RB_projections.csv')
+
+    csv_text = File.read('app/assets/CSVs/2014projections/rb_projections.csv')
     csv = CSV.parse(csv_text, :headers => true)
     
     n = 1
@@ -78,7 +75,7 @@ namespace :projections do
     csv.each do |projection|
       projection = projection.to_hash
 
-      puts "----projection " + n.to_s
+      puts "----rb projection " + n.to_s + " ----"
       p projection
 
       player = nil
@@ -90,7 +87,7 @@ namespace :projections do
       player = Player.find_by name: name.downcase
 
       if player == nil 
-      
+          
         puts n.to_s + " player not found!!!"
         attributes = {
           name: name.downcase,
@@ -99,12 +96,8 @@ namespace :projections do
           team: nil,
           team_abbreviation: team_abbreviation,
           bye_week: nil,
-          rank: nil,
-          best_rank: nil,
-          worst_rank: nil,
-          average_rank: nil,
-          rank_standard_deviation: nil,
-          average_draft_position: nil,
+          position_draft_position: nil,
+          overall_draft_position: nil
         }
 
         player = Player.new(attributes)
@@ -116,8 +109,7 @@ namespace :projections do
         
       end
 
-      projection["player"] = player
-      ProjectionForRb.create(projection)
+      player.create_season2014_projection(projection)
       puts n.to_s + " projection created!!"
 
       n += 1
@@ -127,7 +119,8 @@ namespace :projections do
 
   desc "import wr projections of 2014 season"
   task wr: :environment do
-    csv_text = File.read('app/assets/CSVs/projections/WR_projections.csv')
+    
+    csv_text = File.read('app/assets/CSVs/2014projections/wr_projections.csv')
     csv = CSV.parse(csv_text, :headers => true)
     
     n = 1
@@ -135,7 +128,7 @@ namespace :projections do
     csv.each do |projection|
       projection = projection.to_hash
 
-      puts "----projection " + n.to_s
+      puts "----wr projection " + n.to_s + " ----"
       p projection
 
       player = nil
@@ -147,7 +140,7 @@ namespace :projections do
       player = Player.find_by name: name.downcase
 
       if player == nil 
-      
+          
         puts n.to_s + " player not found!!!"
         attributes = {
           name: name.downcase,
@@ -156,12 +149,8 @@ namespace :projections do
           team: nil,
           team_abbreviation: team_abbreviation,
           bye_week: nil,
-          rank: nil,
-          best_rank: nil,
-          worst_rank: nil,
-          average_rank: nil,
-          rank_standard_deviation: nil,
-          average_draft_position: nil,
+          position_draft_position: nil,
+          overall_draft_position: nil
         }
 
         player = Player.new(attributes)
@@ -173,8 +162,7 @@ namespace :projections do
         
       end
 
-      projection["player"] = player
-      ProjectionForWr.create(projection)
+      player.create_season2014_projection(projection)
       puts n.to_s + " projection created!!"
 
       n += 1
@@ -184,7 +172,8 @@ namespace :projections do
 
   desc "import te projections of 2014 season"
   task te: :environment do
-    csv_text = File.read('app/assets/CSVs/projections/TE_projections.csv')
+    
+    csv_text = File.read('app/assets/CSVs/2014projections/te_projections.csv')
     csv = CSV.parse(csv_text, :headers => true)
     
     n = 1
@@ -192,7 +181,7 @@ namespace :projections do
     csv.each do |projection|
       projection = projection.to_hash
 
-      puts "----projection " + n.to_s
+      puts "----te projection " + n.to_s + " ----"
       p projection
 
       player = nil
@@ -204,7 +193,7 @@ namespace :projections do
       player = Player.find_by name: name.downcase
 
       if player == nil 
-      
+          
         puts n.to_s + " player not found!!!"
         attributes = {
           name: name.downcase,
@@ -213,12 +202,8 @@ namespace :projections do
           team: nil,
           team_abbreviation: team_abbreviation,
           bye_week: nil,
-          rank: nil,
-          best_rank: nil,
-          worst_rank: nil,
-          average_rank: nil,
-          rank_standard_deviation: nil,
-          average_draft_position: nil,
+          position_draft_position: nil,
+          overall_draft_position: nil
         }
 
         player = Player.new(attributes)
@@ -230,8 +215,7 @@ namespace :projections do
         
       end
 
-      projection["player"] = player
-      ProjectionForTe.create(projection)
+      player.create_season2014_projection(projection)
       puts n.to_s + " projection created!!"
 
       n += 1
@@ -241,7 +225,8 @@ namespace :projections do
 
   desc "import k projections of 2014 season"
   task k: :environment do
-    csv_text = File.read('app/assets/CSVs/projections/K_projections.csv')
+    
+    csv_text = File.read('app/assets/CSVs/2014projections/k_projections.csv')
     csv = CSV.parse(csv_text, :headers => true)
     
     n = 1
@@ -249,7 +234,7 @@ namespace :projections do
     csv.each do |projection|
       projection = projection.to_hash
 
-      puts "----projection " + n.to_s
+      puts "----k projection " + n.to_s + " ----"
       p projection
 
       player = nil
@@ -261,7 +246,7 @@ namespace :projections do
       player = Player.find_by name: name.downcase
 
       if player == nil 
-      
+          
         puts n.to_s + " player not found!!!"
         attributes = {
           name: name.downcase,
@@ -270,12 +255,8 @@ namespace :projections do
           team: nil,
           team_abbreviation: team_abbreviation,
           bye_week: nil,
-          rank: nil,
-          best_rank: nil,
-          worst_rank: nil,
-          average_rank: nil,
-          rank_standard_deviation: nil,
-          average_draft_position: nil,
+          position_draft_position: nil,
+          overall_draft_position: nil
         }
 
         player = Player.new(attributes)
@@ -287,8 +268,7 @@ namespace :projections do
         
       end
 
-      projection["player"] = player
-      ProjectionForK.create(projection)
+      player.create_season2014_projection(projection)
       puts n.to_s + " projection created!!"
 
       n += 1
