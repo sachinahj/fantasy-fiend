@@ -1,0 +1,2 @@
+module OverallDraftPositionsHelper
+end

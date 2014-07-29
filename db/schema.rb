@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20140729153303) do
     t.integer  "bye_week"
     t.integer  "position_draft_position"
     t.integer  "overall_draft_position"
+    t.string   "quarterback"
+    t.string   "depth_chart_position"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -11,6 +11,9 @@
       
       t.integer :position_draft_position
       t.integer :overall_draft_position
+
+      t.string :quarterback
+      t.string :depth_chart_position
     
       t.timestamps
     end

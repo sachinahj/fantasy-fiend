@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class AverageDraftPositionControllerTest < ActionController::TestCase
+class OverallDraftPositionsControllerTest < ActionController::TestCase
   test "should get index" do
     get :index
     assert_response :success

@@ -16,6 +16,7 @@
       <th>2013 FPoints</th>
       <th>Projected FPoints</th>
       <th>Position DP</th>
+      <th>Depth Chart</th>
     </tr>
   </thead>
   <tbody>
@@ -29,6 +30,7 @@
         <td><%= player.season2013_stat ? player.season2013_stat.fantasy_points : "-------" %></td>
         <td><%= player.season2014_projection ? player.season2014_projection.fantasy_points : "-------" %></td>
         <td><%= player.position_draft_position %></td>
+        <td><%= player.depth_chart_position ? player.depth_chart_position : "-------" %></td>
       </tr>
     <% end %>
   </tbody>

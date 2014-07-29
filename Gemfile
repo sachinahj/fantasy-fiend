@@ -46,5 +46,7 @@ gem "highcharts-rails", "~> 3.0.0"
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'jquery-ui-rails' 
 
+gem 'nokogiri'
+
 
 
