@@ -1,6 +1,29 @@
 class CompareController < ApplicationController
   def quarterbacks
-    @quarterbacks = Player.where(position: "QB").includes(:projection_for_qb, :stat_for_qb)
+    @quarterbacks = Player.where(position: "QB").includes(:projection_for_qb, :stat_for_qb).limit(10)
+
+    @completions = []
+    @attempts = []
+    @yards = []
+    @touchdowns = []
+    @interceptions = [] 
+    @fantasy_points = []
+    
+    @series = []
+    @quarterbacks.each do |quarterback|
+      qb = {
+        name: quarterback.display_name,
+        data: [
+          quarterback.projection_for_qb.pass_completions,
+          quarterback.projection_for_qb.pass_attempts,
+          quarterback.projection_for_qb.pass_yards,
+          quarterback.projection_for_qb.pass_touchdowns,
+          quarterback.projection_for_qb.pass_interceptions,
+          quarterback.projection_for_qb.fantasy_points
+        ]
+      }
+      @series << qb
+    end
   end
 
   def runningbacks
