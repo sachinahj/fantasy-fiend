@@ -2,7 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
+table#adp {
+  text-align: center;
+}
 tr.qb {
   color: red;
 }
@@ -17,4 +19,7 @@ tr.te {
 }
 tr.k {
   color: black;
+}
+table.dataTable tbody tr.highlight {
+  background-color: #ffd6aa;
 }

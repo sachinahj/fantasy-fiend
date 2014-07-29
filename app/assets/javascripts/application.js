@@ -22,6 +22,7 @@
 $(document).ready(function () {
   $('#adp').dataTable({
     "iDisplayLength" : -1,
-    "paging": false
+    "paging": false,
+    "info": false
   });
 });

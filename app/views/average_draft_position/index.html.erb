@@ -43,6 +43,14 @@
       a = $(this).attr("id");
       $('.'+a).fadeToggle();
     });
+
+    $('tr').click(function (e) {
+      window.yo = $(this);
+      console.log("currentTarget", e.currentTarget);
+      console.log("this", this);
+      $(this).toggleClass("highlight");
+    });
+    
   });
 
 
