@@ -17,3 +17,11 @@
 //= require select2
 //= require highcharts
 //= require highcharts/highcharts-more
+//= require dataTables/jquery.dataTables
+
+$(document).ready(function () {
+  $('#adp').dataTable({
+    "iDisplayLength" : -1,
+    "paging": false
+  });
+});
