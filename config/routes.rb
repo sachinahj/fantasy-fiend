@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -6,7 +8,16 @@ Rails.application.routes.draw do
 
   get '/players', to: 'players#index'
   get '/players/:id', to: 'players#show', as: :player
+
   get '/ADP', to: 'average_draft_position#index', as: :average_draft_position
+
+  get 'compare/quarterbacks', to: 'compare#quarterbacks'
+  get 'compare/runningbacks', to: 'compare#runningbacks'
+  get 'compare/receivers', to: 'compare#receivers'
+  get 'compare/tightends', to: 'compare#tightends'
+  get 'compare/kickers', to: 'compare#kickers'
+  get 'compare/defenses', to: 'compare#defenses'
+  
   root :to => "players#index" 
 
   # You can have the root of your site routed with "root"
