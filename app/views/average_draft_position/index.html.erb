@@ -50,6 +50,12 @@
       console.log("this", this);
       $(this).toggleClass("highlight");
     });
+
+    $('#adp').dataTable({
+      "iDisplayLength" : -1,
+      "paging": false,
+      "info": false
+    });
     
   });
 
