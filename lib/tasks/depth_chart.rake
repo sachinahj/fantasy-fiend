@@ -2,9 +2,17 @@ require 'open-uri'
 require 'nokogiri'
 
 namespace :depth_chart do
-  
+
   desc "grab and set depth chart positions from FantasyPros.com"
   task setup: :environment do
+
+    Rake::Task["depth_chart:depth_chart_position"].invoke
+    Rake::Task["depth_chart:quarterbacks"].invoke
+
+  end
+  
+  desc "grab and set depth chart positions from FantasyPros.com"
+  task depth_chart_position: :environment do
 
 
     doc = Nokogiri::HTML(open("http://www.fantasypros.com/nfl/depth-charts.php"))
@@ -49,4 +57,46 @@ namespace :depth_chart do
 
   end
 
+
+  desc "grab and set depth chart positions from FantasyPros.com"
+  task quarterbacks: :environment do
+    quarterbacks = Player.where(depth_chart_position: "QB1")
+    players = Player.where(position: ["RB","WR","TE"])
+    players.each do |player|
+
+      team_abbreviation = player.team_abbreviation
+
+      quarterbacks.each do |quarterback|
+
+        if quarterback.team_abbreviation == team_abbreviation
+          player.quarterback = quarterback.display_name
+          player.save
+          puts "saved #{quarterback.display_name} for #{player.display_name}"
+        end
+
+      end
+
+    end
+
+  end
+
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
