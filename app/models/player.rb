@@ -1,16 +1,6 @@
 class Player < ActiveRecord::Base 
-  has_one :projection_for_qb
-  has_one :projection_for_rb
-  has_one :projection_for_wr
-  has_one :projection_for_te
-  has_one :projection_for_k
-
-  has_one :stat_for_qb
-  has_one :stat_for_rb
-  has_one :stat_for_wr
-  has_one :stat_for_te
-  has_one :stat_for_k
-  has_one :stat_for_d
+  has_one :season2014_projection
+  has_one :season2013_stat
 
   before_save :check_bye_week_and_team_name
 

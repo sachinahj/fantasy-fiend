@@ -4,7 +4,8 @@ namespace :csv do
   desc "import_initial_csvs"
   task setup: :environment do
     Rake::Task["csv:teams"].invoke
-    Rake::Task["csv:players"].invoke
+    Rake::Task["adp:setup"].invoke
+
   end
 
   desc "import_initial_csvs"
@@ -35,8 +36,8 @@ namespace :csv do
   end
 
 # NOT IN USE
-  desc "imports teams from teams.csv"
-  task from_schedule: :environment do
+  desc "imports schedule from schedule.csv"
+  task schedule: :environment do
     
     csv_text = File.read('app/assets/CSVs/teams.csv')
     csv = CSV.parse(csv_text, :headers => true)
