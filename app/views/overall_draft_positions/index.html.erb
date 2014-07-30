@@ -23,16 +23,16 @@
   <tbody>
     <% @players.each do |player|  %>
       <tr id="player<%=player.id%>" class="<%= player.position.downcase %>">
-        <td><%= player.overall_draft_position %></td>
+        <td><%= player.overall_draft_position.to_i %></td>
         <td><%= player.display_name %></td>
         <td><%= player.position %></td>
         <td><%= player.team_abbreviation %></td>
-        <td><%= player.bye_week %></td>
-        <td><%= player.season_stat ? player.season_stat.fantasy_points : "-------" %></td>
-        <td><%= player.season_projection ? player.season_projection.fantasy_points : "-------" %></td>
-        <td><%= player.position_draft_position %></td>
-        <td><%= player.depth_chart_position ? player.depth_chart_position : "-------" %></td>
-        <td><%= player.quarterback ? player.quarterback : "-------" %></td>
+        <td><%= player.bye_week.to_i %></td>
+        <td><%= player.season_stat ? player.season_stat.fantasy_points.to_f : "" %></td>
+        <td><%= player.season_projection ? player.season_projection.fantasy_points.to_f : "" %></td>
+        <td><%= player.position_draft_position.to_i %></td>
+        <td><%= player.depth_chart_position ? player.depth_chart_position : "" %></td>
+        <td><%= player.quarterback ? player.quarterback : "" %></td>
       </tr>
     <% end %>
   </tbody>
