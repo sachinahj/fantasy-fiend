@@ -22,7 +22,6 @@ class CreateSeasonProjections < ActiveRecord::Migration
       t.float :field_goals_made
       t.float :field_goals_attempts
       t.float :extra_points_made
-      t.float :extra_points_attempts
 
       t.float :fumbles
 

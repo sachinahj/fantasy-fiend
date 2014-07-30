@@ -126,7 +126,6 @@ ActiveRecord::Schema.define(version: 20140730135852) do
     t.float    "field_goals_made"
     t.float    "field_goals_attempts"
     t.float    "extra_points_made"
-    t.float    "extra_points_attempts"
     t.float    "fumbles"
     t.float    "fantasy_points"
     t.datetime "created_at"

@@ -1,0 +1,466 @@
+
+<div id="container1" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0"></div>
+<br><br>
+<div id="container2" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0"></div>
+<br><br>
+<div id="container3" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0"></div>
+
+
+
+<script type="text/javascript">
+  var qbs = <%= raw @quarterbacks.to_json(include: :season_projection) %>; 
+  var rbs = <%= raw @runningbacks.to_json(include: :season_projection) %>; 
+  var wrs = <%= raw @receivers.to_json(include: :season_projection) %>; 
+  var tes = <%= raw @tightends.to_json(include: :season_projection) %>;
+  var ks = <%= raw @kickers.to_json(include: :season_projection) %>;
+  var dsts = <%= raw @defenses.to_json(include: :season_projection) %>;
+
+  var scatter_series = [];
+
+  var qb_series = [];
+  for (var qb in qbs) {
+    if (qbs[qb].overall_draft_position && qbs[qb].season_projection) {
+      qb_series.push({name: qbs[qb].display_name, color: 'red', x: qbs[qb].overall_draft_position, y: qbs[qb].season_projection.fantasy_points});
+    }
+  }
+  scatter_series.push({name: "Quarterbacks", data: qb_series, color: 'red'});
+
+  var rb_series = [];
+  for (var rb in rbs) {
+    if (rbs[rb].overall_draft_position && rbs[rb].season_projection) {
+      rb_series.push({name: rbs[rb].display_name, color: 'orange', x: rbs[rb].overall_draft_position, y: rbs[rb].season_projection.fantasy_points});
+    }
+  }
+  scatter_series.push({name: "Running Backs", data: rb_series, color: 'orange'});
+
+  var wr_series = [];
+  for (var wr in wrs) {
+    if (wrs[wr].overall_draft_position && wrs[wr].season_projection) {
+      wr_series.push({name: wrs[wr].display_name, color: 'green', x: wrs[wr].overall_draft_position, y: wrs[wr].season_projection.fantasy_points});
+    }
+  }
+  scatter_series.push({name: "Wide Receivers", data: wr_series, color: 'green'});
+
+  var te_series = [];
+  for (var te in tes) {
+    if (tes[te].overall_draft_position && tes[te].season_projection) {
+      te_series.push({name: tes[te].display_name, color: 'blue', x: tes[te].overall_draft_position, y: tes[te].season_projection.fantasy_points});
+    }
+  }
+  scatter_series.push({name: "Tight Ends", data: te_series, color: 'blue'});
+
+
+  var k_series = [];
+  for (var k in ks) {
+    if (ks[k].overall_draft_position && ks[k].season_projection) {
+      k_series.push({name: ks[k].display_name, color: 'Purple', x: ks[k].overall_draft_position, y: ks[k].season_projection.fantasy_points});
+    }
+  }
+  scatter_series.push({name: "Kickers", data: k_series, color: 'Purple'});
+
+  console.log("scatter_series", scatter_series);
+
+
+  $(function () {
+      $('#container1').highcharts({
+          chart: {
+              type: 'scatter',
+              zoomType: 'xy'
+          },
+          title: {
+              text: 'Projected Fantasy Points vs Overall Draft Position'
+          },
+          subtitle: {
+              text: 'source: FantasyPros.com'
+          },
+          xAxis: {
+              title: {
+                  enabled: true,
+                  text: 'Projected Overall Draft Position'
+              },
+              startOnTick: true,
+              endOnTick: true,
+              showLastLabel: true,
+              min: 0
+          },
+          yAxis: {
+              title: {
+                  text: 'Projected Fantasy Points'
+              },
+              min: 0
+          },
+          legend: {
+              enabled: true
+          },
+          plotOptions: {
+              scatter: {
+                  marker: {
+                      radius: 5,
+                      states: {
+                          hover: {
+                              enabled: true,
+                              lineColor: 'rgb(100,100,100)'
+                          }
+                      }
+                  },
+                  states: {
+                      hover: {
+                          marker: {
+                              enabled: false
+                          }
+                      }
+                  },
+                  tooltip: {
+                      pointFormat: '<b>{point.name}</b><br>{point.x} draft position, {point.y} fantasy points'
+                  }
+              }
+          },
+          series: scatter_series
+      });
+  });
+</script>
+
+
+
+<script type="text/javascript">
+  var qbs = <%= raw @quarterbacks.to_json(include: :season_projection) %>; 
+  var rbs = <%= raw @runningbacks.to_json(include: :season_projection) %>; 
+  var wrs = <%= raw @receivers.to_json(include: :season_projection) %>; 
+  var tes = <%= raw @tightends.to_json(include: :season_projection) %>;
+  var ks = <%= raw @kickers.to_json(include: :season_projection) %>;
+  var dsts = <%= raw @defenses.to_json(include: :season_projection) %>;
+
+  stacked_series = [];
+  
+  qb_data = [0,0,0,0,0,0,0,0,0,0];
+  for (var qb = 0; qb < qbs.length; qb++) {
+    odp = qbs[qb].overall_draft_position
+    if (odp == null || odp === 0) {
+      continue;
+    }
+    if (odp <= 25) {
+      qb_data[0] += 1;
+    } else if (odp <= 50){
+      qb_data[1] += 1;
+    } else if (odp <= 75){
+      qb_data[2] += 1;
+    } else if (odp <= 100){
+      qb_data[3] += 1;
+    } else if (odp <= 125){
+      qb_data[4] += 1;
+    } else if (odp <= 150){
+      qb_data[5] += 1;
+    } else if (odp <= 175){
+      qb_data[6] += 1;
+    } else if (odp <= 200){
+      qb_data[7] += 1;
+    } else if (odp <= 225){
+      qb_data[8] += 1;
+    } else if (odp <= 250){
+      qb_data[9] += 1;
+    }
+  }
+  stacked_series.push({name: "Quarterbacks", data: qb_data});
+
+  rb_data = [0,0,0,0,0,0,0,0,0,0];
+  for (var rb = 0; rb < rbs.length; rb++) {
+    odp = rbs[rb].overall_draft_position
+    if (odp == null || odp === 0) {
+      continue;
+    }
+    if (odp <= 25) {
+      rb_data[0] += 1;
+    } else if (odp <= 50){
+      rb_data[1] += 1;
+    } else if (odp <= 75){
+      rb_data[2] += 1;
+    } else if (odp <= 100){
+      rb_data[3] += 1;
+    } else if (odp <= 125){
+      rb_data[4] += 1;
+    } else if (odp <= 150){
+      rb_data[5] += 1;
+    } else if (odp <= 175){
+      rb_data[6] += 1;
+    } else if (odp <= 200){
+      rb_data[7] += 1;
+    } else if (odp <= 225){
+      rb_data[8] += 1;
+    } else if (odp <= 250){
+      rb_data[9] += 1;
+    }
+  }
+  stacked_series.push({name: "Runningbacks", data: rb_data});
+
+  wr_data = [0,0,0,0,0,0,0,0,0,0];
+  for (var wr = 0; wr < wrs.length; wr++) {
+    odp = wrs[wr].overall_draft_position
+    if (odp == null || odp === 0) {
+      continue;
+    }
+    if (odp <= 25) {
+      wr_data[0] += 1;
+    } else if (odp <= 50){
+      wr_data[1] += 1;
+    } else if (odp <= 75){
+      wr_data[2] += 1;
+    } else if (odp <= 100){
+      wr_data[3] += 1;
+    } else if (odp <= 125){
+      wr_data[4] += 1;
+    } else if (odp <= 150){
+      wr_data[5] += 1;
+    } else if (odp <= 175){
+      wr_data[6] += 1;
+    } else if (odp <= 200){
+      wr_data[7] += 1;
+    } else if (odp <= 225){
+      wr_data[8] += 1;
+    } else if (odp <= 250){
+      wr_data[9] += 1;
+    }
+  }
+  stacked_series.push({name: "Wide Receivers", data: wr_data});
+
+  te_data = [0,0,0,0,0,0,0,0,0,0];
+  for (var te = 0; te < tes.length; te++) {
+    odp = tes[te].overall_draft_position
+    if (odp == null || odp === 0) {
+      continue;
+    }
+    if (odp <= 25) {
+      te_data[0] += 1;
+    } else if (odp <= 50){
+      te_data[1] += 1;
+    } else if (odp <= 75){
+      te_data[2] += 1;
+    } else if (odp <= 100){
+      te_data[3] += 1;
+    } else if (odp <= 125){
+      te_data[4] += 1;
+    } else if (odp <= 150){
+      te_data[5] += 1;
+    } else if (odp <= 175){
+      te_data[6] += 1;
+    } else if (odp <= 200){
+      te_data[7] += 1;
+    } else if (odp <= 225){
+      te_data[8] += 1;
+    } else if (odp <= 250){
+      te_data[9] += 1;
+    }
+  }
+  stacked_series.push({name: "Tight Ends", data: te_data});
+
+  k_data = [0,0,0,0,0,0,0,0,0,0];
+  for (var k = 0; k < ks.length; k++) {
+    odp = ks[k].overall_draft_position
+    if (odp == null || odp === 0) {
+      continue;
+    }
+    if (odp <= 25) {
+      k_data[0] += 1;
+    } else if (odp <= 50){
+      k_data[1] += 1;
+    } else if (odp <= 75){
+      k_data[2] += 1;
+    } else if (odp <= 100){
+      k_data[3] += 1;
+    } else if (odp <= 125){
+      k_data[4] += 1;
+    } else if (odp <= 150){
+      k_data[5] += 1;
+    } else if (odp <= 175){
+      k_data[6] += 1;
+    } else if (odp <= 200){
+      k_data[7] += 1;
+    } else if (odp <= 225){
+      k_data[8] += 1;
+    } else if (odp <= 250){
+      k_data[9] += 1;
+    }
+  }
+  stacked_series.push({name: "Kickers", data: k_data});
+
+  dst_data = [0,0,0,0,0,0,0,0,0,0];
+  for (var k = 0; k < dsts.length; k++) {
+    odp = dsts[k].overall_draft_position
+    if (odp == null || odp === 0) {
+      continue;
+    }
+    if (odp <= 25) {
+      dst_data[0] += 1;
+    } else if (odp <= 50){
+      dst_data[1] += 1;
+    } else if (odp <= 75){
+      dst_data[2] += 1;
+    } else if (odp <= 100){
+      dst_data[3] += 1;
+    } else if (odp <= 125){
+      dst_data[4] += 1;
+    } else if (odp <= 150){
+      dst_data[5] += 1;
+    } else if (odp <= 175){
+      dst_data[6] += 1;
+    } else if (odp <= 200){
+      dst_data[7] += 1;
+    } else if (odp <= 225){
+      dst_data[8] += 1;
+    } else if (odp <= 250){
+      dst_data[9] += 1;
+    }
+  }
+  stacked_series.push({name: "Defenses", data: dst_data});
+
+
+  
+  $(function () {
+      $('#container2').highcharts({
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: 'Projected Draft Position by Position'
+          },
+          xAxis: {
+              categories: ['1-25', '26-50', '51-75', '76-100', '101-125', '126-150', '151-175', '176-200', '201-225', '226-250'],
+              title : {
+                text: 'Overall Draft Position'
+              }
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: 'Total Players'
+              },
+              stackLabels: {
+                  enabled: false,
+                  style: {
+                      fontWeight: 'bold',
+                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                  }
+              }
+          },
+          legend: {
+              align: 'right',
+              x: -70,
+              verticalAlign: 'top',
+              y: 20,
+              floating: true,
+              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+              borderColor: '#CCC',
+              borderWidth: 1,
+              shadow: false
+          },
+          tooltip: {
+              formatter: function() {
+                  if (this.y === 0){
+                    return;
+                  }
+                  return '<b>'+ this.x +'</b><br/>'+
+                      this.series.name +': '+ this.y +'<br/>'+
+                      'Total: '+ this.point.stackTotal;
+              }
+          },
+          plotOptions: {
+              column: {
+                  stacking: 'normal',
+                  dataLabels: {
+                      enabled: false,
+                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                      style: {
+                          textShadow: '0 0 3px black, 0 0 3px black'
+                      }
+                  }
+              }
+          },
+          series: stacked_series
+      });
+  });
+</script>
+
+<script type="text/javascript">
+
+  var qbs = <%= raw @quarterbacks.to_json(include: :season_projection) %>; 
+  var rbs = <%= raw @runningbacks.to_json(include: :season_projection) %>; 
+  var wrs = <%= raw @receivers.to_json(include: :season_projection) %>; 
+  var tes = <%= raw @tightends.to_json(include: :season_projection) %>;
+  var ks = <%= raw @kickers.to_json(include: :season_projection) %>;
+  var dsts = <%= raw @defenses.to_json(include: :season_projection) %>;
+
+  qb_count = 0;
+  for (qb in qbs) {
+    if (qbs[qb].overall_draft_position <= 30){
+      qb_count += 1;
+    }
+  }
+
+  rb_count = 0;
+  for (rb in rbs) {
+    if (rbs[rb].overall_draft_position <= 30){
+      rb_count += 1;
+    }
+  }
+
+  wr_count = 0;
+  for (wr in wrs) {
+    if (wrs[wr].overall_draft_position <= 30){
+      wr_count += 1;
+    }
+  }
+
+  te_count = 0;
+  for (te in tes) {
+    if (tes[te].overall_draft_position <= 30){
+      te_count += 1;
+    }
+  }
+
+  total = qb_count + rb_count + wr_count + te_count;
+  qb_percent = qb_count/total * 100;
+  rb_percent = rb_count/total * 100;
+  wr_percent = wr_count/total * 100;
+  te_percent = te_count/total * 100;
+
+  $(function () {
+      $('#container3').highcharts({
+          chart: {
+              plotBackgroundColor: null,
+              plotBorderWidth: null,
+              plotShadow: false
+          },
+          title: {
+              text: 'Top 30 Overall Projections'
+          },
+          tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+          },
+          plotOptions: {
+              pie: {
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  dataLabels: {
+                      enabled: false
+                  },
+                  showInLegend: true
+              }
+          },
+          series: [{
+              type: 'pie',
+              name: 'Projection Share',
+              data: [
+                  ['Quarterbacks', qb_percent],
+                  {
+                      name: 'Runningbacks',
+                      y: rb_percent,
+                      sliced: true,
+                      selected: true
+                  },
+                  ['Wide Receivers', wr_percent],
+                  ['Tight Ends', te_percent]
+              ]
+          }]
+      }); 
+  });
+
+</script>

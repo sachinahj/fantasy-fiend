@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   get '/ODP', to: 'overall_draft_positions#index', as: :overall_draft_position
 
+  get 'compare', to: 'compare#index'
   get 'compare/quarterbacks', to: 'compare#quarterbacks'
   get 'compare/runningbacks', to: 'compare#runningbacks'
   get 'compare/receivers', to: 'compare#receivers'
