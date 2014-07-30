@@ -37,7 +37,7 @@ namespace :snaps do
         puts n.to_s + " player not found!!!"
       else 
         puts n.to_s + " player found!!!"
-        player.season2013_stat.update(snap)
+        player.season_stat.update(snap)
         puts n.to_s + " snap created!!"
       end
 
@@ -73,7 +73,7 @@ namespace :snaps do
         puts n.to_s + " player not found!!!"
       else 
         puts n.to_s + " player found!!!"
-        player.season2013_stat.update(snap)
+        player.season_stat.update(snap)
         puts n.to_s + " snap created!!"
       end
 
@@ -109,7 +109,7 @@ namespace :snaps do
         puts n.to_s + " player not found!!!"
       else 
         puts n.to_s + " player found!!!"
-        player.season2013_stat.update(snap)
+        player.season_stat.update(snap)
         puts n.to_s + " snap created!!"
       end
 
@@ -145,7 +145,7 @@ namespace :snaps do
         puts n.to_s + " player not found!!!"
       else 
         puts n.to_s + " player found!!!"
-        player.season2013_stat.update(snap)
+        player.season_stat.update(snap)
         puts n.to_s + " snap created!!"
       end
 

@@ -1,7 +1,7 @@
 class CompareController < ApplicationController
 
   def quarterbacks 
-    @quarterbacks = Player.all.where(position: "QB").where("overall_draft_position < 100").includes(:season2013_stat, :season2014_projection)
+    @quarterbacks = Player.all.where(position: "QB").where("overall_draft_position < 100").includes(:season_stat, :season_projection)
     p @quarterbacks
   end
 

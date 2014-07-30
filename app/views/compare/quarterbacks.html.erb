@@ -2,7 +2,7 @@
 
 
 <div class="quarterbacks" style="display: none">
-  <%= @quarterbacks.to_json(include: [:season2013_stat, :season2014_projection]) %>
+  <%= @quarterbacks.to_json(include: [:season_stat, :season_projection]) %>
 </div>
 
 <script type="text/javascript">
@@ -10,10 +10,10 @@
   var series = []
   for (qb in qbs) {
     odp = qbs[qb].overall_draft_position;
-    fantasy_points = qbs[qb].season2014_projection.fantasy_points;
+    fantasy_points = qbs[qb].season_projection.fantasy_points;
     console.log("qbs[qb].overall_draft_position", qbs[qb].overall_draft_position);
     if (odp != null && fantasy_points != null){
-      series.push({name: qbs[qb].display_name, data: [[qbs[qb].overall_draft_position, qbs[qb].season2014_projection.fantasy_points]]});
+      series.push({name: qbs[qb].display_name, data: [[qbs[qb].overall_draft_position, qbs[qb].season_projection.fantasy_points]]});
     }
   }
   console.log("series", series);

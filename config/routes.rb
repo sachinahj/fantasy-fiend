@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   get '/players/:id', to: 'players#show', as: :player
 
   get '/ODP', to: 'overall_draft_positions#index', as: :overall_draft_position
-  get '/ADP', to: 'average_draft_position#index', as: :average_draft_position
 
   get 'compare/quarterbacks', to: 'compare#quarterbacks'
   get 'compare/runningbacks', to: 'compare#runningbacks'

@@ -33,6 +33,7 @@ namespace :stats do
       stats.delete("team_abbreviation")
       stats.delete("rank")
       stats.delete("position")
+      stats["year"] = 2013
 
       player = Player.find_by name: name
 
@@ -40,7 +41,7 @@ namespace :stats do
         puts n.to_s + " player not found!!!"
       else 
         puts n.to_s + " player found!!!"
-        player.create_season2013_stat(stats)
+        player.create_season_stat(stats)
         puts n.to_s + " stats created!!"
       end
 
@@ -70,6 +71,7 @@ namespace :stats do
       stats.delete("team_abbreviation")
       stats.delete("rank")
       stats.delete("position")
+      stats["year"] = 2013
 
       player = Player.find_by name: name
 
@@ -77,7 +79,7 @@ namespace :stats do
         puts n.to_s + " player not found!!!"
       else 
         puts n.to_s + " player found!!!"
-        player.create_season2013_stat(stats)
+        player.create_season_stat(stats)
         puts n.to_s + " stats created!!"
       end
 
@@ -108,6 +110,7 @@ namespace :stats do
       stats.delete("team_abbreviation")
       stats.delete("rank")
       stats.delete("position")
+      stats["year"] = 2013
 
       player = Player.find_by name: name
 
@@ -115,7 +118,7 @@ namespace :stats do
         puts n.to_s + " player not found!!!"
       else 
         puts n.to_s + " player found!!!"
-        player.create_season2013_stat(stats)
+        player.create_season_stat(stats)
         puts n.to_s + " stats created!!"
       end
 
@@ -145,6 +148,7 @@ namespace :stats do
       stats.delete("team_abbreviation")
       stats.delete("rank")
       stats.delete("position")
+      stats["year"] = 2013
 
       player = Player.find_by name: name
 
@@ -152,7 +156,7 @@ namespace :stats do
         puts n.to_s + " player not found!!!"
       else 
         puts n.to_s + " player found!!!"
-        player.create_season2013_stat(stats)
+        player.create_season_stat(stats)
         puts n.to_s + " stats created!!"
       end
 
@@ -183,6 +187,7 @@ namespace :stats do
       stats.delete("team_abbreviation")
       stats.delete("rank")
       stats.delete("position")
+      stats["year"] = 2013
 
       player = Player.find_by name: name
 
@@ -190,7 +195,7 @@ namespace :stats do
         puts n.to_s + " player not found!!!"
       else 
         puts n.to_s + " player found!!!"
-        player.create_season2013_stat(stats)
+        player.create_season_stat(stats)
         puts n.to_s + " stats created!!"
       end
 
@@ -220,6 +225,7 @@ namespace :stats do
       stats.delete("team_abbreviation")
       stats.delete("rank")
       stats.delete("position")
+      stats["year"] = 2013
 
       player = Player.find_by name: name
 
@@ -227,7 +233,7 @@ namespace :stats do
         puts n.to_s + " player not found!!!"
       else 
         puts n.to_s + " player found!!!"
-        player.create_season2013_stat(stats)
+        player.create_season_stat(stats)
         puts n.to_s + " stats created!!"
       end
 

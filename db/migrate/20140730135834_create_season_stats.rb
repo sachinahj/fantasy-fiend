@@ -1,7 +1,9 @@
-class CreateSeason2013Stats < ActiveRecord::Migration
+class CreateSeasonStats < ActiveRecord::Migration
   def change
-    create_table :season2013_stats do |t|
+    create_table :season_stats do |t|
       t.references :player, index: true
+
+      t.integer :year
 
       t.integer :pass_completions
       t.integer :pass_attempts
@@ -57,7 +59,6 @@ class CreateSeason2013Stats < ActiveRecord::Migration
       t.integer :fumbles
       t.integer :fumbles_lost
       t.float :fantasy_points
-
 
       t.timestamps
     end

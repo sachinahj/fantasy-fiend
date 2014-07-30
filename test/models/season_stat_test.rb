@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Season2014ProjectionTest < ActiveSupport::TestCase
+class SeasonStatTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

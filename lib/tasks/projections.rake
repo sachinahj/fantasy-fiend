@@ -30,6 +30,7 @@ namespace :projections do
       team_abbreviation = projection['team_abbreviation']
       projection.delete("name")
       projection.delete("team_abbreviation")
+      projection["year"] = 2014
 
       player = Player.find_by name: name.downcase
 
@@ -56,7 +57,7 @@ namespace :projections do
         
       end
 
-      player.create_season2014_projection(projection)
+      player.create_season_projection(projection)
       puts n.to_s + " projection created!!"
 
       n += 1
@@ -83,6 +84,7 @@ namespace :projections do
       team_abbreviation = projection['team_abbreviation']
       projection.delete("name")
       projection.delete("team_abbreviation")
+      projection["year"] = 2014
 
       player = Player.find_by name: name.downcase
 
@@ -109,7 +111,7 @@ namespace :projections do
         
       end
 
-      player.create_season2014_projection(projection)
+      player.create_season_projection(projection)
       puts n.to_s + " projection created!!"
 
       n += 1
@@ -136,6 +138,7 @@ namespace :projections do
       team_abbreviation = projection['team_abbreviation']
       projection.delete("name")
       projection.delete("team_abbreviation")
+      projection["year"] = 2014
 
       player = Player.find_by name: name.downcase
 
@@ -162,7 +165,7 @@ namespace :projections do
         
       end
 
-      player.create_season2014_projection(projection)
+      player.create_season_projection(projection)
       puts n.to_s + " projection created!!"
 
       n += 1
@@ -189,6 +192,7 @@ namespace :projections do
       team_abbreviation = projection['team_abbreviation']
       projection.delete("name")
       projection.delete("team_abbreviation")
+      projection["year"] = 2014
 
       player = Player.find_by name: name.downcase
 
@@ -215,7 +219,7 @@ namespace :projections do
         
       end
 
-      player.create_season2014_projection(projection)
+      player.create_season_projection(projection)
       puts n.to_s + " projection created!!"
 
       n += 1
@@ -242,6 +246,7 @@ namespace :projections do
       team_abbreviation = projection['team_abbreviation']
       projection.delete("name")
       projection.delete("team_abbreviation")
+      projection["year"] = 2014
 
       player = Player.find_by name: name.downcase
 
@@ -268,7 +273,7 @@ namespace :projections do
         
       end
 
-      player.create_season2014_projection(projection)
+      player.create_season_projection(projection)
       puts n.to_s + " projection created!!"
 
       n += 1

@@ -4,8 +4,8 @@ class OverallDraftPositionsController < ApplicationController
     .where("overall_draft_position > 0")
     .order('overall_draft_position ASC')
     .includes(
-      :season2013_stat,
-      :season2014_projection
+      :season_stat,
+      :season_projection
     )
 
   end

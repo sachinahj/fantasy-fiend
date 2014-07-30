@@ -1,7 +1,9 @@
-class CreateSeason2014Projections < ActiveRecord::Migration
+class CreateSeasonProjections < ActiveRecord::Migration
   def change
-    create_table :season2014_projections do |t|
+    create_table :season_projections do |t|
       t.references :player, index: true
+
+      t.integer :year
 
       t.float :pass_completions
       t.float :pass_attempts
@@ -25,6 +27,7 @@ class CreateSeason2014Projections < ActiveRecord::Migration
       t.float :fumbles
 
       t.float :fantasy_points
+
 
       t.timestamps
     end
