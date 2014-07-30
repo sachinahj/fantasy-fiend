@@ -69,7 +69,7 @@ namespace :depth_chart do
       quarterbacks.each do |quarterback|
 
         if quarterback.team_abbreviation == team_abbreviation
-          player.quarterback = quarterback.display_name
+          player.quarterback = "#{quarterback.display_name} (#{quarterback.position_draft_position})"
           player.save
           puts "saved #{quarterback.display_name} for #{player.display_name}"
         end
