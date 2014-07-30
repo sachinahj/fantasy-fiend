@@ -1,20 +1,11 @@
 <div id="container" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0"></div>
 
-<%= @defenses.to_json %>
-
-
-<% @defenses.each do |defense|  %>
-  <h6><%= defense.inspect %></h6>
-<% end %>
-
-
-
-
-
-
-
+<div class="quarterbacks" style="display: none">
+  <%= @quarterbacks.to_json %>
+</div>
 
 <script type="text/javascript">
+  window.qbs = JSON.parse($('.quarterbacks').text());
   $(function () {
     $('#container').highcharts({
       chart: {

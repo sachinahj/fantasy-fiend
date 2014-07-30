@@ -1,27 +1,28 @@
 class CompareController < ApplicationController
 
   def quarterbacks 
-    @quarterbacks = Player.where(position: "QB").includes(:season2013_stat, :season2014_projection)
+    @quarterbacks = Player.all.where(position: "QB").where("overall_draft_position < 100").includes(:season2013_stat, :season2014_projection)
+    p @quarterbacks
   end
 
   def runningbacks 
-    @runningbacks = Player.where(position: "QB").includes(:season2013_stat, :season2014_projection)
+    @runningbacks = Player.where(position: "RB").includes(:season2013_stat, :season2014_projection)
   end
 
   def receivers 
-    @receivers = Player.where(position: "QB").includes(:season2013_stat, :season2014_projection)
+    @receivers = Player.where(position: "WR").includes(:season2013_stat, :season2014_projection)
   end
 
   def tightends 
-    @tightends = Player.where(position: "QB").includes(:season2013_stat, :season2014_projection)
+    @tightends = Player.where(position: "TE").includes(:season2013_stat, :season2014_projection)
   end
 
   def kickers 
-    @kickers = Player.where(position: "QB").includes(:season2013_stat, :season2014_projection)
+    @kickers = Player.where(position: "K").includes(:season2013_stat, :season2014_projection)
   end
 
   def defenses
-    @defenses= Player.where(position: "QB").includes(:season2013_stat, :season2014_projection)
+    @defenses= Player.where(position: "DST").includes(:season2013_stat, :season2014_projection)
   end
   
 end

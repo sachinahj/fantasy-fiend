@@ -1,20 +1,12 @@
 <div id="container" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0"></div>
 
-<%= @kickers.to_json %>
-
-
-<% @kickers.each do |kicker|  %>
-  <h6><%= kicker.inspect %></h6>
-<% end %>
-
-
-
-
-
-
+<div class="kickers" style="display: none">
+  <%= @kickers.to_json %>
+</div>
 
 
 <script type="text/javascript">
+  window.ks = JSON.parse($('.kickers').text());
   $(function () {
     $('#container').highcharts({
       chart: {

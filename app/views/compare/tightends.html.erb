@@ -1,20 +1,11 @@
 <div id="container" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0"></div>
 
-<%= @tightends.to_json %>
-
-
-<% @tightends.each do |tightend|  %>
-  <h6><%= tightend.inspect %></h6>
-<% end %>
-
-
-
-
-
-
-
+<div class="tightends" style="display: none">
+  <%= @tightends.to_json %>
+</div>
 
 <script type="text/javascript">
+    window.tes = JSON.parse($('.tightends').text());
   $(function () {
     var chart,
         categories = ['0-4', '5-9', '10-14', '15-19',

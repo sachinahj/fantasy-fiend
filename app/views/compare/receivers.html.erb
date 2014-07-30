@@ -1,21 +1,13 @@
 <div id="container" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0"></div>
 
-<%= @receivers.to_json %>
-
-
-<% @receivers.each do |receiver|  %>
-  <h6><%= receiver.inspect %></h6>
-<% end %>
-
-
-
-
-
-
+<div class="receivers" style="display: none">
+  <%= @receivers.to_json %>
+</div>
 
 
 <script type="text/javascript">
   $(function () {
+    window.wrs = JSON.parse($('.receivers').text());
     $('#container').highcharts({
         chart: {
             type: 'scatter',
