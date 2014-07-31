@@ -9,6 +9,13 @@
 
 <script type="text/javascript">
 
+  $(document).ready(function () {
+    ScatterChart(scatter_series);
+    StackedChart(stacked_series);
+    PieChart(pie_data);
+    SplineChart(spline_series);
+  });
+
   var qbs = <%= raw @quarterbacks.to_json(include: :season_projection) %>; 
   var rbs = <%= raw @runningbacks.to_json(include: :season_projection) %>; 
   var wrs = <%= raw @receivers.to_json(include: :season_projection) %>; 
@@ -16,6 +23,57 @@
   var ks = <%= raw @kickers.to_json(include: :season_projection) %>;
   var dsts = <%= raw @defenses.to_json(include: :season_projection) %>;
 
+
+  qb_scatter = CreatePositionScatterSeries(qbs, "Quarterbacks", "red")
+  rb_scatter = CreatePositionScatterSeries(rbs, "Running Backs", "orange")
+  wr_scatter = CreatePositionScatterSeries(wrs, "Receivers", "green")
+  te_scatter = CreatePositionScatterSeries(tes, "Tight Ends", "blue")
+  k_scatter = CreatePositionScatterSeries(ks, "Kickers", "purple")
+  var scatter_series = [qb_scatter, rb_scatter, wr_scatter, te_scatter, k_scatter]
+  
+  
+
+  qb_stacked = CreatePositionStackedSeries(qbs, "Quarterbacks", "red")
+  rb_stacked = CreatePositionStackedSeries(rbs, "Running Backs", "orange")
+  wr_stacked = CreatePositionStackedSeries(wrs, "Receivers", "green")
+  te_stacked = CreatePositionStackedSeries(tes, "Tight Ends", "blue")
+  k_stacked = CreatePositionStackedSeries(ks, "Kickers", "purple")
+  var stacked_series = [qb_stacked, rb_stacked, wr_stacked, te_stacked, k_stacked]
+
+  
+
+  qb_count = CreatePositionPieData(qbs)
+  rb_count = CreatePositionPieData(rbs)
+  wr_count = CreatePositionPieData(wrs)
+  te_count = CreatePositionPieData(tes)
+  total_count = qb_count + rb_count + wr_count + te_count
+  var pie_data = [
+    {name: 'Quarterbacks', color: 'red', y: qb_count/total_count * 100},
+    {name: 'Running Backs', color: 'yellow', y: rb_count/total_count * 100, sliced: true, selected: true},
+    {name: 'Wide Receivers', color: 'green', y: wr_count/total_count * 100},
+    {name: 'Tight Ends', color: 'blue', y: te_count/total_count * 100}
+  ]
+
+
+  qb_spline = CreatePositionSplineData(qbs, 'Quarterbacks', 'red');
+  rb_spline = CreatePositionSplineData(rbs, 'Running Backs', 'yellow')
+  wr_spline = CreatePositionSplineData(wrs, 'Wide Receivers', 'green')
+  te_spline = CreatePositionSplineData(tes, 'Tight Ends', 'blue')
+  k_spline = CreatePositionSplineData(ks, 'Kickers', 'purple')
+  var spline_series = [qb_spline, rb_spline, wr_spline, te_spline, k_spline];
+
+  
+
+
+
+
+
+
+
+
+
+
+  // ------- aeries and data create functions for charts
   function CreatePositionScatterSeries(positionJSON, name, color) {
     var position_series = []
     for (var position in positionJSON) {
@@ -26,13 +84,68 @@
     return {name: name, data: position_series, color: color}
   }
 
-  qb_scatter = CreatePositionScatterSeries(qbs, "Quarterbacks", "red")
-  rb_scatter = CreatePositionScatterSeries(rbs, "Running Backs", "orange")
-  wr_scatter = CreatePositionScatterSeries(wrs, "Receivers", "green")
-  te_scatter = CreatePositionScatterSeries(tes, "Tight Ends", "blue")
-  k_scatter = CreatePositionScatterSeries(ks, "Kickers", "purple")
-  var scatter_series = [qb_scatter, rb_scatter, wr_scatter, te_scatter, k_scatter]
-  
+  function CreatePositionStackedSeries(positionJSON, name, color) {
+    position_data = [0,0,0,0,0,0,0,0,0,0];
+
+    for (var position = 0; position < positionJSON.length; position++) {
+      odp = positionJSON[position].overall_draft_position
+
+      if (odp == null || odp === 0) {
+        continue;
+      }
+
+      if (odp <= 25) {
+        position_data[0] += 1;
+      } else if (odp <= 50){
+        position_data[1] += 1;
+      } else if (odp <= 75){
+        position_data[2] += 1;
+      } else if (odp <= 100){
+        position_data[3] += 1;
+      } else if (odp <= 125){
+        position_data[4] += 1;
+      } else if (odp <= 150){
+        position_data[5] += 1;
+      } else if (odp <= 175){
+        position_data[6] += 1;
+      } else if (odp <= 200){
+        position_data[7] += 1;
+      } else if (odp <= 225){
+        position_data[8] += 1;
+      } else if (odp <= 250){
+        position_data[9] += 1;
+      }
+    }
+
+    return {name: name, data: position_data, color: color}
+  }
+
+  function CreatePositionPieData(positionJSON) { 
+    position_count = 0;
+    for (position in positionJSON) {
+      if (positionJSON[position].overall_draft_position <= 30){
+        position_count += 1;
+      }
+    }
+    return position_count;
+  }
+
+  function CreatePositionSplineData (positionJSON, name, color) {
+    position_high = positionJSON[0].season_projection.fantasy_points;
+    position_data = [];
+    for (position in positionJSON) {
+      fp = 0
+      if (positionJSON[position].season_projection) {fp = positionJSON[position].season_projection.fantasy_points;}
+      if (fp !== null && fp !== 0){
+        position_data.push(parseFloat((position_high - fp).toFixed(2)));
+      }
+    }
+    position_data.sort(function(a, b){return a-b});
+    position_data = position_data.slice(0,20);
+    return {name: name, data: position_data, color: color}
+  }
+
+  // ------- chart functions ----------
   function ScatterChart (scatter_series) {
     $('#scatter').highcharts({
       chart: {
@@ -90,51 +203,7 @@
       series: scatter_series
     });
   }
-  
-  function CreatePositionStackedSeries(positionJSON, name, color) {
-    position_data = [0,0,0,0,0,0,0,0,0,0];
 
-    for (var position = 0; position < positionJSON.length; position++) {
-      odp = positionJSON[position].overall_draft_position
-
-      if (odp == null || odp === 0) {
-        continue;
-      }
-
-      if (odp <= 25) {
-        position_data[0] += 1;
-      } else if (odp <= 50){
-        position_data[1] += 1;
-      } else if (odp <= 75){
-        position_data[2] += 1;
-      } else if (odp <= 100){
-        position_data[3] += 1;
-      } else if (odp <= 125){
-        position_data[4] += 1;
-      } else if (odp <= 150){
-        position_data[5] += 1;
-      } else if (odp <= 175){
-        position_data[6] += 1;
-      } else if (odp <= 200){
-        position_data[7] += 1;
-      } else if (odp <= 225){
-        position_data[8] += 1;
-      } else if (odp <= 250){
-        position_data[9] += 1;
-      }
-    }
-
-    return {name: name, data: position_data, color: color}
-  }
-
-  qb_stacked = CreatePositionStackedSeries(qbs, "Quarterbacks", "red")
-  rb_stacked = CreatePositionStackedSeries(rbs, "Running Backs", "orange")
-  wr_stacked = CreatePositionStackedSeries(wrs, "Receivers", "green")
-  te_stacked = CreatePositionStackedSeries(tes, "Tight Ends", "blue")
-  k_stacked = CreatePositionStackedSeries(ks, "Kickers", "purple")
-  var stacked_series = [qb_stacked, rb_stacked, wr_stacked, te_stacked, k_stacked]
-
-  
   function StackedChart (stacked_series) {
     $('#stacked').highcharts({
       chart: {
@@ -202,28 +271,6 @@
     });
   }
 
-  function CreatePositionPieData(positionJSON) { 
-    position_count = 0;
-    for (position in positionJSON) {
-      if (positionJSON[position].overall_draft_position <= 30){
-        position_count += 1;
-      }
-    }
-    return position_count;
-  }
-  qb_count = CreatePositionPieData(qbs)
-  rb_count = CreatePositionPieData(rbs)
-  wr_count = CreatePositionPieData(wrs)
-  te_count = CreatePositionPieData(tes)
-  total_count = qb_count + rb_count + wr_count + te_count
-
-  pie_data = [
-    {name: 'Quarterbacks', color: 'red', y: qb_count/total_count * 100},
-    {name: 'Running Backs', color: 'yellow', y: rb_count/total_count * 100, sliced: true, selected: true},
-    {name: 'Wide Receivers', color: 'green', y: wr_count/total_count * 100},
-    {name: 'Tight Ends', color: 'blue', y: te_count/total_count * 100}
-  ]
-
   function PieChart (pie_data) {
     $('#pie').highcharts({
       chart: {
@@ -257,29 +304,6 @@
       }]
     });
   }
-
-  function CreatePositionSplineData (positionJSON, name, color) {
-    position_high = positionJSON[0].season_projection.fantasy_points;
-    position_data = [];
-    for (position in positionJSON) {
-      fp = 0
-      if (positionJSON[position].season_projection) {fp = positionJSON[position].season_projection.fantasy_points;}
-      if (fp !== null && fp !== 0){
-        position_data.push(parseFloat((position_high - fp).toFixed(2)));
-      }
-    }
-    position_data.sort(function(a, b){return a-b});
-    position_data = position_data.slice(0,20);
-    return {name: name, data: position_data, color: color}
-  }
-
-  qb_spline = CreatePositionSplineData(qbs, 'Quarterbacks', 'red');
-  rb_spline = CreatePositionSplineData(rbs, 'Running Backs', 'yellow')
-  wr_spline = CreatePositionSplineData(wrs, 'Wide Receivers', 'green')
-  te_spline = CreatePositionSplineData(tes, 'Tight Ends', 'blue')
-  k_spline = CreatePositionSplineData(ks, 'Kickers', 'purple')
-
-  var spline_series = [qb_spline, rb_spline, wr_spline, te_spline, k_spline];
 
   function SplineChart (spline_series) {
     $('#spline').highcharts({
@@ -330,14 +354,5 @@
       series: spline_series
     });
   }
-</script>
 
-
-<script type="text/javascript">
-  $(document).ready(function () {
-    ScatterChart(scatter_series);
-    StackedChart(stacked_series);
-    PieChart(pie_data);
-    SplineChart(spline_series);
-  });
 </script>

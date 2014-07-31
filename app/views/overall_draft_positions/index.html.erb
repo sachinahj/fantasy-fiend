@@ -55,7 +55,21 @@
     $('#adp').dataTable({
       "iDisplayLength" : -1,
       "paging": false,
-      "info": false
+      "info": false,
+
+      "aoColumns": [
+        null,
+        { "asSorting": [ "asc", "desc" ] },
+        null,
+        null,
+        null,
+        { "asSorting": [ "desc", "asc" ] },
+        { "asSorting": [ "desc", "asc" ] },
+        null,
+        { "asSorting": [ "desc", "asc" ] },
+        { "asSorting": [ "desc", "asc" ] }
+      ]
+
     });
     
   });
