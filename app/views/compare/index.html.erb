@@ -1,13 +1,11 @@
 
-<div id="container1" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0"></div>
+<div id="scatter" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0"></div>
 <br><br>
-<div id="container2" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0"></div>
+<div id="stacked" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0"></div>
 <br><br>
-<div id="container3" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0"></div>
+<div id="pie" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0"></div>
 <br><br>
-<div id="container4" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0"></div>
-
-
+<div id="spline" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0"></div>
 
 <script type="text/javascript">
 
@@ -18,581 +16,328 @@
   var ks = <%= raw @kickers.to_json(include: :season_projection) %>;
   var dsts = <%= raw @defenses.to_json(include: :season_projection) %>;
 
-  var scatter_series = [];
-
-  var qb_series = [];
-  for (var qb in qbs) {
-    if (qbs[qb].overall_draft_position && qbs[qb].season_projection) {
-      qb_series.push({name: qbs[qb].display_name+" ("+qbs[qb].team_abbreviation+")", color: 'red', x: qbs[qb].overall_draft_position, y: qbs[qb].season_projection.fantasy_points});
+  function CreatePositionScatterSeries(positionJSON, name, color) {
+    var position_series = []
+    for (var position in positionJSON) {
+      if (positionJSON[position].overall_draft_position && positionJSON[position].season_projection) {
+        position_series.push({name: positionJSON[position].display_name+" ("+positionJSON[position].team_abbreviation+")", color: color, x: positionJSON[position].overall_draft_position, y: positionJSON[position].season_projection.fantasy_points});
+      }
     }
+    return {name: name, data: position_series, color: color}
   }
-  scatter_series.push({name: "Quarterbacks", data: qb_series, color: 'red'});
 
-  var rb_series = [];
-  for (var rb in rbs) {
-    if (rbs[rb].overall_draft_position && rbs[rb].season_projection) {
-      rb_series.push({name: rbs[rb].display_name+" ("+rbs[rb].team_abbreviation+")", color: 'orange', x: rbs[rb].overall_draft_position, y: rbs[rb].season_projection.fantasy_points});
-    }
-  }
-  scatter_series.push({name: "Running Backs", data: rb_series, color: 'orange'});
-
-  var wr_series = [];
-  for (var wr in wrs) {
-    if (wrs[wr].overall_draft_position && wrs[wr].season_projection) {
-      wr_series.push({name: wrs[wr].display_name+" ("+wrs[wr].team_abbreviation+")", color: 'green', x: wrs[wr].overall_draft_position, y: wrs[wr].season_projection.fantasy_points});
-    }
-  }
-  scatter_series.push({name: "Wide Receivers", data: wr_series, color: 'green'});
-
-  var te_series = [];
-  for (var te in tes) {
-    if (tes[te].overall_draft_position && tes[te].season_projection) {
-      te_series.push({name: tes[te].display_name+" ("+tes[te].team_abbreviation+")", color: 'blue', x: tes[te].overall_draft_position, y: tes[te].season_projection.fantasy_points});
-    }
-  }
-  scatter_series.push({name: "Tight Ends", data: te_series, color: 'blue'});
-
-  var k_series = [];
-  for (var k in ks) {
-    if (ks[k].overall_draft_position && ks[k].season_projection) {
-      k_series.push({name: ks[k].display_name+" ("+ks[k].team_abbreviation+")", color: 'Purple', x: ks[k].overall_draft_position, y: ks[k].season_projection.fantasy_points});
-    }
-  }
-  scatter_series.push({name: "Kickers", data: k_series, color: 'Purple'});
-
-
-  $(function () {
-      $('#container1').highcharts({
-          chart: {
-              type: 'scatter',
-              zoomType: 'xy'
-          },
-          title: {
-              text: 'Projected Fantasy Points vs Overall Draft Position'
-          },
-          subtitle: {
-              text: 'Source: FantasyPros.com'
-          },
-          xAxis: {
-              title: {
-                  enabled: true,
-                  text: 'Projected Overall Draft Position'
-              },
-              startOnTick: true,
-              endOnTick: true,
-              showLastLabel: true,
-              min: 0
-          },
-          yAxis: {
-              title: {
-                  text: 'Projected Fantasy Points'
-              },
-              min: 0
-          },
-          legend: {
-              enabled: true
-          },
-          plotOptions: {
-              scatter: {
-                  marker: {
-                      radius: 5,
-                      states: {
-                          hover: {
-                              enabled: true,
-                              lineColor: 'rgb(100,100,100)'
-                          }
-                      }
-                  },
-                  states: {
-                      hover: {
-                          marker: {
-                              enabled: false
-                          }
-                      }
-                  },
-                  tooltip: {
-                      pointFormat: '<b>{point.name}</b><br>{point.x} draft position, {point.y} fantasy points'
-                  }
+  qb_scatter = CreatePositionScatterSeries(qbs, "Quarterbacks", "red")
+  rb_scatter = CreatePositionScatterSeries(rbs, "Running Backs", "orange")
+  wr_scatter = CreatePositionScatterSeries(wrs, "Receivers", "green")
+  te_scatter = CreatePositionScatterSeries(tes, "Tight Ends", "blue")
+  k_scatter = CreatePositionScatterSeries(ks, "Kickers", "purple")
+  var scatter_series = [qb_scatter, rb_scatter, wr_scatter, te_scatter, k_scatter]
+  
+  function ScatterChart (scatter_series) {
+    $('#scatter').highcharts({
+      chart: {
+        type: 'scatter',
+        zoomType: 'xy'
+      },
+      title: {
+        text: 'Projected Fantasy Points vs Overall Draft Position'
+      },
+      subtitle: {
+        text: 'Source: FantasyPros.com'
+      },
+      xAxis: {
+        title: {
+          enabled: true,
+          text: 'Projected Overall Draft Position'
+        },
+        startOnTick: true,
+        endOnTick: true,
+        showLastLabel: true,
+        min: 0
+      },
+      yAxis: {
+        title: {
+          text: 'Projected Fantasy Points'
+        },
+        min: 0
+      },
+      legend: {
+        enabled: true
+      },
+      plotOptions: {
+        scatter: {
+          marker: {
+            radius: 5,
+            states: {
+              hover: {
+                enabled: true,
+                lineColor: 'rgb(100,100,100)'
               }
+            }
           },
-          series: scatter_series
-      });
-  });
+          states: {
+            hover: {
+              marker: {
+                enabled: false
+              }
+            }
+          },
+          tooltip: {
+            pointFormat: '<b>{point.name}</b><br>{point.x} draft position, {point.y} fantasy points'
+          }
+        }
+      },
+      series: scatter_series
+    });
+  }
+  
+  function CreatePositionStackedSeries(positionJSON, name, color) {
+    position_data = [0,0,0,0,0,0,0,0,0,0];
+
+    for (var position = 0; position < positionJSON.length; position++) {
+      odp = positionJSON[position].overall_draft_position
+
+      if (odp == null || odp === 0) {
+        continue;
+      }
+
+      if (odp <= 25) {
+        position_data[0] += 1;
+      } else if (odp <= 50){
+        position_data[1] += 1;
+      } else if (odp <= 75){
+        position_data[2] += 1;
+      } else if (odp <= 100){
+        position_data[3] += 1;
+      } else if (odp <= 125){
+        position_data[4] += 1;
+      } else if (odp <= 150){
+        position_data[5] += 1;
+      } else if (odp <= 175){
+        position_data[6] += 1;
+      } else if (odp <= 200){
+        position_data[7] += 1;
+      } else if (odp <= 225){
+        position_data[8] += 1;
+      } else if (odp <= 250){
+        position_data[9] += 1;
+      }
+    }
+
+    return {name: name, data: position_data, color: color}
+  }
+
+  qb_stacked = CreatePositionStackedSeries(qbs, "Quarterbacks", "red")
+  rb_stacked = CreatePositionStackedSeries(rbs, "Running Backs", "orange")
+  wr_stacked = CreatePositionStackedSeries(wrs, "Receivers", "green")
+  te_stacked = CreatePositionStackedSeries(tes, "Tight Ends", "blue")
+  k_stacked = CreatePositionStackedSeries(ks, "Kickers", "purple")
+  var stacked_series = [qb_stacked, rb_stacked, wr_stacked, te_stacked, k_stacked]
+
+  
+  function StackedChart (stacked_series) {
+    $('#stacked').highcharts({
+      chart: {
+        type: 'column'
+      },
+      title: {
+        text: 'Projected Draft Picks by Position'
+      },
+      subtitle: {
+        text: 'Source: FantasyPros.com'
+      },
+      xAxis: {
+        categories: ['1-10%', '11-20%', '21-30%', '31-40%', '41-50%', '51-60%', '61-70%', '71-80%', '81-90%', '91-100%'],
+        title : {
+          text: 'Overall Draft Pick'
+        }
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: 'Total Players'
+        },
+        stackLabels: {
+          enabled: false,
+          style: {
+            fontWeight: 'bold',
+            color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+          }
+        }
+      },
+      legend: {
+        align: 'right',
+        x: 0,
+        verticalAlign: 'top',
+        y: 50,
+        floating: true,
+        backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+        borderColor: '#CCC',
+        borderWidth: 1,
+        shadow: false
+      },
+      tooltip: {
+        formatter: function() {
+          if (this.y === 0){
+            return;
+          }
+          return '<b>'+ this.x +'</b><br/>'+
+            this.series.name +': '+ this.y +'<br/>'+
+            'Total: '+ this.point.stackTotal;
+        }
+      },
+      plotOptions: {
+        column: {
+          stacking: 'normal',
+          dataLabels: {
+            enabled: false,
+            color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+            style: {
+              textShadow: '0 0 3px black, 0 0 3px black'
+            }
+          }
+        }
+      },
+      series: stacked_series
+    });
+  }
+
+  function CreatePositionPieData(positionJSON) { 
+    position_count = 0;
+    for (position in positionJSON) {
+      if (positionJSON[position].overall_draft_position <= 30){
+        position_count += 1;
+      }
+    }
+    return position_count;
+  }
+  qb_count = CreatePositionPieData(qbs)
+  rb_count = CreatePositionPieData(rbs)
+  wr_count = CreatePositionPieData(wrs)
+  te_count = CreatePositionPieData(tes)
+  total_count = qb_count + rb_count + wr_count + te_count
+
+  pie_data = [
+    {name: 'Quarterbacks', color: 'red', y: qb_count/total_count * 100},
+    {name: 'Running Backs', color: 'yellow', y: rb_count/total_count * 100, sliced: true, selected: true},
+    {name: 'Wide Receivers', color: 'green', y: wr_count/total_count * 100},
+    {name: 'Tight Ends', color: 'blue', y: te_count/total_count * 100}
+  ]
+
+  function PieChart (pie_data) {
+    $('#pie').highcharts({
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false
+      },
+      title: {
+        text: 'Top 30 Projected Overall Draft Picks by Position'
+      },
+      subtitle: {
+        text: 'Source: FantasyPros.com'
+      },
+      tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: false
+          },
+          showInLegend: true
+        }
+      },
+      series: [{
+        type: 'pie',
+        name: 'Projection Share',
+        data: pie_data
+      }]
+    });
+  }
+
+  function CreatePositionSplineData (positionJSON, name, color) {
+    position_high = positionJSON[0].season_projection.fantasy_points;
+    position_data = [];
+    for (position in positionJSON) {
+      fp = 0
+      if (positionJSON[position].season_projection) {fp = positionJSON[position].season_projection.fantasy_points;}
+      if (fp !== null && fp !== 0){
+        position_data.push(parseFloat((position_high - fp).toFixed(2)));
+      }
+    }
+    position_data.sort(function(a, b){return a-b});
+    position_data = position_data.slice(0,20);
+    return {name: name, data: position_data, color: color}
+  }
+
+  qb_spline = CreatePositionSplineData(qbs, 'Quarterbacks', 'red');
+  rb_spline = CreatePositionSplineData(rbs, 'Running Backs', 'yellow')
+  wr_spline = CreatePositionSplineData(wrs, 'Wide Receivers', 'green')
+  te_spline = CreatePositionSplineData(tes, 'Tight Ends', 'blue')
+  k_spline = CreatePositionSplineData(ks, 'Kickers', 'purple')
+
+  var spline_series = [qb_spline, rb_spline, wr_spline, te_spline, k_spline];
+
+  function SplineChart (spline_series) {
+    $('#spline').highcharts({
+      chart: {
+        type: 'spline'
+      },
+      title: {
+        text: 'Projected Point Drop Off Relative to #1 Projected Player'
+      },
+      subtitle: {
+        text: 'Source: FantasyPros.com'
+      },
+      xAxis: {
+        categories: [
+          '1', '2', '3', '4', '5',
+          '6', '7', '8', '9', '10',
+          '11', '12', '13', '14', '15',
+          '16', '17', '18', '19', '20' 
+        ],
+        title: {
+          text: "Projected Points Position"
+        }
+      },
+      yAxis: {
+        title: {
+          text: 'Points Differental'
+        },
+        labels: {
+          formatter: function() {
+            return this.value
+          }
+        },
+        min: 0
+      },
+      tooltip: {
+        crosshairs: true,
+        shared: true
+      },
+      plotOptions: {
+        spline: {
+          marker: {
+            radius: 4,
+            lineColor: '#666666',
+            lineWidth: 1
+          }
+        }
+      },
+      series: spline_series
+    });
+  }
 </script>
 
 
 <script type="text/javascript">
-
-  var qbs = <%= raw @quarterbacks.to_json(include: :season_projection) %>; 
-  var rbs = <%= raw @runningbacks.to_json(include: :season_projection) %>; 
-  var wrs = <%= raw @receivers.to_json(include: :season_projection) %>; 
-  var tes = <%= raw @tightends.to_json(include: :season_projection) %>;
-  var ks = <%= raw @kickers.to_json(include: :season_projection) %>;
-  var dsts = <%= raw @defenses.to_json(include: :season_projection) %>;
-
-  stacked_series = [];
-  
-  qb_data = [0,0,0,0,0,0,0,0,0,0];
-  for (var qb = 0; qb < qbs.length; qb++) {
-    odp = qbs[qb].overall_draft_position
-    if (odp == null || odp === 0) {
-      continue;
-    }
-    if (odp <= 25) {
-      qb_data[0] += 1;
-    } else if (odp <= 50){
-      qb_data[1] += 1;
-    } else if (odp <= 75){
-      qb_data[2] += 1;
-    } else if (odp <= 100){
-      qb_data[3] += 1;
-    } else if (odp <= 125){
-      qb_data[4] += 1;
-    } else if (odp <= 150){
-      qb_data[5] += 1;
-    } else if (odp <= 175){
-      qb_data[6] += 1;
-    } else if (odp <= 200){
-      qb_data[7] += 1;
-    } else if (odp <= 225){
-      qb_data[8] += 1;
-    } else if (odp <= 250){
-      qb_data[9] += 1;
-    }
-  }
-  stacked_series.push({name: "Quarterbacks", data: qb_data});
-
-  rb_data = [0,0,0,0,0,0,0,0,0,0];
-  for (var rb = 0; rb < rbs.length; rb++) {
-    odp = rbs[rb].overall_draft_position
-    if (odp == null || odp === 0) {
-      continue;
-    }
-    if (odp <= 25) {
-      rb_data[0] += 1;
-    } else if (odp <= 50){
-      rb_data[1] += 1;
-    } else if (odp <= 75){
-      rb_data[2] += 1;
-    } else if (odp <= 100){
-      rb_data[3] += 1;
-    } else if (odp <= 125){
-      rb_data[4] += 1;
-    } else if (odp <= 150){
-      rb_data[5] += 1;
-    } else if (odp <= 175){
-      rb_data[6] += 1;
-    } else if (odp <= 200){
-      rb_data[7] += 1;
-    } else if (odp <= 225){
-      rb_data[8] += 1;
-    } else if (odp <= 250){
-      rb_data[9] += 1;
-    }
-  }
-  stacked_series.push({name: "Runningbacks", data: rb_data});
-
-  wr_data = [0,0,0,0,0,0,0,0,0,0];
-  for (var wr = 0; wr < wrs.length; wr++) {
-    odp = wrs[wr].overall_draft_position
-    if (odp == null || odp === 0) {
-      continue;
-    }
-    if (odp <= 25) {
-      wr_data[0] += 1;
-    } else if (odp <= 50){
-      wr_data[1] += 1;
-    } else if (odp <= 75){
-      wr_data[2] += 1;
-    } else if (odp <= 100){
-      wr_data[3] += 1;
-    } else if (odp <= 125){
-      wr_data[4] += 1;
-    } else if (odp <= 150){
-      wr_data[5] += 1;
-    } else if (odp <= 175){
-      wr_data[6] += 1;
-    } else if (odp <= 200){
-      wr_data[7] += 1;
-    } else if (odp <= 225){
-      wr_data[8] += 1;
-    } else if (odp <= 250){
-      wr_data[9] += 1;
-    }
-  }
-  stacked_series.push({name: "Wide Receivers", data: wr_data});
-
-  te_data = [0,0,0,0,0,0,0,0,0,0];
-  for (var te = 0; te < tes.length; te++) {
-    odp = tes[te].overall_draft_position
-    if (odp == null || odp === 0) {
-      continue;
-    }
-    if (odp <= 25) {
-      te_data[0] += 1;
-    } else if (odp <= 50){
-      te_data[1] += 1;
-    } else if (odp <= 75){
-      te_data[2] += 1;
-    } else if (odp <= 100){
-      te_data[3] += 1;
-    } else if (odp <= 125){
-      te_data[4] += 1;
-    } else if (odp <= 150){
-      te_data[5] += 1;
-    } else if (odp <= 175){
-      te_data[6] += 1;
-    } else if (odp <= 200){
-      te_data[7] += 1;
-    } else if (odp <= 225){
-      te_data[8] += 1;
-    } else if (odp <= 250){
-      te_data[9] += 1;
-    }
-  }
-  stacked_series.push({name: "Tight Ends", data: te_data});
-
-  k_data = [0,0,0,0,0,0,0,0,0,0];
-  for (var k = 0; k < ks.length; k++) {
-    odp = ks[k].overall_draft_position
-    if (odp == null || odp === 0) {
-      continue;
-    }
-    if (odp <= 25) {
-      k_data[0] += 1;
-    } else if (odp <= 50){
-      k_data[1] += 1;
-    } else if (odp <= 75){
-      k_data[2] += 1;
-    } else if (odp <= 100){
-      k_data[3] += 1;
-    } else if (odp <= 125){
-      k_data[4] += 1;
-    } else if (odp <= 150){
-      k_data[5] += 1;
-    } else if (odp <= 175){
-      k_data[6] += 1;
-    } else if (odp <= 200){
-      k_data[7] += 1;
-    } else if (odp <= 225){
-      k_data[8] += 1;
-    } else if (odp <= 250){
-      k_data[9] += 1;
-    }
-  }
-  stacked_series.push({name: "Kickers", data: k_data});
-
-  dst_data = [0,0,0,0,0,0,0,0,0,0];
-  for (var k = 0; k < dsts.length; k++) {
-    odp = dsts[k].overall_draft_position
-    if (odp == null || odp === 0) {
-      continue;
-    }
-    if (odp <= 25) {
-      dst_data[0] += 1;
-    } else if (odp <= 50){
-      dst_data[1] += 1;
-    } else if (odp <= 75){
-      dst_data[2] += 1;
-    } else if (odp <= 100){
-      dst_data[3] += 1;
-    } else if (odp <= 125){
-      dst_data[4] += 1;
-    } else if (odp <= 150){
-      dst_data[5] += 1;
-    } else if (odp <= 175){
-      dst_data[6] += 1;
-    } else if (odp <= 200){
-      dst_data[7] += 1;
-    } else if (odp <= 225){
-      dst_data[8] += 1;
-    } else if (odp <= 250){
-      dst_data[9] += 1;
-    }
-  }
-  stacked_series.push({name: "Defenses", data: dst_data});
-
-  
-  $(function () {
-      $('#container2').highcharts({
-          chart: {
-              type: 'column'
-          },
-          title: {
-              text: 'Projected Draft Picks by Position'
-          },
-          xAxis: {
-              categories: ['1-25', '26-50', '51-75', '76-100', '101-125', '126-150', '151-175', '176-200', '201-225', '226-250'],
-              title : {
-                text: 'Overall Draft Pick'
-              }
-          },
-          yAxis: {
-              min: 0,
-              title: {
-                  text: 'Total Players'
-              },
-              stackLabels: {
-                  enabled: false,
-                  style: {
-                      fontWeight: 'bold',
-                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-                  }
-              }
-          },
-          legend: {
-              align: 'right',
-              x: -70,
-              verticalAlign: 'top',
-              y: 20,
-              floating: true,
-              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-              borderColor: '#CCC',
-              borderWidth: 1,
-              shadow: false
-          },
-          tooltip: {
-              formatter: function() {
-                  if (this.y === 0){
-                    return;
-                  }
-                  return '<b>'+ this.x +'</b><br/>'+
-                      this.series.name +': '+ this.y +'<br/>'+
-                      'Total: '+ this.point.stackTotal;
-              }
-          },
-          plotOptions: {
-              column: {
-                  stacking: 'normal',
-                  dataLabels: {
-                      enabled: false,
-                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                      style: {
-                          textShadow: '0 0 3px black, 0 0 3px black'
-                      }
-                  }
-              }
-          },
-          series: stacked_series
-      });
+  $(document).ready(function () {
+    ScatterChart(scatter_series);
+    StackedChart(stacked_series);
+    PieChart(pie_data);
+    SplineChart(spline_series);
   });
-</script>
-
-
-<script type="text/javascript">
-
-  var qbs = <%= raw @quarterbacks.to_json(include: :season_projection) %>; 
-  var rbs = <%= raw @runningbacks.to_json(include: :season_projection) %>; 
-  var wrs = <%= raw @receivers.to_json(include: :season_projection) %>; 
-  var tes = <%= raw @tightends.to_json(include: :season_projection) %>;
-  var ks = <%= raw @kickers.to_json(include: :season_projection) %>;
-  var dsts = <%= raw @defenses.to_json(include: :season_projection) %>;
-
-
-  qb_count = 0;
-  for (qb in qbs) {
-    if (qbs[qb].overall_draft_position <= 30){
-      qb_count += 1;
-    }
-  }
-
-  rb_count = 0;
-  for (rb in rbs) {
-    if (rbs[rb].overall_draft_position <= 30){
-      rb_count += 1;
-    }
-  }
-
-  wr_count = 0;
-  for (wr in wrs) {
-    if (wrs[wr].overall_draft_position <= 30){
-      wr_count += 1;
-    }
-  }
-
-  te_count = 0;
-  for (te in tes) {
-    if (tes[te].overall_draft_position <= 30){
-      te_count += 1;
-    }
-  }
-
-  total = qb_count + rb_count + wr_count + te_count;
-  qb_percent = qb_count/total * 100;
-  rb_percent = rb_count/total * 100;
-  wr_percent = wr_count/total * 100;
-  te_percent = te_count/total * 100;
-
-  $(function () {
-      $('#container3').highcharts({
-          chart: {
-              plotBackgroundColor: null,
-              plotBorderWidth: null,
-              plotShadow: false
-          },
-          title: {
-              text: 'Top 30 Projected Overall Draft Picks by Position'
-          },
-          tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-          },
-          plotOptions: {
-              pie: {
-                  allowPointSelect: true,
-                  cursor: 'pointer',
-                  dataLabels: {
-                      enabled: false
-                  },
-                  showInLegend: true
-              }
-          },
-          series: [{
-              type: 'pie',
-              name: 'Projection Share',
-              data: [
-                  ['Quarterbacks', qb_percent],
-                  {
-                      name: 'Runningbacks',
-                      y: rb_percent,
-                      sliced: true,
-                      selected: true
-                  },
-                  ['Wide Receivers', wr_percent],
-                  ['Tight Ends', te_percent]
-              ]
-          }]
-      }); 
-  });
-</script>
-
-
-<script type="text/javascript">
-
-  var qbs = <%= raw @quarterbacks.to_json(include: :season_projection) %>; 
-  var rbs = <%= raw @runningbacks.to_json(include: :season_projection) %>; 
-  var wrs = <%= raw @receivers.to_json(include: :season_projection) %>; 
-  var tes = <%= raw @tightends.to_json(include: :season_projection) %>;
-  var ks = <%= raw @kickers.to_json(include: :season_projection) %>;
-  var dsts = <%= raw @defenses.to_json(include: :season_projection) %>;
-
-  dropoff_series = [];
-  qb_high = qbs[0].season_projection.fantasy_points;
-  qb_data = [];
-  for (qb in qbs) {
-    fp = 0
-    if (qbs[qb].season_projection) {fp = qbs[qb].season_projection.fantasy_points;}
-    if (fp !== null && fp !== 0){
-      qb_data.push(parseFloat((qb_high - fp).toFixed(2)));
-    }
-  }
-  qb_data.sort(function(a, b){return a-b});
-
-  rb_high = rbs[0].season_projection.fantasy_points;
-  rb_data = [];
-  for (rb in rbs) {
-    fp = 0
-    if (rbs[rb].season_projection) {fp = rbs[rb].season_projection.fantasy_points;}
-    if (fp !== null && fp !== 0){
-      rb_data.push(parseFloat((rb_high - fp).toFixed(2)));
-    }
-  }
-  rb_data.sort(function(a, b){return a-b});
-
-  wr_high = wrs[0].season_projection.fantasy_points;
-  wr_data = [];
-  for (wr in wrs) {
-    fp = 0
-    if (wrs[wr].season_projection) {fp = wrs[wr].season_projection.fantasy_points;}
-    if (fp !== null && fp !== 0){
-      wr_data.push(parseFloat((wr_high - fp).toFixed(2)));
-    }
-  }
-  wr_data.sort(function(a, b){return a-b});
-
-  te_high = tes[0].season_projection.fantasy_points;
-  te_data = [];
-  for (te in tes) {
-    fp = 0
-    if (tes[te].season_projection) {fp = tes[te].season_projection.fantasy_points;}
-    if (fp !== null && fp !== 0){
-      te_data.push(parseFloat((te_high - fp).toFixed(2)));
-    }
-  }
-  te_data.sort(function(a, b){return a-b});
-
-  k_high = ks[0].season_projection.fantasy_points;
-  k_data = [];
-  for (k in ks) {
-    fp = 0
-    if (ks[k].season_projection) {fp = ks[k].season_projection.fantasy_points;}
-    if (fp !== null && fp !== 0){
-      k_data.push(parseFloat((k_high - fp).toFixed(2)))
-    }
-  }
-  k_data.sort(function(a, b){return a-b});
-
-
-  qb_data =  qb_data.slice(0,20);
-  rb_data =  rb_data.slice(0,20);
-  wr_data =  wr_data.slice(0,20);
-  te_data =  te_data.slice(0,20);
-  k_data  =  k_data.slice(0,20);
-
-  dropoff_series.push({name:"Quarterbacks", data: qb_data});
-  dropoff_series.push({name:"Runningbacks", data: rb_data});
-  dropoff_series.push({name:"Wide Receivers", data: wr_data});
-  dropoff_series.push({name:"Tight Ends", data: te_data});
-  dropoff_series.push({name:"Kickers", data: k_data});
-
-  $(function () {
-      $('#container4').highcharts({
-          chart: {
-              type: 'spline'
-          },
-          title: {
-              text: 'Projected Point Drop Off Relative to #1 Projected Player'
-          },
-          subtitle: {
-              text: 'Source: FantasyPros.com'
-          },
-          xAxis: {
-              categories: [
-                '1', '2', '3', '4', '5',
-                '6', '7', '8', '9', '10',
-                '11', '12', '13', '14', '15',
-                '16', '17', '18', '19', '20' 
-              ],
-              title: {
-                text: "Projected Points Position"
-              }
-          },
-          yAxis: {
-              title: {
-                  text: 'Points Differental'
-              },
-              labels: {
-                  formatter: function() {
-                      return this.value
-                  }
-              },
-              min: 0
-          },
-          tooltip: {
-              crosshairs: true,
-              shared: true
-          },
-          plotOptions: {
-              spline: {
-                  marker: {
-                      radius: 4,
-                      lineColor: '#666666',
-                      lineWidth: 1
-                  }
-              }
-          },
-          series: dropoff_series
-      });
-  });
-  
-
 </script>
