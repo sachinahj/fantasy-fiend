@@ -1,11 +1,10 @@
 class CompareController < ApplicationController
-  before_action :get_positions, only: :index
+  before_action :get_positions, only: [:index, :laboratory]
 
   def index
   end
 
   def laboratory    
-    @players = Player.all.includes(:season_stat, :season_projection)
   end
 
   private 
