@@ -49,9 +49,9 @@
 
 
 <script type="text/javascript">
-  var ids = [];
   
   $(document).ready(function () {
+    
     $('#e1').select2({
       placeholder: "Select a Player",
       allowClear: true
@@ -78,390 +78,388 @@
       Render();
     });
 
-  });
 
-  var all_players = <%= raw @players.to_json(include: [:season_projection, :season_stat]) %>; 
-  var qbs = <%= raw @quarterbacks.to_json(include: [:season_projection, :season_stat]) %>; 
-  var rbs = <%= raw @runningbacks.to_json(include: [:season_projection, :season_stat]) %>; 
-  var wrs = <%= raw @receivers.to_json(include: [:season_projection, :season_stat]) %>; 
-  var tes = <%= raw @tightends.to_json(include: [:season_projection, :season_stat]) %>;
-  var ks = <%= raw @kickers.to_json(include: [:season_projection, :season_stat]) %>;
-  var dsts = <%= raw @defenses.to_json(include: [:season_projection, :season_stat]) %>;
+    var ids = [];
+    var all_players = <%= raw @players.to_json(include: [:season_projection, :season_stat]) %>;
 
-
-  function AddID(id){
-    ids.push(id);
-    return true;
-  }
-
-  function DeleteID(id) {
-    var index = ids.indexOf(id);
-    if (index > -1) {
-      ids.splice(index,1);
+    // --- adds id to ids array ---
+    function AddID(id){
+      ids.push(id);
+      return true;
     }
-  };
-
-  function GetData(id) {
-    for (player in all_players){
-      if (all_players[player].id === id){
-        return all_players[player];
+    // --- deletes id to ids array ---
+    function DeleteID(id) {
+      var index = ids.indexOf(id);
+      if (index > -1) {
+        ids.splice(index,1);
       }
-    }
-  };
+    };
 
-  function create_data () {
-    players = [];
-    for (var id in ids){
-      player = GetData(ids[id])
-      players.push(player);
-    }
-    return players
-  }
-
-  function which_data(players) {
-    
-    // ----- Split info into 3 different categories (projections, stats, snaps) ------------------
-    var info = [];
-    for (key in players[0]){
-      if (key === 'season_stat' || key === 'season_projection' || key.indexOf('created') > -1 || key.indexOf('updated') > -1 || key.indexOf('id') > -1){
-      } else {
-        info.push(key);
-      }
-    }
-
-    var season_stats_snaps  = [];
-    var season_stats = [];
-    for (key in players[0].season_stat){
-      if (key.indexOf('created') > -1 || key.indexOf('updated') > -1 || key.indexOf('id') > -1 || key.indexOf('year') > -1) {}
-      else if (key.indexOf("snap") > -1){
-        season_stats_snaps.push(key);
-      } else {
-        season_stats.push(key);
-      }
-    }
-
-    var season_projections = [];
-    for (key in players[0].season_projection){
-
-      if (key.indexOf('created') > -1 || key.indexOf('updated') > -1 || key.indexOf('id') > -1 || key.indexOf('year') > -1) {}
-      else {
-        season_projections.push(key);
-      }
-    }
-
-    // ------- Determine which categories are used by less than 50% and set to NULL ---------
-    for (var i = 0; i < info.length; i++) {
-      count = 0;
-      total_count = players.length
-      for (var j = 0; j < total_count; j++) {
-        if (players[j][info[i]] === null || players[j][info[i]] === 0) {
-           count += 1;
+    // --- returns individual player data form player id --- 
+    function GetData(id) {
+      for (player in all_players){
+        if (all_players[player].id === id){
+          return all_players[player];
         }
       }
-      if (parseFloat(count/total_count) > 0.5) {
-        info[i] = null;
+    };
+
+    // --- return data of all players in ids array
+    function create_data () {
+      players = [];
+      for (var id in ids){
+        player = GetData(ids[id])
+        players.push(player);
       }
+      return players
     }
 
-    for (var i = 0; i < season_stats.length; i++) {
-      count = 0;
-      total_count = players.length
-      for (var j = 0; j < total_count; j++) {
-        if (players[j]["season_stat"][season_stats[i]] === null || players[j]["season_stat"][season_stats[i]] === 0) {
-           count += 1;
-        }
-      }
-      if (parseFloat(count/total_count) > 0.5) {
-        season_stats[i] = null;
-      }
-    }
-
-    for (var i = 0; i < season_stats_snaps.length; i++) {
-      count = 0;
-      total_count = players.length
-      for (var j = 0; j < total_count; j++) {
-        if (players[j]["season_stat"][season_stats_snaps[i]] === null || players[j]["season_stat"][season_stats_snaps[i]] === 0) {
-           count += 1;
-        }
-      }
-      if (parseFloat(count/total_count) > 0.5) {
-        season_stats_snaps[i] = null;
-      }
-    }
-
-    for (var i = 0; i < season_projections.length; i++) {
-      count = 0;
-      total_count = players.length
-      for (var j = 0; j < total_count; j++) {
-        if (players[j]["season_projection"][season_projections[i]] === null || players[j]["season_projection"][season_projections[i]] === 0) {
-           count += 1;
-        }
-      }
-      if (parseFloat(count/total_count) > 0.5) {
-        season_projections[i] = null;
-      }
-    }
- 
-    // -------- Remove NULL values from categories -----------
-    function RemoveNull (categories) {
-      for (var i = 0; i < categories.length; i++) {
-        if (categories[i] == undefined) {         
-          categories.splice(i, 1);
-          i--;
-        }
-      }  
-      return categories;      
-    }
-
-    info = RemoveNull(info)
-    season_stats = RemoveNull(season_stats)
-    season_stats_snaps = RemoveNull(season_stats_snaps)
-    season_projections = RemoveNull(season_projections)
-    
-    //  ------- Return object of categoreis ------------
-    return {
-      'info': info,
-      'season_stats': season_stats,
-      'season_stats_snaps': season_stats_snaps,
-      'season_projections': season_projections
-    }
-  }
-
-
-  function Render () {
-    players = create_data();
-    var projections_categories = stats_categories = snaps_categories = projections_series = stats_series = snaps_series = [];
-
-    
-    if (players[0] != null) {
-
-      data = which_data(players);
+    // --- determines which categories should be used in each chart
+    function which_data(players) {
       
-      var season_projections = data.season_projections
-      projections_categories = season_projections
-      var projections_series = []
-      for (var i = 0; i < players.length; i++){
-        var cat = []
-        for (var j = 0; j < season_projections.length; j++) {
-          cat.push(players[i]["season_projection"][season_projections[j]]);
+      // ----- Split info into 3 different categories (projections, stats, snaps) ------------------
+      var info = [];
+      for (key in players[0]){
+        if (key === 'season_stat' || key === 'season_projection' || key.indexOf('created') > -1 || key.indexOf('updated') > -1 || key.indexOf('id') > -1){
+        } else {
+          info.push(key);
         }
-        projections_series.push({name: players[i].display_name, data: cat})
       }
 
-      var season_stats = data.season_stats
-      stats_categories = season_stats
-      var stats_series = []
-      for (var i = 0; i < players.length; i++){
-        var cat = []
-        for (var j = 0; j < season_stats.length; j++) {
-          cat.push(players[i]["season_stat"][season_stats[j]]);
+      var season_stats_snaps  = [];
+      var season_stats = [];
+      for (key in players[0].season_stat){
+        if (key.indexOf('created') > -1 || key.indexOf('updated') > -1 || key.indexOf('id') > -1 || key.indexOf('year') > -1) {}
+        else if (key.indexOf("snap") > -1){
+          season_stats_snaps.push(key);
+        } else {
+          season_stats.push(key);
         }
-        stats_series.push({name: players[i].display_name, data: cat})
       }
 
+      var season_projections = [];
+      for (key in players[0].season_projection){
 
-      var season_stats_snaps = data.season_stats_snaps
-      snaps_categories = season_stats_snaps
-      var snaps_series = []
-      for (var i = 0; i < players.length; i++){
-        var cat = []
-        for (var j = 0; j < season_stats_snaps.length; j++) {
-          cat.push(players[i]["season_stat"][season_stats_snaps[j]]);
+        if (key.indexOf('created') > -1 || key.indexOf('updated') > -1 || key.indexOf('id') > -1 || key.indexOf('year') > -1) {}
+        else {
+          season_projections.push(key);
         }
-        snaps_series.push({name: players[i].display_name, data: cat})
+      }
+
+      // ------- Determine which categories are used by less than 50% and set to NULL ---------
+      for (var i = 0; i < info.length; i++) {
+        count = 0;
+        total_count = players.length
+        for (var j = 0; j < total_count; j++) {
+          if (players[j][info[i]] === null || players[j][info[i]] === 0) {
+             count += 1;
+          }
+        }
+        if (parseFloat(count/total_count) > 0.5) {
+          info[i] = null;
+        }
+      }
+
+      for (var i = 0; i < season_stats.length; i++) {
+        count = 0;
+        total_count = players.length
+        for (var j = 0; j < total_count; j++) {
+          if (players[j]["season_stat"][season_stats[i]] === null || players[j]["season_stat"][season_stats[i]] === 0) {
+             count += 1;
+          }
+        }
+        if (parseFloat(count/total_count) > 0.5) {
+          season_stats[i] = null;
+        }
+      }
+
+      for (var i = 0; i < season_stats_snaps.length; i++) {
+        count = 0;
+        total_count = players.length
+        for (var j = 0; j < total_count; j++) {
+          if (players[j]["season_stat"][season_stats_snaps[i]] === null || players[j]["season_stat"][season_stats_snaps[i]] === 0) {
+             count += 1;
+          }
+        }
+        if (parseFloat(count/total_count) > 0.5) {
+          season_stats_snaps[i] = null;
+        }
+      }
+
+      for (var i = 0; i < season_projections.length; i++) {
+        count = 0;
+        total_count = players.length
+        for (var j = 0; j < total_count; j++) {
+          if (players[j]["season_projection"][season_projections[i]] === null || players[j]["season_projection"][season_projections[i]] === 0) {
+             count += 1;
+          }
+        }
+        if (parseFloat(count/total_count) > 0.5) {
+          season_projections[i] = null;
+        }
+      }
+   
+      // -------- Remove NULL values from categories -----------
+      function RemoveNull (categories) {
+        for (var i = 0; i < categories.length; i++) {
+          if (categories[i] == undefined) {         
+            categories.splice(i, 1);
+            i--;
+          }
+        }  
+        return categories;      
+      }
+
+      info = RemoveNull(info)
+      season_stats = RemoveNull(season_stats)
+      season_stats_snaps = RemoveNull(season_stats_snaps)
+      season_projections = RemoveNull(season_projections)
+      
+      //  ------- Return object of categoreis ------------
+      return {
+        'info': info,
+        'season_stats': season_stats,
+        'season_stats_snaps': season_stats_snaps,
+        'season_projections': season_projections
       }
     }
-      ProjectionsChart(projections_categories, projections_series);
-      StatsChart(stats_categories, stats_series);
-      SnapsChart(snaps_categories, snaps_series);
-  }
 
+    // --- function render players data from categories
+    function Render () {
+      players = create_data();
+      var projections_categories = stats_categories = snaps_categories = projections_series = stats_series = snaps_series = [];
 
-  function ProjectionsChart (categories, series) {
-    categories = typeof categories !== 'undefined' ? categories : [];
-    series = typeof series !== 'undefined' ? series : [];
+      
+      if (players[0] != null) {
 
-    $('#projections').highcharts({
-      chart: {
-        type: 'bar'
-      },
-      title: {
-        text: 'Projections'
-      },
-      subtitle: {
-        text: 'Source: FantasyPros.com'
-      },
-      xAxis: {
-        categories: categories,
-        title: {
-          text: null
-        },
-      },
-      yAxis: {
-        // type: 'logarithmic',
-        min: 0,
-        max: 1000,
-        title: {
-          text: 'Projections',
-          align: 'high'
-        },
-        labels: {
-          overflow: 'justify',
-        }
-      },
-      tooltip: {
-        valueSuffix: ''
-      },
-      plotOptions: {
-        bar: {
-          dataLabels: {
-            enabled: false
+        data = which_data(players);
+        
+        var season_projections = data.season_projections
+        projections_categories = season_projections
+        var projections_series = []
+        for (var i = 0; i < players.length; i++){
+          var cat = []
+          for (var j = 0; j < season_projections.length; j++) {
+            cat.push(players[i]["season_projection"][season_projections[j]]);
           }
+          projections_series.push({name: players[i].display_name, data: cat})
         }
-      },
-      legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'top',
-        x: 0,
-        y: 0,
-        floating: true,
-        borderWidth: 1,
-        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor || '#FFFFFF'),
-        shadow: true
-      },
-      credits: {
-        enabled: false
-      },
-      series: series
-    });
 
-  }
-
-
-  function StatsChart (categories, series) {
-    categories = typeof categories !== 'undefined' ? categories : [];
-    series = typeof series !== 'undefined' ? series : [];
-
-    $('#stats').highcharts({
-      chart: {
-        type: 'bar'
-      },
-      title: {
-        text: 'Stats'
-      },
-      subtitle: {
-        text: 'Source: FantasyData.com'
-      },
-      xAxis: {
-        categories: categories,
-        title: {
-          text: null
-        },
-      },
-      yAxis: {
-        // type: 'logarithmic',
-        min: 0,
-        max: 1000,
-        title: {
-          text: 'Stats',
-          align: 'high'
-        },
-        labels: {
-          overflow: 'justify'
-        }
-      },
-      tooltip: {
-        valueSuffix: ''
-      },
-      plotOptions: {
-        bar: {
-          dataLabels: {
-            enabled: false
+        var season_stats = data.season_stats
+        stats_categories = season_stats
+        var stats_series = []
+        for (var i = 0; i < players.length; i++){
+          var cat = []
+          for (var j = 0; j < season_stats.length; j++) {
+            cat.push(players[i]["season_stat"][season_stats[j]]);
           }
+          stats_series.push({name: players[i].display_name, data: cat})
         }
-      },
-      legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'top',
-        x: 0,
-        y: 0,
-        floating: true,
-        borderWidth: 1,
-        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor || '#FFFFFF'),
-        shadow: true
-      },
-      credits: {
-        enabled: false
-      },
-      series: series
-    });
-
-  }
 
 
-  function SnapsChart (categories, series) {
-    categories = typeof categories !== 'undefined' ? categories : [];
-    series = typeof series !== 'undefined' ? series : [];
-
-    $('#snaps').highcharts({
-      chart: {
-        type: 'bar'
-      },
-      title: {
-        text: 'Snaps'
-      },
-      subtitle: {
-        text: 'Source: FantasyData.com'
-      },
-      xAxis: {
-        categories: categories,
-        title: {
-          text: null
-        },
-      },
-      yAxis: {
-        // type: 'logarithmic',
-        min: 0,
-        max: 1000,
-        title: {
-          text: 'Snaps',
-          align: 'high'
-        },
-        labels: {
-          overflow: 'justify'
+        var season_stats_snaps = data.season_stats_snaps
+        snaps_categories = season_stats_snaps
+        var snaps_series = []
+        for (var i = 0; i < players.length; i++){
+          var cat = []
+          for (var j = 0; j < season_stats_snaps.length; j++) {
+            cat.push(players[i]["season_stat"][season_stats_snaps[j]]);
+          }
+          snaps_series.push({name: players[i].display_name, data: cat})
         }
-      },
-      tooltip: {
+      }
+        ProjectionsChart(projections_categories, projections_series);
+        StatsChart(stats_categories, stats_series);
+        SnapsChart(snaps_categories, snaps_series);
+    }
+
+    // --- function to render projections chart --- 
+    function ProjectionsChart (categories, series) {
+      categories = typeof categories !== 'undefined' ? categories : [];
+      series = typeof series !== 'undefined' ? series : [];
+
+      $('#projections').highcharts({
+        chart: {
+          type: 'bar'
+        },
+        title: {
+          text: 'Projections'
+        },
+        subtitle: {
+          text: 'Source: FantasyPros.com'
+        },
+        xAxis: {
+          categories: categories,
+          title: {
+            text: null
+          },
+        },
+        yAxis: {
+          // type: 'logarithmic',
+          min: 0,
+          max: 1000,
+          title: {
+            text: 'Projections',
+            align: 'high'
+          },
+          labels: {
+            overflow: 'justify',
+          }
+        },
+        tooltip: {
           valueSuffix: ''
-      },
-      plotOptions: {
-        bar: {
-          dataLabels: {
-            enabled: false
+        },
+        plotOptions: {
+          bar: {
+            dataLabels: {
+              enabled: false
+            }
           }
-        }
-      },
-      legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'top',
-        x: 0,
-        y: 0,
-        floating: true,
-        borderWidth: 1,
-        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor || '#FFFFFF'),
-        shadow: true
-      },
-      credits: {
+        },
+        legend: {
+          layout: 'vertical',
+          align: 'right',
+          verticalAlign: 'top',
+          x: 0,
+          y: 0,
+          floating: true,
+          borderWidth: 1,
+          backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor || '#FFFFFF'),
+          shadow: true
+        },
+        credits: {
           enabled: false
-      },
-      series: series
-    });
+        },
+        series: series
+      });
 
-  }
+    }
 
+    // --- function to render stats chart ---     
+    function StatsChart (categories, series) {
+      categories = typeof categories !== 'undefined' ? categories : [];
+      series = typeof series !== 'undefined' ? series : [];
+
+      $('#stats').highcharts({
+        chart: {
+          type: 'bar'
+        },
+        title: {
+          text: 'Stats'
+        },
+        subtitle: {
+          text: 'Source: FantasyData.com'
+        },
+        xAxis: {
+          categories: categories,
+          title: {
+            text: null
+          },
+        },
+        yAxis: {
+          // type: 'logarithmic',
+          min: 0,
+          max: 1000,
+          title: {
+            text: 'Stats',
+            align: 'high'
+          },
+          labels: {
+            overflow: 'justify'
+          }
+        },
+        tooltip: {
+          valueSuffix: ''
+        },
+        plotOptions: {
+          bar: {
+            dataLabels: {
+              enabled: false
+            }
+          }
+        },
+        legend: {
+          layout: 'vertical',
+          align: 'right',
+          verticalAlign: 'top',
+          x: 0,
+          y: 0,
+          floating: true,
+          borderWidth: 1,
+          backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor || '#FFFFFF'),
+          shadow: true
+        },
+        credits: {
+          enabled: false
+        },
+        series: series
+      });
+
+    }
+
+    // --- function to render snaps chart --- 
+    function SnapsChart (categories, series) {
+      categories = typeof categories !== 'undefined' ? categories : [];
+      series = typeof series !== 'undefined' ? series : [];
+
+      $('#snaps').highcharts({
+        chart: {
+          type: 'bar'
+        },
+        title: {
+          text: 'Snaps'
+        },
+        subtitle: {
+          text: 'Source: FantasyData.com'
+        },
+        xAxis: {
+          categories: categories,
+          title: {
+            text: null
+          },
+        },
+        yAxis: {
+          // type: 'logarithmic',
+          min: 0,
+          max: 1000,
+          title: {
+            text: 'Snaps',
+            align: 'high'
+          },
+          labels: {
+            overflow: 'justify'
+          }
+        },
+        tooltip: {
+            valueSuffix: ''
+        },
+        plotOptions: {
+          bar: {
+            dataLabels: {
+              enabled: false
+            }
+          }
+        },
+        legend: {
+          layout: 'vertical',
+          align: 'right',
+          verticalAlign: 'top',
+          x: 0,
+          y: 0,
+          floating: true,
+          borderWidth: 1,
+          backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor || '#FFFFFF'),
+          shadow: true
+        },
+        credits: {
+            enabled: false
+        },
+        series: series
+      });
+
+    }
+  // --- end of document.ready --- 
+  });
 </script>
 
 
