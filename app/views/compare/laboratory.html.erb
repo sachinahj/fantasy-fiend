@@ -160,7 +160,7 @@
       count = 0;
       total_count = players.length
       for (var j = 0; j < total_count; j++) {
-        if (players[j][info[i]] === null) {
+        if (players[j][info[i]] === null || players[j][info[i]] === 0) {
            count += 1;
         }
       }
@@ -173,7 +173,7 @@
       count = 0;
       total_count = players.length
       for (var j = 0; j < total_count; j++) {
-        if (players[j]["season_stat"][season_stats[i]] === null) {
+        if (players[j]["season_stat"][season_stats[i]] === null || players[j]["season_stat"][season_stats[i]] === 0) {
            count += 1;
         }
       }
@@ -186,7 +186,7 @@
       count = 0;
       total_count = players.length
       for (var j = 0; j < total_count; j++) {
-        if (players[j]["season_stat"][season_stats_snaps[i]] === null) {
+        if (players[j]["season_stat"][season_stats_snaps[i]] === null || players[j]["season_stat"][season_stats_snaps[i]] === 0) {
            count += 1;
         }
       }
@@ -199,7 +199,7 @@
       count = 0;
       total_count = players.length
       for (var j = 0; j < total_count; j++) {
-        if (players[j]["season_projection"][season_projections[i]] === null) {
+        if (players[j]["season_projection"][season_projections[i]] === null || players[j]["season_projection"][season_projections[i]] === 0) {
            count += 1;
         }
       }
@@ -260,44 +260,45 @@
       data = which_data(players);
       
       var season_projections = data.season_projections
-      categories = season_projections
-      var series = []
+      console.log("season_stats", season_projections);
+      projections_categories = season_projections
+      var projections_series = []
       for (var i = 0; i < players.length; i++){
         var cat = []
         for (var j = 0; j < season_projections.length; j++) {
           cat.push(players[i]["season_projection"][season_projections[j]]);
         }
-        series.push({name: players[i].display_name, data: cat})
+        projections_series.push({name: players[i].display_name, data: cat})
       }
 
       var season_stats = data.season_stats
       console.log("season_stats", season_stats);
-      categories = season_stats
-      var series = []
+      stats_categories = season_stats
+      var stats_series = []
       for (var i = 0; i < players.length; i++){
         var cat = []
         for (var j = 0; j < season_stats.length; j++) {
           cat.push(players[i]["season_stat"][season_stats[j]]);
         }
-        series.push({name: players[i].display_name, data: cat})
+        stats_series.push({name: players[i].display_name, data: cat})
       }
 
 
       var season_stats_snaps = data.season_stats_snaps
       console.log("season_stats_snaps", season_stats_snaps);
-      categories = season_stats_snaps
-      var series = []
+      snaps_categories = season_stats_snaps
+      var snaps_series = []
       for (var i = 0; i < players.length; i++){
         var cat = []
         for (var j = 0; j < season_stats_snaps.length; j++) {
           cat.push(players[i]["season_stat"][season_stats_snaps[j]]);
         }
-        series.push({name: players[i].display_name, data: cat})
+        snaps_series.push({name: players[i].display_name, data: cat})
       }
     }
-      SnapsChart(categories, series);
-      StatsChart(categories, series);
-      ProjectionsChart(categories, series);
+      ProjectionsChart(projections_categories, projections_series);
+      StatsChart(stats_categories, stats_series);
+      SnapsChart(snaps_categories, snaps_series);
   }
 
 
