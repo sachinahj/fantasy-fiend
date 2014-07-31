@@ -1,4 +1,3 @@
-
 <h3>All Players </h3>
 
 <select id ="e1" style="width : 300px">
@@ -42,7 +41,7 @@
 </select>
 
 
-<p>Selected muthafuckas: <span id="selectedText"></span></p>
+<p>Selected players: <span id="selectedText"></span></p>
 <br>
 <div id="projections" style="min-width: 310px; max-width: px; height: 400px; margin: 0"></div>
 <div id="stats" style="min-width: 310px; max-width: px; height: 400px; margin: 0"></div>
@@ -278,6 +277,7 @@
       StatsChart(stats_categories, stats_series);
       SnapsChart(snaps_categories, snaps_series);
   }
+
 
   function ProjectionsChart (categories, series) {
     categories = typeof categories !== 'undefined' ? categories : [];
