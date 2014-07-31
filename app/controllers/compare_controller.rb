@@ -1,12 +1,13 @@
 class CompareController < ApplicationController
+  before_action :get_positions, only: [:index, :laboratory ]
+
   def index
-    @quarterbacks = Player.all.where(position: "QB").includes(:season_stat, :season_projection)
-    @runningbacks = Player.all.where(position: "RB").includes(:season_stat, :season_projection)
-    @receivers = Player.all.where(position: "WR").includes(:season_stat, :season_projection)
-    @tightends = Player.all.where(position: "TE").includes(:season_stat, :season_projection)
-    @kickers = Player.all.where(position: "K").includes(:season_stat, :season_projection)
-    @defenses = Player.all.where(position: "DST").includes(:season_stat, :season_projection)
   end
+
+  def laboratory
+    
+  end
+
   def quarterbacks 
     @quarterbacks = Player.all.where(position: "QB").where("overall_draft_position < 100").includes(:season_stat, :season_projection)
   end
@@ -29,6 +30,41 @@ class CompareController < ApplicationController
 
   def defenses
     @defenses= Player.where(position: "DST").includes(:season2013_stat, :season2014_projection)
+  end
+
+  private 
+
+  def get_positions
+
+    @players = Player.all.includes(:season_stat, :season_projection)
+    @quarterbacks = []
+    @runningbacks = []
+    @receivers = []
+    @tightends = []
+    @kickers = []
+    @defenses = []
+    @others = []
+
+
+    @players.each do |player|
+      case player.position
+      when 'QB'
+        @quarterbacks << player
+      when 'RB'
+        @runningbacks << player
+      when 'WR'
+        @receivers << player
+      when 'TE'
+        @tightends << player
+      when 'K'
+        @kickers << player
+      when 'DST'
+        @defenses << player
+      else
+        @others << player
+      end
+    end
+
   end
   
 end
