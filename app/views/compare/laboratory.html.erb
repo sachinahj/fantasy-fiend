@@ -41,7 +41,7 @@
 </select>
 
 
-<p>Selected players: <span id="selectedText"></span></p>
+<p>Selected Players: <span id="selectedText"></span></p>
 <br>
 <div id="projections" style="min-width: 310px; max-width: px; height: 400px; margin: 0"></div>
 <div id="stats" style="min-width: 310px; max-width: px; height: 400px; margin: 0"></div>
@@ -56,31 +56,29 @@
       placeholder: "Select a Player",
       allowClear: true
     });
-    // ProjectionsChart(['test1', 'test2'], [{name: "Sachin", data:[1,2]}]);
-    // StatsChart(['test1', 'test2'], [{name: "Sachin", data:[1,2]}]);
-  });
 
-  $('#e1').change(function() {
-    amount = $('span#delete').length
-    if (amount < 5){
-      var theID = $('#e1').select2('data').id
-      if (ids.indexOf(parseInt(theID)) > -1){
-        return;
+    $('#e1').change(function() {
+      amount = $('span#delete').length
+      if (amount < 5){
+        var theID = $('#e1').select2('data').id
+        if (ids.indexOf(parseInt(theID)) > -1){
+          return;
+        }
+        var theText = $('#e1').select2('data').text;
+        $('#selectedText').append('<p id="player"><span id="delete"> x </span><a data-id="' + theID + '" href="/players/'+theID +'">' + theText + '</a><br></p>')
+        AddID(parseInt(theID));
+        Render();
       }
-      var theText = $('#e1').select2('data').text;
-      $('#selectedText').append('<p id="player"><span id="delete"> x </span><a data-id="' + theID + '" href="/players/'+theID +'">' + theText + '</a><br></p>')
-      AddID(parseInt(theID));
+    });
+
+    $('#selectedText').on('click','#delete', function () {
+      id = $(this).parent().find('a').data('id')
+      $(this).parent().remove();
+      DeleteID(id);
       Render();
-    }
-  });
+    });
 
-  $('#selectedText').on('click','#delete', function () {
-    id = $(this).parent().find('a').data('id')
-    $(this).parent().remove();
-    DeleteID(id);
-    Render();
   });
-
 
   var all_players = <%= raw @players.to_json(include: [:season_projection, :season_stat]) %>; 
   var qbs = <%= raw @quarterbacks.to_json(include: [:season_projection, :season_stat]) %>; 
