@@ -5,7 +5,8 @@ namespace :csv do
   task test: :environment do
 
     Rake::Task["csv:teams"].invoke
-    Rake::Task["dp:setup"].invoke
+    Rake::Task["rankings:setup"].invoke
+    Rake::Task["draft_positions:setup"].invoke
     Rake::Task["projections:setup"].invoke
     Rake::Task["stats:setup"].invoke
     Rake::Task["snaps:setup"].invoke
@@ -17,7 +18,7 @@ namespace :csv do
   task setup: :environment do
 
     Rake::Task["csv:teams"].invoke
-    Rake::Task["dp:setup"].invoke
+    Rake::Task["draft_positions:setup"].invoke
     Rake::Task["projections:setup"].invoke
     Rake::Task["stats:setup"].invoke
     Rake::Task["snaps:setup"].invoke

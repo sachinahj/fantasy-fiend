@@ -9,6 +9,9 @@
       t.string :team_abbreviation
       t.integer :bye_week
       
+      t.integer :overall_rank
+      t.integer :position_rank
+
       t.integer :position_draft_position
       t.integer :overall_draft_position
 

@@ -1,53 +1,86 @@
 def create_projections(position)
 
-  csv_text = File.read('app/assets/CSVs/2014projections/' + position + '_projections.csv')
-  csv = CSV.parse(csv_text, :headers => true)
-  
-  n = 1
-
-  csv.each do |projection|
-    projection = projection.to_hash
-
-    puts "----" + position + " projection " + n.to_s + " ----"
-    p projection
-
-    player = nil
-    name = projection['name']
-    team_abbreviation = projection['team_abbreviation']
-    projection.delete("name")
-    projection.delete("team_abbreviation")
-    projection["year"] = 2014
-
-    player = Player.where(name: name.downcase).where(team_abbreviation: team_abbreviation).first
-
-    if player == nil 
-        
-      puts n.to_s + " player not found!!!"
-      attributes = {
-        name: name.downcase,
-        display_name: name,
-        position: position.upcase,
-        team: nil,
-        team_abbreviation: team_abbreviation,
-        bye_week: nil,
-        position_draft_position: nil,
-        overall_draft_position: nil
-      }
-
-      player = Player.new(attributes)
-      player.save
-      puts n.to_s + " player created!!"  
-    else 
+    csv_text = File.read('app/assets/CSVs/2014projections/' + position + '_projections.csv')
+    csv = CSV.parse(csv_text, :headers => true)
     
-      puts n.to_s + " player found!!!"
+    n = 1
+
+    csv.each do |projection|
+      projection = projection.to_hash
+
+      puts "----" + position + " projection " + n.to_s + " ----"
+      p projection
+
+      player = nil
+      name = projection['name'].downcase
+      team_abbreviation = projection['team_abbreviation']
+      projection.delete("name")
+      projection.delete("team_abbreviation")
+      projection.delete("rank")
+      projection.delete("position")
+
+      player = Player.where(name: name.downcase).where(team_abbreviation: team_abbreviation).first
+
+      if player == nil 
+        puts n.to_s + " player not found!!!"
+      else 
+        puts n.to_s + " player found!!!"
+        player.create_season_projection(projection)
+        puts n.to_s + " projection created!!"
+      end
+
+      n += 1
+    end  
+
+
+  # csv_text = File.read('app/assets/CSVs/2014projections/' + position + '_projections.csv')
+  # csv = CSV.parse(csv_text, :headers => true)
+  
+  # n = 1
+
+  # csv.each do |projection|
+  #   projection = projection.to_hash
+
+  #   puts "----" + position + " projection " + n.to_s + " ----"
+  #   p projection
+
+  #   player = nil
+  #   name = projection['name']
+  #   team_abbreviation = projection['team_abbreviation']
+  #   projection.delete("name")
+  #   projection.delete("team_abbreviation")
+  #   projection["year"] = 2014
+
+  #   player = Player.where(name: name.downcase).where(team_abbreviation: team_abbreviation).first
+
+  #   if player == nil 
+        
+  #     puts n.to_s + " player not found!!!"
+  #     attributes = {
+  #       name: name.downcase,
+  #       display_name: name,
+  #       position: position.upcase,
+  #       team: nil,
+  #       team_abbreviation: team_abbreviation,
+  #       bye_week: nil,
+  #       position_draft_position: nil,
+  #       overall_draft_position: nil
+  #     }
+
+  #     player = Player.new(attributes)
+  #     player.save
+  #     puts n.to_s + " player created!!"  
+  #   else 
+    
+  #     puts n.to_s + " player found!!!"
       
-    end
+  #   end
 
-    player.create_season_projection(projection)
-    puts n.to_s + " projection created!!"
+  #   player.create_season_projection(projection)
+  #   puts n.to_s + " projection created!!"
 
-    n += 1
-  end
+  #   n += 1
+  # end
 
 end
 

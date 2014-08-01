@@ -37,7 +37,7 @@ end
 
 namespace :snaps do
 
-  desc "import_snaps_csvs"
+  desc "import_snaps_csvs - update"
   task setup: :environment do
 
     Rake::Task["snaps:qb"].invoke

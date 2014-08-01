@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20140730135852) do
     t.string   "team"
     t.string   "team_abbreviation"
     t.integer  "bye_week"
+    t.integer  "overall_rank"
+    t.integer  "position_rank"
     t.integer  "position_draft_position"
     t.integer  "overall_draft_position"
     t.string   "quarterback"
