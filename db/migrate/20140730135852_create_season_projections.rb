@@ -21,6 +21,16 @@ class CreateSeasonProjections < ActiveRecord::Migration
 
       t.float :field_goals_made
       t.float :field_goals_attempts
+
+      t.integer :sos_qb_rank
+      t.float :sos_qb_fpa
+      t.integer :sos_rb_rank
+      t.float :sos_rb_fpa
+      t.integer :sos_wr_rank
+      t.float :sos_wr_fpa
+      t.integer :sos_te_rank
+      t.float :sos_te_fpa
+
       t.float :extra_points_made
 
       t.float :fumbles

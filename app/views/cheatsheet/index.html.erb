@@ -5,7 +5,7 @@
 <label for="k"><input id="k" type="checkbox" checked> Ks</label>
 <label for="dst"><input id="dst" type="checkbox" checked> DSTs</label>
 
-<table id="adp">
+<table id="indexTable">
   <thead>
     <tr>
       <th>Overall Rank</th>
@@ -77,7 +77,7 @@
        return ((x < y) ? 1 : ((x > y) ? -1 : 0));  
     };  
 
-    $('#adp').dataTable({
+    $('#indexTable').dataTable({
       "iDisplayLength" : -1,
       "paging": false,
       "info": false,
@@ -99,6 +99,7 @@
       ]
 
     });
+
 
     
   });

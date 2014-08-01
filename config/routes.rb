@@ -2,6 +2,15 @@ Rails.application.routes.draw do
 
 
 
+
+  get 'cheatsheet', to: 'cheatsheet#index'
+  get 'cheatsheet/quarterbacks', to: 'cheatsheet#quarterbacks'
+  get 'cheatsheet/flex', to: 'cheatsheet#flex'
+  get 'cheatsheet/kickers', to: 'cheatsheet#kickers'
+  get 'cheatsheet/defenses', to: 'cheatsheet#defenses'
+  get 'cheatsheet/snaps', to: 'cheatsheet#snaps'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -9,18 +18,9 @@ Rails.application.routes.draw do
 
   get '/players', to: 'players#index'
   get '/players/:id', to: 'players#show', as: :player
-
-  get '/ODP', to: 'overall_draft_positions#index', as: :overall_draft_position
-
   
   get 'compare', to: 'compare#index'
   get 'compare/laboratory', to: 'compare#laboratory'
-  get 'compare/quarterbacks', to: 'compare#quarterbacks'
-  get 'compare/runningbacks', to: 'compare#runningbacks'
-  get 'compare/receivers', to: 'compare#receivers'
-  get 'compare/tightends', to: 'compare#tightends'
-  get 'compare/kickers', to: 'compare#kickers'
-  get 'compare/defenses', to: 'compare#defenses'
   
   root :to => "players#index" 
 
