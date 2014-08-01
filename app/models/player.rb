@@ -27,7 +27,6 @@ class Player < ActiveRecord::Base
       self.season_projection.save
     end
 
-
   end
 
 
