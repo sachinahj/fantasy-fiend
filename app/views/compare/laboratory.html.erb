@@ -47,6 +47,7 @@
 <label for="te"><input id="te" type="checkbox" checked> TEs</label>
 <label for="k"><input id="k" type="checkbox" checked> Ks</label>
 <label for="dst"><input id="dst" type="checkbox" checked> DSTs</label>
+<label for="select"><input id="select" type="checkbox"> All</label>
 
 
 <p>Selected Players: <span id="selectedText"></span></p>
@@ -68,15 +69,25 @@
     var dsts = <%= raw @defenses.to_json(include: :season_projection) %>;
 
     $('input[type="checkbox"]').on("click", function () {
-      // a = $(this).attr("id");
-      // $('.'+a).fadeToggle();
+      if ($(this).parent().prop('for') == 'select'){
+
+        if (this.checked){
+          $('input[type="checkbox"]').each(function () {
+            this.checked = true;
+          });
+        } else {
+          $('input[type="checkbox"]').each(function () {
+            this.checked = false;
+          });
+        }
+
+      }
       RenderSelectBox();
     });
 
     function RenderSelectBox () {
       html = '<select id ="e1" style="width : 300px"><option></option>';
       
-      console.log($('input[type="checkbox"]#qb').val());
       if ($('input[type="checkbox"]#qb').prop('checked') == true){
         html += PositionOptGroup('Quarterbacks', qbs);
       }
