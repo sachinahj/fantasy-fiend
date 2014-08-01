@@ -1,44 +1,52 @@
 <h3>All Players </h3>
+<div class="container">
+  <select id ="e1" style="width : 300px">
+    <option></option>
+    <optgroup label="Quarterbacks" class="QB">
+      <% @quarterbacks.each do |qb| %>
+        <option value = "<%= qb.id %>"><%= qb.display_name %></option>
+      <% end %>
+    </optgroup>
+    <optgroup label="Running Backs" class="RB">
+      <% @runningbacks.each do |rb| %>
+        <option value = "<%= rb.id %>"><%= rb.display_name %></option>
+      <% end %>
+    </optgroup>
+    <optgroup label="Wide Receivers" class="WR">
+      <% @receivers.each do |wr| %>
+        <option value = "<%= wr.id %>"><%= wr.display_name %></option>
+      <% end %>
+    </optgroup>
+    <optgroup label="Tight Ends" class="TE">
+      <% @tightends.each do |te| %>
+        <option value = "<%= te.id %>"><%= te.display_name %></option>
+      <% end %>
+    </optgroup>
+    <optgroup label="Kickers" class="K">
+      <% @kickers.each do |k| %>
+        <option value = "<%= k.id %>"><%= k.display_name %></option>
+      <% end %>
+    </optgroup>
+    <optgroup label="Defense" class="Defense">
+      <% @defenses.each do |dst| %>
+        <option value = "<%= dst.id %>"><%= dst.display_name %></option>
+      <% end %>
+    </optgroup>
+    <optgroup label="Other" class="Other">
+      <% @others.each do |other| %>
+        <option value = "<%= other.id %>"><%= other.display_name %></option>
+      <% end %>
+    </optgroup>
+  </select>
+</div>
 
-<select id ="e1" style="width : 300px">
-  <option></option>
-  <optgroup label="Quarterbacks" class="QB">
-    <% @quarterbacks.each do |qb| %>
-      <option value = "<%= qb.id %>"><%= qb.display_name %></option>
-    <% end %>
-  </optgroup>
-  <optgroup label="Running Backs" class="RB">
-    <% @runningbacks.each do |rb| %>
-      <option value = "<%= rb.id %>"><%= rb.display_name %></option>
-    <% end %>
-  </optgroup>
-  <optgroup label="Wide Receivers" class="WR">
-    <% @receivers.each do |wr| %>
-      <option value = "<%= wr.id %>"><%= wr.display_name %></option>
-    <% end %>
-  </optgroup>
-  <optgroup label="Tight Ends" class="TE">
-    <% @tightends.each do |te| %>
-      <option value = "<%= te.id %>"><%= te.display_name %></option>
-    <% end %>
-  </optgroup>
-  <optgroup label="Kickers" class="K">
-    <% @kickers.each do |k| %>
-      <option value = "<%= k.id %>"><%= k.display_name %></option>
-    <% end %>
-  </optgroup>
-  <optgroup label="Defense" class="Defense">
-    <% @defenses.each do |dst| %>
-      <option value = "<%= dst.id %>"><%= dst.display_name %></option>
-    <% end %>
-  </optgroup>
-  <optgroup label="Other" class="Other">
-    <% @others.each do |other| %>
-      <option value = "<%= other.id %>"><%= other.display_name %></option>
-    <% end %>
-  </optgroup>
 
-</select>
+<label for="qb"><input id="qb" type="checkbox" checked> QBs</label>
+<label for="rb"><input id="rb" type="checkbox" checked> RBs</label>
+<label for="wr"><input id="wr" type="checkbox" checked> WRs</label>
+<label for="te"><input id="te" type="checkbox" checked> TEs</label>
+<label for="k"><input id="k" type="checkbox" checked> Ks</label>
+<label for="dst"><input id="dst" type="checkbox" checked> DSTs</label>
 
 
 <p>Selected Players: <span id="selectedText"></span></p>
@@ -51,13 +59,66 @@
 <script type="text/javascript">
   
   $(document).ready(function () {
+
+    var qbs = <%= raw @quarterbacks.to_json(include: :season_projection) %>; 
+    var rbs = <%= raw @runningbacks.to_json(include: :season_projection) %>; 
+    var wrs = <%= raw @receivers.to_json(include: :season_projection) %>; 
+    var tes = <%= raw @tightends.to_json(include: :season_projection) %>;
+    var ks = <%= raw @kickers.to_json(include: :season_projection) %>;
+    var dsts = <%= raw @defenses.to_json(include: :season_projection) %>;
+
+    $('input[type="checkbox"]').on("click", function () {
+      // a = $(this).attr("id");
+      // $('.'+a).fadeToggle();
+      RenderSelectBox();
+    });
+
+    function RenderSelectBox () {
+      html = '<select id ="e1" style="width : 300px"><option></option>';
+      
+      console.log($('input[type="checkbox"]#qb').val());
+      if ($('input[type="checkbox"]#qb').prop('checked') == true){
+        html += PositionOptGroup('Quarterbacks', qbs);
+      }
+      if ($('input[type="checkbox"]#rb').prop('checked') == true){
+        html += PositionOptGroup('Running Backs', rbs);
+      }
+      if ($('input[type="checkbox"]#wr').prop('checked') == true){
+        html += PositionOptGroup('Wide Receivers', wrs);
+      }
+      if ($('input[type="checkbox"]#te').prop('checked') == true){
+        html += PositionOptGroup('Tight Ends', tes);
+      }
+      if ($('input[type="checkbox"]#k').prop('checked') == true){
+        html += PositionOptGroup('Kickers', ks);
+      }
+      if ($('input[type="checkbox"]#dst').prop('checked') == true){
+        html += PositionOptGroup('Defenses', dsts);
+      }
+      html += "</select>";
+      $('.container').empty().append(html);
+      $('#e1').select2('destroy').select2({
+        placeholder: "Select a Player",
+        allowClear: true
+      });
+    }
+
+    function PositionOptGroup (label, positionJSON){
+      html = '<optgroup label="' + label + '" class="QB">';
+      for (position in positionJSON){
+        option_html = '<option value = "' + positionJSON[position].id + '">' + positionJSON[position].display_name + '</option>';
+        html += option_html;
+      }
+      html += '</optgroup>';
+      return html;
+    }
     
     $('#e1').select2({
       placeholder: "Select a Player",
       allowClear: true
     });
 
-    $('#e1').change(function() {
+    $(document).on('change','#e1', function() {
       amount = $('span#delete').length
       if (amount < 5){
         var theID = $('#e1').select2('data').id
@@ -151,7 +212,7 @@
         count = 0;
         total_count = players.length
         for (var j = 0; j < total_count; j++) {
-          if (players[j][info[i]] === null || players[j][info[i]] === 0) {
+          if (players[j][info[i]] === null || players[j][info[i]] < 1) {
              count += 1;
           }
         }
@@ -164,7 +225,7 @@
         count = 0;
         total_count = players.length
         for (var j = 0; j < total_count; j++) {
-          if (players[j]["season_stat"][season_stats[i]] === null || players[j]["season_stat"][season_stats[i]] === 0) {
+          if (players[j]["season_stat"][season_stats[i]] === null || players[j]["season_stat"][season_stats[i]] < 1) {
              count += 1;
           }
         }
@@ -177,7 +238,7 @@
         count = 0;
         total_count = players.length
         for (var j = 0; j < total_count; j++) {
-          if (players[j]["season_stat"][season_stats_snaps[i]] === null || players[j]["season_stat"][season_stats_snaps[i]] === 0) {
+          if (players[j]["season_stat"][season_stats_snaps[i]] === null || players[j]["season_stat"][season_stats_snaps[i]] < 1) {
              count += 1;
           }
         }
@@ -190,7 +251,7 @@
         count = 0;
         total_count = players.length
         for (var j = 0; j < total_count; j++) {
-          if (players[j]["season_projection"][season_projections[i]] === null || players[j]["season_projection"][season_projections[i]] === 0) {
+          if (players[j]["season_projection"][season_projections[i]] === null || players[j]["season_projection"][season_projections[i]] < 1) {
              count += 1;
           }
         }
@@ -224,6 +285,10 @@
       }
     }
 
+    function log10(val) {
+      return Math.log(val) / Math.LN10;
+    }
+
     // --- function render players data from categories
     function Render () {
       players = create_data();
@@ -234,56 +299,62 @@
 
         data = which_data(players);
         
+        // ---- create season projections series and categories ---
         var season_projections = data.season_projections
         projections_categories = season_projections
         var projections_series = []
         for (var i = 0; i < players.length; i++){
           var cat = []
           for (var j = 0; j < season_projections.length; j++) {
-            cat.push(players[i]["season_projection"][season_projections[j]]);
+            cat.push(log10(players[i]["season_projection"][season_projections[j]]));
           }
           projections_series.push({name: players[i].display_name, data: cat})
         }
 
+        // ---- create season stats series and categories ---
         var season_stats = data.season_stats
         stats_categories = season_stats
         var stats_series = []
         for (var i = 0; i < players.length; i++){
           var cat = []
           for (var j = 0; j < season_stats.length; j++) {
-            cat.push(players[i]["season_stat"][season_stats[j]]);
+            cat.push(log10(players[i]["season_stat"][season_stats[j]]));
           }
           stats_series.push({name: players[i].display_name, data: cat})
         }
 
-
+        // ---- create season stats snaps series and categories ---
         var season_stats_snaps = data.season_stats_snaps
         snaps_categories = season_stats_snaps
         var snaps_series = []
         for (var i = 0; i < players.length; i++){
           var cat = []
           for (var j = 0; j < season_stats_snaps.length; j++) {
-            cat.push(players[i]["season_stat"][season_stats_snaps[j]]);
+            cat.push(log10(players[i]["season_stat"][season_stats_snaps[j]]));
           }
           snaps_series.push({name: players[i].display_name, data: cat})
         }
       }
-        ProjectionsChart(projections_categories, projections_series);
-        StatsChart(stats_categories, stats_series);
-        SnapsChart(snaps_categories, snaps_series);
+
+        ProjectionsStatsSnapsChart('Projections', projections_categories, projections_series);
+        ProjectionsStatsSnapsChart('Stats',stats_categories, stats_series);
+        ProjectionsStatsSnapsChart('Snaps',snaps_categories, snaps_series);
+        // ProjectionsChart(projections_categories, projections_series);
+        // StatsChart(stats_categories, stats_series);
+        // SnapsChart(snaps_categories, snaps_series);
     }
 
     // --- function to render projections chart --- 
-    function ProjectionsChart (categories, series) {
+    function ProjectionsStatsSnapsChart (titleofchart, categories, series) {
       categories = typeof categories !== 'undefined' ? categories : [];
       series = typeof series !== 'undefined' ? series : [];
 
-      $('#projections').highcharts({
+      $('#'+titleofchart.toLowerCase()).highcharts({
         chart: {
           type: 'bar'
         },
         title: {
-          text: 'Projections'
+          text: titleofchart
         },
         subtitle: {
           text: 'Source: FantasyPros.com'
@@ -297,22 +368,31 @@
         yAxis: {
           // type: 'logarithmic',
           min: 0,
-          max: 1000,
+          // max: 1000,
           title: {
-            text: 'Projections',
+            text: titleofchart,
             align: 'high'
           },
           labels: {
             overflow: 'justify',
+            formatter: function () {
+              return Math.round(Math.pow(10,this.value));
+            }
           }
         },
         tooltip: {
-          valueSuffix: ''
+          valueSuffix: '',
+          formatter: function() {
+            return '' + this.series.name + ': ' + Math.round(Math.pow(10,this.y));
+          }
         },
         plotOptions: {
           bar: {
             dataLabels: {
-              enabled: false
+              enabled: false,
+              formatter: function() {
+                   return Math.round(Math.pow(10,this.y)); 
+                }
             }
           }
         },

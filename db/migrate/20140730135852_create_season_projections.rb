@@ -26,6 +26,8 @@ class CreateSeasonProjections < ActiveRecord::Migration
       t.float :fumbles
 
       t.float :fantasy_points
+      t.float :fantasy_points_per_week
+
 
 
       t.timestamps

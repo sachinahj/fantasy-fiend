@@ -18,11 +18,13 @@
       <th>Quarterback</th>
       <th>Depth Chart</th>
       
-      <th>Overall Draft Position</th>
-      <th>Position Draft Position</th>
+      <th>Overall Draft Pick</th>
 
-      <th>'13 Fantasy Points</th>
-      <th>'14 Projected Points</th>
+      <th>'13 Fantasy Pts</th>
+      <th>'14 Projected Pts</th>
+      <th>'13 Pts/Week</th>
+      <th>'14 Pts/Week</th>
+      
     </tr>
   </thead>
   <tbody>
@@ -38,12 +40,12 @@
         <td><%= player.quarterback ? player.quarterback : "" %></td>
         <td><%= player.depth_chart_position ? player.depth_chart_position : "" %></td>
 
-
         <td><%= player.overall_draft_position.to_i %></td>
-        <td><%= player.position_draft_position %></td>
         
         <td><%= player.season_stat ? player.season_stat.fantasy_points : "" %></td>
-        <td><%= player.season_projection ? player.season_projection.fantasy_points : "" %></td>
+        <td><%= player.season_projection ? player.season_projection.fantasy_points  : "" %></td>
+        <td><%= player.season_stat ? player.season_stat.fantasy_points_per_week : "" %></td>
+        <td><%= player.season_projection ? player.season_projection.fantasy_points_per_week : "" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -82,7 +84,6 @@
 
       "aoColumns": [
         null,
-        // { "asSorting": [ "asc", "desc" ], "sType": "text-blankslast" },
         null,
         null,
         null,
@@ -91,7 +92,8 @@
         {"sType": "text-blankslast"},
         {"sType": "text-blankslast"},
         null,
-        null,
+        { "asSorting": [ "desc", "asc" ] },
+        { "asSorting": [ "desc", "asc" ] },
         { "asSorting": [ "desc", "asc" ] },
         { "asSorting": [ "desc", "asc" ] }
       ]

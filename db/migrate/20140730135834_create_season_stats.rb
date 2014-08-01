@@ -59,7 +59,8 @@ class CreateSeasonStats < ActiveRecord::Migration
       t.integer :fumbles
       t.integer :fumbles_lost
       t.float :fantasy_points
-
+      t.float :fantasy_points_per_week
+      
       t.timestamps
     end
   end

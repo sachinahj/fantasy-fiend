@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 20140730135852) do
     t.float    "extra_points_made"
     t.float    "fumbles"
     t.float    "fantasy_points"
+    t.float    "fantasy_points_per_week"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -187,6 +188,7 @@ ActiveRecord::Schema.define(version: 20140730135852) do
     t.integer  "fumbles"
     t.integer  "fumbles_lost"
     t.float    "fantasy_points"
+    t.float    "fantasy_points_per_week"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

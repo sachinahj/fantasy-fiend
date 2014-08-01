@@ -61,7 +61,7 @@ namespace :depth_chart do
   desc "grab and set depth chart positions from FantasyPros.com"
   task quarterbacks: :environment do
     quarterbacks = Player.where(depth_chart_position: "QB1")
-    players = Player.where(position: ["RB","WR","TE"])
+    players = Player.where(position: ["RB","WR","TE","K","DST"])
     players.each do |player|
 
       team_abbreviation = player.team_abbreviation
