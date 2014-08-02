@@ -11,6 +11,12 @@ table#indexTable td, table#indexTable th {
   font-size: .9em;
   padding: 0px 0px;
 }
+table#indexTable th {
+  text-align: left;
+  font-size: .7em;
+  padding: 0px 0px;
+}
+
 table.dataTable tbody tr.highlight {
   background-color: #a5ffe8;
 }
