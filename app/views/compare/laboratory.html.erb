@@ -46,29 +46,29 @@
       </div>
       <div class="row">
         <div class="span3">
-          <label for="qb"><input id="qb" type="checkbox" checked> QBs</label>
+          <label class="labChecks" for="qb"><input id="qb" type="checkbox" checked> QBs</label>
         </div>
         <div class="span3">
-          <label for="rb"><input id="rb" type="checkbox" checked> RBs</label>
+          <label class="labChecks" for="rb"><input id="rb" type="checkbox" checked> RBs</label>
         </div>
         <div class="span3">
-          <label for="wr"><input id="wr" type="checkbox" checked> WRs</label>
+          <label class="labChecks" for="wr"><input id="wr" type="checkbox" checked> WRs</label>
         </div>
         <div class="span3">
         </div>
       </div>
       <div class="row">
         <div class="span3">
-          <label for="te"><input id="te" type="checkbox" checked> TEs</label>
+          <label class="labChecks" for="te"><input id="te" type="checkbox" checked> TEs</label>
         </div>
         <div class="span3">
-          <label for="k"><input id="k" type="checkbox" checked> Ks</label>
+          <label class="labChecks" for="k"><input id="k" type="checkbox" checked> Ks</label>
         </div>
         <div class="span3">
-          <label for="dst"><input id="dst" type="checkbox" checked> DSTs</label>
+          <label class="labChecks" for="dst"><input id="dst" type="checkbox" checked> DSTs</label>
         </div>
         <div class="span3">
-          <label for="select"><input id="select" type="checkbox" checked> All</label>    
+          <label class="labChecks" for="select"><input id="select" type="checkbox" checked> All</label>    
         </div>
       </div>
       <div class="row">
@@ -95,6 +95,7 @@
   
   $(document).ready(function () {
 
+    // ---- get data from backend server ---
     var qbs = <%= raw @quarterbacks.to_json(include: :season_projection) %>; 
     var rbs = <%= raw @runningbacks.to_json(include: :season_projection) %>; 
     var wrs = <%= raw @receivers.to_json(include: :season_projection) %>; 
@@ -102,6 +103,7 @@
     var ks = <%= raw @kickers.to_json(include: :season_projection) %>;
     var dsts = <%= raw @defenses.to_json(include: :season_projection) %>;
 
+    // ---- select all functionality ---
     $('input[type="checkbox"]').on("click", function () {
       if ($(this).parent().prop('for') == 'select'){
 
@@ -119,6 +121,7 @@
       RenderSelectBox();
     });
 
+    // ---- render select box with appropiate positions ----
     function RenderSelectBox () {
       html = '<select id ="e1" style="width : 90%"><option></option>';
       
@@ -148,6 +151,7 @@
       });
     }
 
+    // ---- create html of each position players for render funcation --- 
     function PositionOptGroup (label, positionJSON){
       html = '<optgroup label="' + label + '" class="QB">';
       for (position in positionJSON){
@@ -158,26 +162,71 @@
       return html;
     }
     
+    // ---- initialize select box on startup
     $('#e1').select2({
       placeholder: "Select a Player",
       allowClear: true
     });
 
+    // ---- event listener for change on select box ----
+    // ---- add player to view and to ids array ---
     $(document).on('change','#e1', function() {
       amount = $('span#delete').length
       if (amount < 5){
         var theID = $('#e1').select2('data').id
-        if (ids.indexOf(parseInt(theID)) > -1){
+        if (ids.indexOf(parseInt(theID)) > -1) {
           return;
         }
-        var theText = $('#e1').select2('data').text;
-        $('#selectedText').append('<p id="player"><span id="delete"> x </span><a data-id="' + theID + '" href="/players/'+theID +'">' + theText + '</a><br></p>')
+
+
+
+        var player = GetData(theID);
+        var html = '<div id="player">' + 
+          '<div id="delete_tag"> x </div>' + 
+          '<p id="player_info_header">' + 
+          '<a data-id="' + player.id + '" href="/players/'+player.id +'">' + player.display_name + '</a>' +
+          ' (' + player.position + ')</p>' + 
+          '<ul>' +
+          '<li><b>Team</b>: ' + player.team_abbreviation + ' (bye: ' + player.bye_week + ')</li>';
+        if (player.overall_rank) {
+          html += '<li><b>Overall Rank</b>: ' + player.overall_rank + '</li>';
+        }
+        if (player.depth_chart_position) {
+          html += '<li><b>Depth Chart</b>: ' + player.depth_chart_position + '</li>'
+        }
+        if (player.season_projection) {
+          switch (player.position){
+            case 'QB':
+              html += '<li><b>SOS Rank</b>: ' + player.season_projection.sos_qb_rank + '</li>'
+              html += '<li><b>SOS FPA</b>: ' + player.season_projection.sos_qb_fpa + '</li>'
+              break;
+            case 'RB':
+              html += '<li><b>SOS Rank</b>: ' + player.season_projection.sos_rb_rank + '</li>'
+              html += '<li><b>SOS FPA</b>: ' + player.season_projection.sos_rb_fpa + '</li>'
+              break;
+            case 'WR':
+              html += '<li><b>SOS Rank</b>: ' + player.season_projection.sos_wr_rank + '</li>'
+              html += '<li><b>SOS FPA</b>: ' + player.season_projection.sos_wr_fpa + '</li>'
+              break;
+            case 'TE':
+              html += '<li><b>SOS Rank</b>: ' + player.season_projection.sos_te_rank + '</li>'
+              html += '<li><b>SOS FPA</b>: ' + player.season_projection.sos_te_fpa + '</li>'
+              break;
+            default:
+              console.log("defaulted switch statment in select#change listener");
+          }
+        }
+        html +=  '</ul></div>'
+
+
+        $('#selectedText').append(html);
         AddID(parseInt(theID));
         Render();
       }
     });
 
-    $('#selectedText').on('click','#delete', function () {
+    // ---- delete event listener to remove player from view and ids array ----
+    $('#selectedText').on('click','#delete_tag', function () {
       id = $(this).parent().find('a').data('id')
       $(this).parent().remove();
       DeleteID(id);
@@ -185,6 +234,7 @@
     });
 
 
+    // ---- ids array and all players data from backend ----
     var ids = [];
     var all_players = <%= raw @players.to_json(include: [:season_projection, :season_stat]) %>;
 
@@ -203,8 +253,8 @@
 
     // --- returns individual player data form player id --- 
     function GetData(id) {
-      for (player in all_players){
-        if (all_players[player].id === id){
+      for (var player in all_players){
+        if (all_players[player].id == id){
           return all_players[player];
         }
       }
@@ -288,8 +338,10 @@
         count = 0;
         total_count = players.length
         for (var j = 0; j < total_count; j++) {
-          if (players[j]["season_stat"][season_stats[i]] === null || players[j]["season_stat"][season_stats[i]] < 1) {
-             count += 1;
+          if(players[j]["season_stat"]){
+            if (players[j]["season_stat"][season_stats[i]] === null || players[j]["season_stat"][season_stats[i]] < 1) {
+               count += 1;
+            }
           }
         }
         if (parseFloat(count/total_count) > 0.5) {
@@ -301,8 +353,10 @@
         count = 0;
         total_count = players.length
         for (var j = 0; j < total_count; j++) {
-          if (players[j]["season_stat"][season_stats_snaps[i]] === null || players[j]["season_stat"][season_stats_snaps[i]] < 1) {
-             count += 1;
+          if(players[j]["season_stat"]){
+            if (players[j]["season_stat"][season_stats_snaps[i]] === null || players[j]["season_stat"][season_stats_snaps[i]] < 1) {
+               count += 1;
+            }
           }
         }
         if (parseFloat(count/total_count) > 0.5) {
@@ -314,8 +368,10 @@
         count = 0;
         total_count = players.length
         for (var j = 0; j < total_count; j++) {
-          if (players[j]["season_projection"][season_projections[i]] === null || players[j]["season_projection"][season_projections[i]] < 1) {
-             count += 1;
+          if(players[j]["season_projection"]){
+            if (players[j]["season_projection"][season_projections[i]] === null || players[j]["season_projection"][season_projections[i]] < 1) {
+               count += 1;
+            }
           }
         }
         if (parseFloat(count/total_count) > 0.5) {

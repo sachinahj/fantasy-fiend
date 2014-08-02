@@ -8,20 +8,34 @@ h3, p, a, li {
   /*font-family: "Vollkorn";*/
 }
 
-span#delete:hover {
+div#delete_tag:hover {
   cursor: pointer;
   background-color: gray;
-  border-radius: 100%;
+  border-radius: 5px;
   text-align: center;
 }
 
-label {
-  display: block;
+div#delete_tag {
+  display: inline-block;
+  margin-right: 5px;
 }
-
-p#player {
+p#player_info_header {
+  display: inline-block;
+  margin-bottom: 0px;
+}
+div#player {
   margin: 0px 10px 5px 0px;
   display: block;
+  cursor: pointer;
+  -moz-user-select: none; /* mozilla browsers */
+  -webkit-user-select: none; /* webkit browsers */
+}
+
+div#player li{
+  list-style: none;
+  margin-bottom: 0px;
+  font-size: 0.9em;
+  line-height: 1.1em;
 }
 
 .span2.fixed {
