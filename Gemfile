@@ -48,5 +48,9 @@ gem 'jquery-ui-rails'
 
 gem 'nokogiri'
 
+gem 'therubyracer'
+gem "less-rails"
+gem 'twitter-bootstrap-rails'
+
 
 

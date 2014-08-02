@@ -5,7 +5,6 @@ namespace :csv do
   task test: :environment do
 
     Rake::Task["csv:teams"].invoke
-    Rake::Task["sos_fpa:sos"].invoke
 
     Rake::Task["rankings:setup"].invoke
     Rake::Task["draft_positions:setup"].invoke
@@ -14,9 +13,10 @@ namespace :csv do
 
     Rake::Task["snaps:setup"].invoke
     Rake::Task["depth_chart:setup"].invoke
+
+    Rake::Task["sos_fpa:sos"].invoke
     Rake::Task["sos_fpa:fpa"].invoke
 
-    Rake::Task["csv:finalize"].invoke
 
 
   end
@@ -25,24 +25,19 @@ namespace :csv do
   task setup: :environment do
 
     Rake::Task["csv:teams"].invoke
+
     Rake::Task["rankings:setup"].invoke
     Rake::Task["draft_positions:setup"].invoke
     Rake::Task["projections:setup"].invoke
     Rake::Task["stats:setup"].invoke
+
     Rake::Task["snaps:setup"].invoke
     Rake::Task["depth_chart:setup"].invoke
 
-    Rake::Task["csv:finalize"].invoke
+    Rake::Task["sos_fpa:sos"].invoke
+    Rake::Task["sos_fpa:fpa"].invoke
 
 
-  end
-
-  desc "imports teams from teams.csv"
-  task finalize: :environment do
-    
-    Player.all.each do |pl|
-      pl.update_sos
-    end
 
   end
 

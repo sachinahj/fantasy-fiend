@@ -1,4 +1,12 @@
 namespace :sos_fpa do
+
+  desc "import strength of schedule from FantasyPros.com"
+  task setup: :environment do
+    Rake::Task["sos_fpa:sos"].invoke
+    Rake::Task["sos_fpa:fpa"].invoke
+
+  end
+
   desc "import strength of schedule from FantasyPros.com"
   task sos: :environment do
     doc = Nokogiri::HTML(open("http://www.fantasypros.com/nfl/strength-of-schedule.php"))
@@ -41,6 +49,10 @@ namespace :sos_fpa do
         puts "nothing"
       end
 
+    end
+    
+    Player.all.each do |pl|
+      pl.update_sos
     end
 
   end

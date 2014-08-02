@@ -12,5 +12,31 @@ span#delete:hover {
   cursor: pointer;
   background-color: gray;
   border-radius: 100%;
+  text-align: center;
 }
 
+label {
+  display: inline-block;
+}
+
+p#player {
+  margin: 0px 10px 5px 0px;
+  display: inline-block;
+  float: left;
+}
+
+.span2.fixed {
+  position: fixed;
+  display: block;
+}
+
+.chart {
+  min-width: 310px;
+  max-width: 100%;
+  height: 300px;
+  margin: 0;
+}
+
+/*body {
+  background-color: #2b592c;
+}*/

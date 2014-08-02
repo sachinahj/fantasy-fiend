@@ -16,3 +16,11 @@
  *= require select2-bootstrap
  *= require dataTables/jquery.dataTables
  */
+/** {
+  border: 1px solid red;
+}*/
+
+.brand#title {
+  margin-left: .1em;
+  color: black;
+}

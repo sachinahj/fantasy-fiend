@@ -1,60 +1,73 @@
-<h3>All Players </h3>
-<div class="container">
-  <select id ="e1" style="width : 300px">
-    <option></option>
-    <optgroup label="Quarterbacks" class="QB">
-      <% @quarterbacks.each do |qb| %>
-        <option value = "<%= qb.id %>"><%= qb.display_name %></option>
-      <% end %>
-    </optgroup>
-    <optgroup label="Running Backs" class="RB">
-      <% @runningbacks.each do |rb| %>
-        <option value = "<%= rb.id %>"><%= rb.display_name %></option>
-      <% end %>
-    </optgroup>
-    <optgroup label="Wide Receivers" class="WR">
-      <% @receivers.each do |wr| %>
-        <option value = "<%= wr.id %>"><%= wr.display_name %></option>
-      <% end %>
-    </optgroup>
-    <optgroup label="Tight Ends" class="TE">
-      <% @tightends.each do |te| %>
-        <option value = "<%= te.id %>"><%= te.display_name %></option>
-      <% end %>
-    </optgroup>
-    <optgroup label="Kickers" class="K">
-      <% @kickers.each do |k| %>
-        <option value = "<%= k.id %>"><%= k.display_name %></option>
-      <% end %>
-    </optgroup>
-    <optgroup label="Defense" class="Defense">
-      <% @defenses.each do |dst| %>
-        <option value = "<%= dst.id %>"><%= dst.display_name %></option>
-      <% end %>
-    </optgroup>
-    <optgroup label="Other" class="Other">
-      <% @others.each do |other| %>
-        <option value = "<%= other.id %>"><%= other.display_name %></option>
-      <% end %>
-    </optgroup>
-  </select>
+<div class="row-fluid">
+  <div class="span2 fixed">
+      <div class="select-container">
+        <select id ="e1" style="width:100%">
+          <option></option>
+          <optgroup label="Quarterbacks" class="QB">
+            <% @quarterbacks.each do |qb| %>
+              <option value = "<%= qb.id %>"><%= qb.display_name %></option>
+            <% end %>
+          </optgroup>
+          <optgroup label="Running Backs" class="RB">
+            <% @runningbacks.each do |rb| %>
+              <option value = "<%= rb.id %>"><%= rb.display_name %></option>
+            <% end %>
+          </optgroup>
+          <optgroup label="Wide Receivers" class="WR">
+            <% @receivers.each do |wr| %>
+              <option value = "<%= wr.id %>"><%= wr.display_name %></option>
+            <% end %>
+          </optgroup>
+          <optgroup label="Tight Ends" class="TE">
+            <% @tightends.each do |te| %>
+              <option value = "<%= te.id %>"><%= te.display_name %></option>
+            <% end %>
+          </optgroup>
+          <optgroup label="Kickers" class="K">
+            <% @kickers.each do |k| %>
+              <option value = "<%= k.id %>"><%= k.display_name %></option>
+            <% end %>
+          </optgroup>
+          <optgroup label="Defense" class="Defense">
+            <% @defenses.each do |dst| %>
+              <option value = "<%= dst.id %>"><%= dst.display_name %></option>
+            <% end %>
+          </optgroup>
+          <optgroup label="Other" class="Other">
+            <% @others.each do |other| %>
+              <option value = "<%= other.id %>"><%= other.display_name %></option>
+            <% end %>
+          </optgroup>
+        </select>
+      </div>
+      <label for="qb"><input id="qb" type="checkbox" checked> QBs</label>
+      <label for="rb"><input id="rb" type="checkbox" checked> RBs</label>
+      <label for="wr"><input id="wr" type="checkbox" checked> WRs</label>
+      <label for="te"><input id="te" type="checkbox" checked> TEs</label>
+      <label for="k"><input id="k" type="checkbox" checked> Ks</label>
+      <label for="dst"><input id="dst" type="checkbox" checked> DSTs</label>
+      <label for="select"><input id="select" type="checkbox" checked> All</label>    
+      <p>Selected Players:</p>
+      <span id="selectedText">
+        <!-- selected players -->
+      </span>
+  </div>
+  <div class="span10 pull-right">
+    <div id="projections" class="chart"></div>
+    <div id="stats" class="chart"></div>
+    <div id="snaps" class="chart"></div>
+  </div>
 </div>
 
 
-<label for="qb"><input id="qb" type="checkbox" checked> QBs</label>
-<label for="rb"><input id="rb" type="checkbox" checked> RBs</label>
-<label for="wr"><input id="wr" type="checkbox" checked> WRs</label>
-<label for="te"><input id="te" type="checkbox" checked> TEs</label>
-<label for="k"><input id="k" type="checkbox" checked> Ks</label>
-<label for="dst"><input id="dst" type="checkbox" checked> DSTs</label>
-<label for="select"><input id="select" type="checkbox"> All</label>
 
 
-<p>Selected Players: <span id="selectedText"></span></p>
-<br>
-<div id="projections" style="min-width: 310px; max-width: px; height: 400px; margin: 0"></div>
-<div id="stats" style="min-width: 310px; max-width: px; height: 400px; margin: 0"></div>
-<div id="snaps" style="min-width: 310px; max-width: px; height: 400px; margin: 0"></div>
+
+
+           
+
+
+
 
 
 <script type="text/javascript">
@@ -86,7 +99,7 @@
     });
 
     function RenderSelectBox () {
-      html = '<select id ="e1" style="width : 300px"><option></option>';
+      html = '<select id ="e1" style="width : 100%"><option></option>';
       
       if ($('input[type="checkbox"]#qb').prop('checked') == true){
         html += PositionOptGroup('Quarterbacks', qbs);
@@ -107,7 +120,7 @@
         html += PositionOptGroup('Defenses', dsts);
       }
       html += "</select>";
-      $('.container').empty().append(html);
+      $('.select-container').empty().append(html);
       $('#e1').select2('destroy').select2({
         placeholder: "Select a Player",
         allowClear: true
@@ -345,11 +358,13 @@
           }
           snaps_series.push({name: players[i].display_name, data: cat})
         }
-      }
-
         ProjectionsStatsSnapsChart('Projections', projections_categories, projections_series);
         ProjectionsStatsSnapsChart('Stats',stats_categories, stats_series);
         ProjectionsStatsSnapsChart('Snaps',snaps_categories, snaps_series);
+      } else {
+        $('.chart').hide();
+      }
+
         // ProjectionsChart(projections_categories, projections_series);
         // StatsChart(stats_categories, stats_series);
         // SnapsChart(snaps_categories, snaps_series);
@@ -360,6 +375,7 @@
       categories = typeof categories !== 'undefined' ? categories : [];
       series = typeof series !== 'undefined' ? series : [];
 
+      $('#'+titleofchart.toLowerCase()).show();
       $('#'+titleofchart.toLowerCase()).highcharts({
         chart: {
           type: 'bar'
@@ -420,130 +436,6 @@
         },
         credits: {
           enabled: false
-        },
-        series: series
-      });
-
-    }
-
-    // --- function to render stats chart ---     
-    function StatsChart (categories, series) {
-      categories = typeof categories !== 'undefined' ? categories : [];
-      series = typeof series !== 'undefined' ? series : [];
-
-      $('#stats').highcharts({
-        chart: {
-          type: 'bar'
-        },
-        title: {
-          text: 'Stats'
-        },
-        subtitle: {
-          text: 'Source: FantasyData.com'
-        },
-        xAxis: {
-          categories: categories,
-          title: {
-            text: null
-          },
-        },
-        yAxis: {
-          // type: 'logarithmic',
-          min: 0,
-          max: 1000,
-          title: {
-            text: 'Stats',
-            align: 'high'
-          },
-          labels: {
-            overflow: 'justify'
-          }
-        },
-        tooltip: {
-          valueSuffix: ''
-        },
-        plotOptions: {
-          bar: {
-            dataLabels: {
-              enabled: false
-            }
-          }
-        },
-        legend: {
-          layout: 'vertical',
-          align: 'right',
-          verticalAlign: 'top',
-          x: 0,
-          y: 0,
-          floating: true,
-          borderWidth: 1,
-          backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor || '#FFFFFF'),
-          shadow: true
-        },
-        credits: {
-          enabled: false
-        },
-        series: series
-      });
-
-    }
-
-    // --- function to render snaps chart --- 
-    function SnapsChart (categories, series) {
-      categories = typeof categories !== 'undefined' ? categories : [];
-      series = typeof series !== 'undefined' ? series : [];
-
-      $('#snaps').highcharts({
-        chart: {
-          type: 'bar'
-        },
-        title: {
-          text: 'Snaps'
-        },
-        subtitle: {
-          text: 'Source: FantasyData.com'
-        },
-        xAxis: {
-          categories: categories,
-          title: {
-            text: null
-          },
-        },
-        yAxis: {
-          // type: 'logarithmic',
-          min: 0,
-          max: 1000,
-          title: {
-            text: 'Snaps',
-            align: 'high'
-          },
-          labels: {
-            overflow: 'justify'
-          }
-        },
-        tooltip: {
-            valueSuffix: ''
-        },
-        plotOptions: {
-          bar: {
-            dataLabels: {
-              enabled: false
-            }
-          }
-        },
-        legend: {
-          layout: 'vertical',
-          align: 'right',
-          verticalAlign: 'top',
-          x: 0,
-          y: 0,
-          floating: true,
-          borderWidth: 1,
-          backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor || '#FFFFFF'),
-          shadow: true
-        },
-        credits: {
-            enabled: false
         },
         series: series
       });

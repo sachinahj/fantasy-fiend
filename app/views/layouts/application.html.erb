@@ -8,7 +8,23 @@
 </head>
 <body>
 
-<%= yield %>
+  <div class="navbar">
+    <div class="navbar-inner">
+      <!-- <a class="brand" id="title" href="#">Fantasy Football</a> -->
+      <%= link_to "Fantasy Football", root_path,  {class: "brand", id: "title"} %>
+      <ul class="nav pull-right">
+        <li class="active"><%= link_to "Ranks", cheatsheet_path %></li>
+        <li><%= link_to "Compare", compare_path  %></li>
+        <li><%= link_to "Laboratory",   compare_laboratory_path  %></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <%= yield %>
+  
+  </div>
 
 </body>
 </html>
