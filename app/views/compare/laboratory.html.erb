@@ -53,9 +53,9 @@
       </span>
   </div>
   <div class="span10 pull-right">
-    <div id="projections" class="chart"></div>
-    <div id="stats" class="chart"></div>
-    <div id="snaps" class="chart"></div>
+    <div id="projectionsChart" class="labChart"></div>
+    <div id="statsChart" class="labChart"></div>
+    <div id="snapsChart" class="labChart"></div>
   </div>
 </div>
 
@@ -358,25 +358,25 @@
           }
           snaps_series.push({name: players[i].display_name, data: cat})
         }
-        ProjectionsStatsSnapsChart('Projections', projections_categories, projections_series);
-        ProjectionsStatsSnapsChart('Stats',stats_categories, stats_series);
-        ProjectionsStatsSnapsChart('Snaps',snaps_categories, snaps_series);
+        ProjectionsStatsSnapsChart('Projections','projectionsChart', projections_categories, projections_series);
+        ProjectionsStatsSnapsChart('Stats','statsChart',stats_categories, stats_series);
+        ProjectionsStatsSnapsChart('Snaps','snapsChart',snaps_categories, snaps_series);
+
       } else {
-        $('.chart').hide();
+
+        $('.labChart').hide();
+
       }
 
-        // ProjectionsChart(projections_categories, projections_series);
-        // StatsChart(stats_categories, stats_series);
-        // SnapsChart(snaps_categories, snaps_series);
     }
 
     // --- function to render projections chart --- 
-    function ProjectionsStatsSnapsChart (titleofchart, categories, series) {
+    function ProjectionsStatsSnapsChart (titleofchart, chart_id, categories, series) {
       categories = typeof categories !== 'undefined' ? categories : [];
       series = typeof series !== 'undefined' ? series : [];
 
-      $('#'+titleofchart.toLowerCase()).show();
-      $('#'+titleofchart.toLowerCase()).highcharts({
+      $('#'+chart_id).show();
+      $('#'+chart_id).highcharts({
         chart: {
           type: 'bar'
         },

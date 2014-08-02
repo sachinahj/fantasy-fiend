@@ -2,11 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#indexTable { table-layout: fixed; }
+/* laboratory */
+#indexTable { 
+  table-layout: fixed; 
+}
 table#indexTable td, table#indexTable th {
   text-align: left;
   font-size: .9em;
   padding: 0px 0px;
+}
+table.dataTable tbody tr.highlight {
+  background-color: #a5ffe8;
+}
+table.dataTable tbody td {
+  cursor: pointer;
+  -moz-user-select: none; /* mozilla browsers */
+  -webkit-user-select: none; /* webkit browsers */
 }
 tr.qb {
   color: red;
@@ -26,21 +37,14 @@ tr.k {
 tr.dst {
   color: black;
 }
-table.dataTable tbody tr.highlight {
-  background-color: #a5ffe8;
-}
-table.dataTable tbody td {
-  cursor: pointer;
-  -moz-user-select: none; /* mozilla browsers */
-  -webkit-user-select: none; /* webkit browsers */
-}
-
 #searchBar {
   float: right;
 }
-
 .checkboxes {
   position: absolute;
   margin-top: 10px;
   z-index: 1;
+}
+.labChart {
+  display: none;
 }
