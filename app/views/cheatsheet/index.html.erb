@@ -6,6 +6,7 @@
     <label class="cheatsheetChecks" for="te"><input id="te" type="checkbox" checked> TEs</label>
     <label class="cheatsheetChecks" for="k"><input id="k" type="checkbox" checked> Ks</label>
     <label class="cheatsheetChecks" for="dst"><input id="dst" type="checkbox" checked> DSTs</label>
+    <label class="cheatsheetChecks" for="select"><input id="select" type="checkbox" checked> All</label>  
   </div>
 </div>
 
@@ -36,7 +37,7 @@
       </thead>
       <tbody>
         <% @players.each do |player|  %>
-          <tr id="player<%=player.id%>" class="<%= player.position.downcase %>">
+          <tr id="player<%=player.id%>" class="playerRow <%= player.position.downcase %>">
             <td><%= player.overall_rank.to_i != 0 ? player.overall_rank.to_i : 300 %></td>
             <td><%= player.position_rank %></td>
 
@@ -64,6 +65,23 @@
 <script type="text/javascript">
   
   $(document).ready(function () {
+
+    $('input[type="checkbox"]').on("click", function () {
+      if ($(this).parent().prop('for') == 'select'){
+
+        if (this.checked){
+          $('input[type="checkbox"]').each(function () {
+            this.checked = true;
+          });
+            $('.playerRow').show();
+        } else {
+          $('input[type="checkbox"]').each(function () {
+            this.checked = false;
+          });
+            $('.playerRow').hide();
+        }
+      }
+    });
 
     $('input[type="checkbox"]').on("click", function () {
       a = $(this).attr("id");
@@ -107,6 +125,13 @@
         { "asSorting": [ "desc", "asc" ], "sWidth": "9%" }
       ]
 
+    });
+
+    $('#indexTable').on('search.dt', function () {
+      $('input[type="checkbox"]').each(function () {
+        this.checked = true;
+      });
+      $('.playerRow').show();
     });
 
 
