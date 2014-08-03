@@ -1,15 +1,55 @@
-<div class="pie_selector">stat</div>
-<div id="pie" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0"></div>
-<br>
-<div id="x_select" class="scatter_selector">stat</div>
-<div id="y_select" class="scatter_selector">fpoints</div>
-<div id="scatter" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0"></div>
-<br>
-<div class="spline_selector">fpoints</div>
-<div id="spline" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0"></div>
-<br>
-<div class="stacked_selector">stat</div>
-<div id="stacked" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0"></div>
+<div class="row">
+  <div class="span4">
+    <div class="row">
+      <div class="span12">
+        <div class="btn btn-primary pie_selector">By Rank</div>
+      </div>
+    </div>
+  </div>
+  <div class="span8">
+    <div id="pie" class="breakdownChart"></div>
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="span4">
+    <div class="row">
+      <div class="span12">
+        <div id="x_select" class="btn btn-primary scatter_selector">By Rank</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span12">
+        <div id="y_select" class="btn btn-primary scatter_selector">By '13 Fantasy Points</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="span8">
+    <div id="scatter" class="breakdownChart"></div>    
+  </div>
+</div>
+
+<div class="row">
+  <div class="span4">
+    <div class="btn btn-primary spline_selector">By '13 Fantasy Points</div>
+  </div>
+  <div class="span8">
+    <div id="spline" class="breakdownChart"></div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span4">
+    <div class="btn btn-primary stacked_selector">By Rank</div>
+  </div>
+  <div class="span8">
+    <div id="stacked" class="breakdownChart"></div>
+  </div>
+</div>
+
 
 <script type="text/javascript">
 
@@ -20,18 +60,43 @@
     var scatter_stat = "odp";
     $(document).on('click', '.scatter_selector', function () {
 
+      $(this).toggleClass('btn-primary');
+      $(this).toggleClass('btn-inverse');
+
+
+      if ($(this).hasClass('btn-primary')) {
+        $(this).text('By Rank');
+      } else {
+        $(this).text('By Position');
+      }
+
       var switching = $(this).prop('id');
       if (switching === "y_select"){
+
         if (scatter_season === 2014) {
           scatter_season = 2013;
         } else {
           scatter_season = 2014;
         }
+
+        if ($(this).hasClass('btn-primary')) {
+          $(this).text("By '13 Fantasy Points");
+        } else {
+          $(this).text("By Projected Fantasy Points");
+        }
+
       } else {
+
         if (scatter_stat === "odp") {
           scatter_stat = "rank";
         } else {
           scatter_stat = "odp";
+        }
+
+        if ($(this).hasClass('btn-primary')) {
+          $(this).text("By Rank");
+        } else {
+          $(this).text("By Projected Overall Pick");
         }
       }
 
@@ -51,6 +116,16 @@
     var stacked_stat = "odp";
     $(document).on('click', '.stacked_selector', function () {
 
+      $(this).toggleClass('btn-primary');
+      $(this).toggleClass('btn-inverse');
+
+
+      if ($(this).hasClass('btn-primary')) {
+        $(this).text('By Rank');
+      } else {
+        $(this).text('By Position');
+      }
+
       if (stacked_stat === "odp") {
         stacked_stat = "rank";
       } else {
@@ -65,9 +140,18 @@
 
     });
 
-    // ---- axis switch for stacked series ----
+    // ---- axis switch for pie series ----
     var pie_stat = "odp";
     $(document).on('click', '.pie_selector', function () {
+
+      $(this).toggleClass('btn-primary');
+      $(this).toggleClass('btn-inverse');
+
+      if ($(this).hasClass('btn-primary')) {
+        $(this).text('By Rank');
+      } else {
+        $(this).text('By Position');
+      }
 
       if (pie_stat === "odp") {
         pie_stat = "rank";
@@ -86,6 +170,15 @@
     // ---- axis switch for spline series ----
     var spline_season = 2014;
     $(document).on('click', '.spline_selector', function () {
+
+      $(this).toggleClass('btn-primary');
+      $(this).toggleClass('btn-inverse');
+
+      if ($(this).hasClass('btn-primary')) {
+        $(this).text("By '13 Fantasy Points");
+      } else {
+        $(this).text("By Projected Fantasy Points");
+      }
 
       if (spline_season === 2014) {
         spline_season = 2013;
