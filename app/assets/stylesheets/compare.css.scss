@@ -38,7 +38,7 @@ div#player li{
   line-height: 1.1em;
 }
 
-.span2.fixed {
+.fixed {
   position: fixed;
   display: block;
 }
@@ -55,8 +55,7 @@ div#player li{
 }
 
 .breakdownChart {
-  min-width: 310px;
-  max-width: 800px;
+  width: 100%;
   height: 500px;
   margin: 0;
   border: 1px solid blue;

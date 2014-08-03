@@ -1,83 +1,83 @@
 <div class="row-fluid">
   <div class="span2 fixed">
-      <div class="row">
-        <div class="span12">
-          <div class="select-container">
-            <select id ="labSelectBox" style="width:90%">
-              <option></option>
-              <optgroup label="Quarterbacks" class="QB">
-                <% @quarterbacks.each do |qb| %>
-                  <option value = "<%= qb.id %>"><%= qb.display_name %></option>
-                <% end %>
-              </optgroup>
-              <optgroup label="Running Backs" class="RB">
-                <% @runningbacks.each do |rb| %>
-                  <option value = "<%= rb.id %>"><%= rb.display_name %></option>
-                <% end %>
-              </optgroup>
-              <optgroup label="Wide Receivers" class="WR">
-                <% @receivers.each do |wr| %>
-                  <option value = "<%= wr.id %>"><%= wr.display_name %></option>
-                <% end %>
-              </optgroup>
-              <optgroup label="Tight Ends" class="TE">
-                <% @tightends.each do |te| %>
-                  <option value = "<%= te.id %>"><%= te.display_name %></option>
-                <% end %>
-              </optgroup>
-              <optgroup label="Kickers" class="K">
-                <% @kickers.each do |k| %>
-                  <option value = "<%= k.id %>"><%= k.display_name %></option>
-                <% end %>
-              </optgroup>
-              <optgroup label="Defense" class="Defense">
-                <% @defenses.each do |dst| %>
-                  <option value = "<%= dst.id %>"><%= dst.display_name %></option>
-                <% end %>
-              </optgroup>
-              <optgroup label="Other" class="Other">
-                <% @others.each do |other| %>
-                  <option value = "<%= other.id %>"><%= other.display_name %></option>
-                <% end %>
-              </optgroup>
-            </select>
-          </div>
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="select-container">
+          <select id ="labSelectBox" style="width:90%">
+            <option></option>
+            <optgroup label="Quarterbacks" class="QB">
+              <% @quarterbacks.each do |qb| %>
+                <option value = "<%= qb.id %>"><%= qb.display_name %></option>
+              <% end %>
+            </optgroup>
+            <optgroup label="Running Backs" class="RB">
+              <% @runningbacks.each do |rb| %>
+                <option value = "<%= rb.id %>"><%= rb.display_name %></option>
+              <% end %>
+            </optgroup>
+            <optgroup label="Wide Receivers" class="WR">
+              <% @receivers.each do |wr| %>
+                <option value = "<%= wr.id %>"><%= wr.display_name %></option>
+              <% end %>
+            </optgroup>
+            <optgroup label="Tight Ends" class="TE">
+              <% @tightends.each do |te| %>
+                <option value = "<%= te.id %>"><%= te.display_name %></option>
+              <% end %>
+            </optgroup>
+            <optgroup label="Kickers" class="K">
+              <% @kickers.each do |k| %>
+                <option value = "<%= k.id %>"><%= k.display_name %></option>
+              <% end %>
+            </optgroup>
+            <optgroup label="Defense" class="Defense">
+              <% @defenses.each do |dst| %>
+                <option value = "<%= dst.id %>"><%= dst.display_name %></option>
+              <% end %>
+            </optgroup>
+            <optgroup label="Other" class="Other">
+              <% @others.each do |other| %>
+                <option value = "<%= other.id %>"><%= other.display_name %></option>
+              <% end %>
+            </optgroup>
+          </select>
         </div>
       </div>
-      <div class="row">
-        <div class="span3">
-          <label class="labChecks" for="qb"><input id="qb" type="checkbox" checked> QBs</label>
-        </div>
-        <div class="span3">
-          <label class="labChecks" for="rb"><input id="rb" type="checkbox" checked> RBs</label>
-        </div>
-        <div class="span3">
-          <label class="labChecks" for="wr"><input id="wr" type="checkbox" checked> WRs</label>
-        </div>
-        <div class="span3">
-        </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span3">
+        <label class="labChecks" for="qb"><input id="qb" type="checkbox" checked> QBs</label>
       </div>
-      <div class="row">
-        <div class="span3">
-          <label class="labChecks" for="te"><input id="te" type="checkbox" checked> TEs</label>
-        </div>
-        <div class="span3">
-          <label class="labChecks" for="k"><input id="k" type="checkbox" checked> Ks</label>
-        </div>
-        <div class="span3">
-          <label class="labChecks" for="dst"><input id="dst" type="checkbox" checked> DSTs</label>
-        </div>
-        <div class="span3">
-          <label class="labChecks" for="select"><input id="select" type="checkbox" checked> All</label>    
-        </div>
+      <div class="span3">
+        <label class="labChecks" for="rb"><input id="rb" type="checkbox" checked> RBs</label>
       </div>
-      <div class="row">
-        <div class="span12">
-          <span id="selectedText">
-            <!-- selected players -->
-          </span>
-        </div>
+      <div class="span3">
+        <label class="labChecks" for="wr"><input id="wr" type="checkbox" checked> WRs</label>
       </div>
+      <div class="span3">
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span3">
+        <label class="labChecks" for="te"><input id="te" type="checkbox" checked> TEs</label>
+      </div>
+      <div class="span3">
+        <label class="labChecks" for="k"><input id="k" type="checkbox" checked> Ks</label>
+      </div>
+      <div class="span3">
+        <label class="labChecks" for="dst"><input id="dst" type="checkbox" checked> DSTs</label>
+      </div>
+      <div class="span3">
+        <label class="labChecks" for="select"><input id="select" type="checkbox" checked> All</label>    
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span12">
+        <span id="selectedText">
+          <!-- selected players -->
+        </span>
+      </div>
+    </div>
   </div>
   <div class="span10 pull-right">
     <div id="projectionsChart" class="labChart"></div>
