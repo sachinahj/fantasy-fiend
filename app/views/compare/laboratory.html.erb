@@ -3,7 +3,7 @@
       <div class="row">
         <div class="span12">
           <div class="select-container">
-            <select id ="e1" style="width:90%">
+            <select id ="labSelectBox" style="width:90%">
               <option></option>
               <optgroup label="Quarterbacks" class="QB">
                 <% @quarterbacks.each do |qb| %>
@@ -123,7 +123,7 @@
 
     // ---- render select box with appropiate positions ----
     function RenderSelectBox () {
-      html = '<select id ="e1" style="width : 90%"><option></option>';
+      html = '<select id ="labSelectBox" style="width : 90%"><option></option>';
       
       if ($('input[type="checkbox"]#qb').prop('checked') == true){
         html += PositionOptGroup('Quarterbacks', qbs);
@@ -145,7 +145,7 @@
       }
       html += "</select>";
       $('.select-container').empty().append(html);
-      $('#e1').select2('destroy').select2({
+      $('#labSelectBox').select2('destroy').select2({
         placeholder: "Select a Player",
         allowClear: true
       });
@@ -163,17 +163,17 @@
     }
     
     // ---- initialize select box on startup
-    $('#e1').select2({
+    $('#labSelectBox').select2({
       placeholder: "Select a Player",
       allowClear: true
     });
 
     // ---- event listener for change on select box ----
     // ---- add player to view and to ids array ---
-    $(document).on('change','#e1', function() {
+    $(document).on('change','#labSelectBox', function() {
       amount = $('span#delete').length
       if (amount < 5){
-        var theID = $('#e1').select2('data').id
+        var theID = $('#labSelectBox').select2('data').id
         if (ids.indexOf(parseInt(theID)) > -1) {
           return;
         }
@@ -184,7 +184,7 @@
         var html = '<div id="player">' + 
           '<div id="delete_tag"> x </div>' + 
           '<p id="player_info_header">' + 
-          '<a data-id="' + player.id + '" href="/players/'+player.id +'">' + player.display_name + '</a>' +
+          '<a target="_blank" data-id="' + player.id + '" href="/players/'+player.id +'">' + player.display_name + '</a>' +
           ' (' + player.position + ')</p>' + 
           '<ul>' +
           '<li><b>Team</b>: ' + player.team_abbreviation + ' (bye: ' + player.bye_week + ')</li>';

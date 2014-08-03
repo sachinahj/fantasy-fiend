@@ -1,70 +1,151 @@
-<h3>All Players </h3>
+<div class="row">
 
-<div class="select-container">
-<select id ="e1" style="width : 300px">
-  <option></option>
-  <optgroup label="Quarterbacks" class="QB">
-    <% @qbs.each do |qb| %>
-      <option value = "<%= qb[0] %>"><%= qb[1] %></option>
-    <% end %>
-  </optgroup>
-  <optgroup label="Running Backs" class="RB">
-    <% @rbs.each do |rb| %>
-      <option value = "<%= rb[0] %>"><%= rb[1] %></option>
-    <% end %>
-  </optgroup>
-  <optgroup label="Wide Receivers" class="WR">
-    <% @wrs.each do |wr| %>
-      <option value = "<%= wr[0] %>"><%= wr[1] %></option>
-    <% end %>
-  </optgroup>
-  <optgroup label="Tight Ends" class="TE">
-    <% @tes.each do |te| %>
-      <option value = "<%= te[0] %>"><%= te[1] %></option>
-    <% end %>
-  </optgroup>
-  <optgroup label="Kickers" class="K">
-    <% @ks.each do |k| %>
-      <option value = "<%= k[0] %>"><%= k[1] %></option>
-    <% end %>
-  </optgroup>
-  <optgroup label="Defense" class="Defense">
-    <% @dsts.each do |dst| %>
-      <option value = "<%= dst[0] %>"><%= dst[1] %></option>
-    <% end %>
-  </optgroup>
-  <optgroup label="Other" class="Other">
-    <% @others.each do |other| %>
-      <option value = "<%= other[0] %>"><%= other[1] %></option>
-    <% end %>
-  </optgroup>
-</select>
+  <div class="span8">
+    <h1 class= "text-center">Welcome!</h1>
+    <br>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget risus at nulla lobortis tincidunt. Cras malesuada nisl magna, vitae lobortis quam convallis sed. Ut accumsan dapibus eros ut porttitor. Donec in tempor enim. Sed pharetra mi ante, at fermentum mauris lobortis at. Morbi feugiat, nulla eget dictum pharetra, neque lectus tristique mauris, in pretium est ligula in libero. Vestibulum accumsan libero id urna elementum, vitae imperdiet nibh volutpat. Suspendisse convallis mi odio, ut eleifend odio cursus quis. Nullam tempor lectus eu tortor feugiat, a blandit neque ullamcorper. Suspendisse potenti. Vivamus id augue vel erat facilisis iaculis a eu urna. Sed sit amet diam ac quam accumsan porttitor sed vitae metus. Integer vel eros erat. Quisque iaculis mi aliquam diam cursus ultrices. Suspendisse blandit auctor mauris eget dictum.</p>
+
+    <p>Pellentesque sed enim rhoncus, rutrum augue non, accumsan neque. Sed adipiscing, sapien at iaculis ullamcorper, mauris tellus accumsan tellus, nec sollicitudin sapien enim eu tellus. Cras tincidunt arcu augue, et luctus lorem aliquet ut. Aliquam auctor ornare lectus ac gravida. Quisque ipsum massa, pharetra id turpis sit amet, mollis pretium sapien. Duis magna est, suscipit sit amet quam sit amet, scelerisque venenatis nisl. Nullam interdum sem diam, in dapibus ante sodales pellentesque. Mauris in justo ac nisi aliquam volutpat. Quisque sed tristique justo. Aliquam lobortis ut felis a sagittis. Sed gravida elit non adipiscing vestibulum. Suspendisse potenti.</p>
+  </div>
+
+
+  <div class="span4 border">
+
+    <div class="row">
+      <div class="span4 text-center">
+        <h4>Search </h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span4">
+        <div class="select-container">
+          <select id ="homeSelectBox" style="width:100%">
+            <option></option>
+            <optgroup label="Quarterbacks" class="QB">
+              <% @qbs.each do |qb| %>
+                <option value = "<%= qb[0] %>"><%= qb[1] %></option>
+              <% end %>
+            </optgroup>
+            <optgroup label="Running Backs" class="RB">
+              <% @rbs.each do |rb| %>
+                <option value = "<%= rb[0] %>"><%= rb[1] %></option>
+              <% end %>
+            </optgroup>
+            <optgroup label="Wide Receivers" class="WR">
+              <% @wrs.each do |wr| %>
+                <option value = "<%= wr[0] %>"><%= wr[1] %></option>
+              <% end %>
+            </optgroup>
+            <optgroup label="Tight Ends" class="TE">
+              <% @tes.each do |te| %>
+                <option value = "<%= te[0] %>"><%= te[1] %></option>
+              <% end %>
+            </optgroup>
+            <optgroup label="Kickers" class="K">
+              <% @ks.each do |k| %>
+                <option value = "<%= k[0] %>"><%= k[1] %></option>
+              <% end %>
+            </optgroup>
+            <optgroup label="Defense" class="Defense">
+              <% @dsts.each do |dst| %>
+                <option value = "<%= dst[0] %>"><%= dst[1] %></option>
+              <% end %>
+            </optgroup>
+            <optgroup label="Other" class="Other">
+              <% @others.each do |other| %>
+                <option value = "<%= other[0] %>"><%= other[1] %></option>
+              <% end %>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span4">
+        <table id="searchSummaryTable">
+          <thead>
+            <tr>
+              <th style="width:40%">Name (Position)</th>
+              <th style="width:14%">Rank</th>
+              <th style="width:23%">'13 FP/Wk</th>
+              <th style="width:23%">'14 FP/Wk</th>
+            </tr>
+          </thead>
+          <tbody class="summaryTable">
+          <!-- selected players -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
 </div>
 
-<p>Selected muthafuckas: <span id="selectedText"></span></p>
 
 <script type="text/javascript">
   
   $(document).ready(function () {
-    $("#e1").select2({
+    $("#homeSelectBox").select2({
       placeholder: "Select a Player",
       allowClear: true
     });
   });
 
-  $("#e1").change(function() {
-    var theID = $('#e1').select2('data').id
-    var theText = $('#e1').select2('data').text;
-    $('#selectedText').append('<br><a href="/players/'+theID +'">' + theText + '</a>')
+  $("#homeSelectBox").change(function() {
+    var theID = $('#homeSelectBox').select2('data').id
+    var theText = $('#homeSelectBox').select2('data').text;
+
+    player = GetData(theID);
+
+    html = '<tr>' +
+      '<td><i class="icon-remove-sign"></i> <a target="_blank" data-id="' + player.id + '" href="/players/'+player.id +'">' + player.display_name + ' (' + player.position + ')</a></td>';
+
+      if (player.overall_rank) {
+        html += '<td>' + player.overall_rank + '</td>';
+      } else {
+        html += '<td>---</td>';
+      }
+
+      
+
+      if (player.season_stat) {
+        html += '<td>' + player.season_stat.fantasy_points_per_week + '</td>';
+      } else {
+        html += '<td>---</td>';
+      }
+      
+      if (player.season_projection) {
+        html += '<td>' + player.season_projection.fantasy_points_per_week + '</td>';
+      } else {
+        html += '<td>---</td>';
+      }
+      html += '<tr>';
+
+
+
+    $('.summaryTable').append(html);
   });
 
-  $('input[type="checkbox"]').on("click", function () {
-    position = $(this).parent().data("for");
-    $('.'+position)
-  });  
+  $(document).on('click', 'i', function (e) {
+    $(this).parent().parent().remove();
+  });
 
-  function RenderOptGroup() {
+  // $('input[type="checkbox"]').on("click", function () {
+  //   position = $(this).parent().data("for");
+  //   $('.'+position)
+  // });  
 
-  }
+  var all_players = <%= raw @players.to_json(include: [:season_projection, :season_stat]) %>;
+  function GetData(id) {
+    for (var player in all_players){
+      if (all_players[player].id == id){
+        return all_players[player];
+      }
+    }
+  };
+
 </script>
 

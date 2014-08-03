@@ -51,6 +51,7 @@ gem 'nokogiri'
 gem 'therubyracer'
 gem "less-rails"
 gem 'twitter-bootstrap-rails'
+# gem 'jquery_mobile_rails'
 
 
 

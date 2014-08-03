@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+// require jquery.mobile
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
@@ -19,4 +20,5 @@
 //= require highcharts
 //= require highcharts/highcharts-more
 //= require dataTables/jquery.dataTables
+
 

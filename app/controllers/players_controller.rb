@@ -1,7 +1,7 @@
 class PlayersController < ApplicationController
 
   def index
-    @players = Player.all
+    @players = Player.all.includes(:season_stat, :season_projection)
     @qbs = []
     @rbs = []
     @wrs = []
