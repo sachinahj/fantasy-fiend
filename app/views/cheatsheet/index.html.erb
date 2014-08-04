@@ -51,7 +51,7 @@
             <td><%= player.quarterback ? player.quarterback : "" %></td>
             <td><%= player.depth_chart_position ? player.depth_chart_position : "" %></td>
 
-            <td><%= player.overall_draft_position.to_i != 0 ? player.overall_draft_position.to_i : "" %></td>
+            <td><%= player.overall_draft_position.to_i != 0 ? player.overall_draft_position.to_i : 300 %></td>
 
             <% case player.position%>
             <% when "QB"%>
@@ -140,13 +140,13 @@
         {"sWidth": "3%"},
         {"sType": "text-blankslast", "sWidth":"14%"},
         {"sType": "text-blankslast", "sWidth": "5%"},
-        {"sType": "text-blankslast", "sWidth": "5%"},
-        {"sType": "text-blankslast", "sWidth": "7%"},
-        {"sType": "text-blankslast", "sWidth": "7%"},
-        {"sType": "text-blankslast", "asSorting": [ "desc", "asc" ], "sWidth": "7%"},
-        {"sType": "text-blankslast", "asSorting": [ "desc", "asc" ], "sWidth": "7%" },
-        {"sType": "text-blankslast", "asSorting": [ "desc", "asc" ], "sWidth": "7%" },
-        {"sType": "text-blankslast", "asSorting": [ "desc", "asc" ], "sWidth": "7%" }
+        {"sWidth": "5%"},
+        {"sWidth": "7%"},
+        {"sWidth": "7%"},
+        {"asSorting": [ "desc", "asc" ], "sWidth": "7%"},
+        {"asSorting": [ "desc", "asc" ], "sWidth": "7%" },
+        {"asSorting": [ "desc", "asc" ], "sWidth": "7%" },
+        {"asSorting": [ "desc", "asc" ], "sWidth": "7%" }
       ]
 
     });
