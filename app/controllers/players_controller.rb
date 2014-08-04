@@ -128,11 +128,16 @@ class PlayersController < ApplicationController
       "snap_fantasy_points_percent" => "----"
     }
 
-    if (@player.season_stat)
+    if @player.season_stat
       @stat = @player.season_stat
     end
 
+    if @player.position == "QB"
+      @onTeam = Player.where(team_abbreviation: @player.team_abbreviation).where(position: ["RB", "WR", "TE"]).order("depth_chart_position ASC")
+    end
 
+    puts "----on team--------"
+    p @onTeam
 
 
 

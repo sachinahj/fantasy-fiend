@@ -51,6 +51,10 @@
       </div>
     </div>
 
+    <% if @player.position != "DST" && @player.position != "K" && @player.position != "QB"%>
+      <%= render "quarterback" %>
+    <% end %>
+
   </div>
 
 </div>
@@ -69,16 +73,24 @@
 
   </div>
 
+  <div class="span2">
+
+    <% if @player.position != "DST" && @player.position != "K"%>
+      <%= render "sos" %>
+    <% elsif @player.position == "K" %> 
+      <%= render "stat" %>
+    <% else %>
+      <%= render "fpa" %>
+    <% end %>
+
+  </div>
 
 
   <div class="span2">
 
-    <% if @player.position != "DST" %>
+    <% if @player.position != "DST" && @player.position != "K"%>
       <%= render "stat" %>
-    <% else %> 
-      <%= render "fpa" %>
     <% end %>
-
 
   </div>
 
@@ -91,16 +103,12 @@
 
   </div>
 
+  <div class="span4">
 
-  <div class="span2">
-
-    <% if @player.position != "DST" && @player.position != "K"%>
-      <%= render "sos" %>
+    <% if @player.position == "QB" %>
+      <%= render "throws_to" %>
     <% end %>
 
-  </div>
-
-  <div class="span4">
     <div class="row-fluid">
       <div class="span12">
         <h5 class="text-center">Player News</h5>
@@ -116,6 +124,8 @@
 </div>
 
 <br><br>
+
+
 
 
 
@@ -138,7 +148,7 @@
           $('.playerNews').append("No News");
         }
         $.each(data, function (index, item) {
-          if (index < 8) {
+          if (index < 5) {
             var html = '<a href="'+item.url+'"><h6>' + item.title + '</h6></a>';
             $('.playerNews').append(html);
           }

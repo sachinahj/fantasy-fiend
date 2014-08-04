@@ -1,0 +1,27 @@
+<div class="row-fluid">
+  <div class="span12">
+    <h5 class="text-center">Throws To</h5>
+  </div>
+</div>
+<hr>
+
+
+<% half = @onTeam.length/2 %>
+<div class="row-fluid">
+  <div class="span6">
+    <% @onTeam.each_with_index do |player, index| %>
+      <% if index < half %>
+        <p><%= player.display_name %> (<%= player.depth_chart_position %>)</p>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="span6">
+    <% @onTeam.each_with_index do |player, index| %>
+      <% if index >= half %>
+        <p><%= player.display_name %> (<%= player.depth_chart_position %>)</p>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<hr>
