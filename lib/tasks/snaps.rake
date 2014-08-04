@@ -19,7 +19,7 @@ def create_snaps(position)
     snap.delete("rank")
     snap.delete("position")
 
-    player = Player.where(name: name.downcase).where(team_abbreviation: team_abbreviation).first
+    player = Player.where(name: name.downcase).first
 
     if player == nil 
       puts n.to_s + " player not found!!!"
