@@ -53,5 +53,9 @@ gem "less-rails"
 gem 'twitter-bootstrap-rails'
 # gem 'jquery_mobile_rails'
 
+group :production do
+  gem 'pg'
+end
+
 
 

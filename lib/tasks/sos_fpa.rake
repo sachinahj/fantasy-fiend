@@ -15,16 +15,16 @@ namespace :sos_fpa do
     # puts table
 
     sos = {}
+    n = 1
     table.each_with_index do |row, index|
       column = index % 9
       case column 
       when 0
         if index != 0
-          p sos
-          team = sos[:team]
+          # p sos
+          team_name = sos[:team]
           sos.delete(:team)
-          team = Team.find_by(team: team)
-          p team
+          team = Team.find_by(team: team_name)
           team.update(sos)
           team.save
         end
@@ -48,9 +48,21 @@ namespace :sos_fpa do
       else
         puts "nothing"
       end
+      puts n
+      n += 1
 
     end
     
+    Team.find_by(team_abbreviation: "PIT").update({
+      sos_qb_rank: 21,
+      sos_qb_fpa: 16.3,
+      sos_rb_rank: 30,
+      sos_rb_fpa: 17.5,
+      sos_wr_rank: 27,
+      sos_wr_fpa: 21.3,
+      sos_te_rank: 25,
+      sos_te_fpa: 8.0
+    });
     Player.all.each do |pl|
       pl.update_sos
     end
