@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140730135852) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "players", force: true do |t|
     t.string   "name"
     t.string   "display_name"
@@ -62,7 +65,7 @@ ActiveRecord::Schema.define(version: 20140730135852) do
     t.datetime "updated_at"
   end
 
-  add_index "season_projections", ["player_id"], name: "index_season_projections_on_player_id"
+  add_index "season_projections", ["player_id"], name: "index_season_projections_on_player_id", using: :btree
 
   create_table "season_stats", force: true do |t|
     t.integer  "player_id"
@@ -128,7 +131,7 @@ ActiveRecord::Schema.define(version: 20140730135852) do
     t.datetime "updated_at"
   end
 
-  add_index "season_stats", ["player_id"], name: "index_season_stats_on_player_id"
+  add_index "season_stats", ["player_id"], name: "index_season_stats_on_player_id", using: :btree
 
   create_table "teams", force: true do |t|
     t.string   "team"
