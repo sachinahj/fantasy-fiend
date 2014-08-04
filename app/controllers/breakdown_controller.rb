@@ -6,6 +6,9 @@ class BreakdownController < ApplicationController
 
   def players
   end
+  
+  def KsAndDSTs  
+  end
 
   private 
 

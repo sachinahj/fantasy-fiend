@@ -1,0 +1,21 @@
+<div class="row-fluid">
+  <div class="span12">
+    <h5 class="text-left">'14 Projections</h5>
+  </div>
+</div>
+<hr>
+
+<!-- render -->
+<% case @player.position %>
+<% when "QB" %>
+  <%= render "qb_projection" %>
+<% when "RB" %>
+  <%= render "rb_projection" %>
+<% when "WR" %>
+  <%= render "wr_projection" %>
+<% when "TE" %>
+  <%= render "te_projection" %>
+<% when "K" %>
+  <%= render "k_projection" %>
+<% else %>
+<% end %>

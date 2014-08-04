@@ -5,9 +5,9 @@ Rails.application.routes.draw do
 
   get 'breakdown/draft' , to: "breakdown#draft"
   get 'breakdown/players', to: "breakdown#players"
+  get 'breakdown/KsAndDSTs', to: 'breakdown#KsAndDSTs'
 
   get 'cheatsheet', to: 'cheatsheet#index'
-  get 'cheatsheet/KsAndDSTs', to: 'cheatsheet#KsAndDSTs'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

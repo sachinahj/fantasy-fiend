@@ -27,6 +27,9 @@
           <th>Depth<br>Chart</th>
           
           <th>ODP</th>
+          <th>SOS Rank</th>
+          <th>SOS FPA/Week</th>
+
 
           <th>'13 Points</th>
           <th>'14 Projected</th>
@@ -48,7 +51,26 @@
             <td><%= player.quarterback ? player.quarterback : "" %></td>
             <td><%= player.depth_chart_position ? player.depth_chart_position : "" %></td>
 
-            <td><%= player.overall_draft_position.to_i %></td>
+            <td><%= player.overall_draft_position.to_i != 0 ? player.overall_draft_position.to_i : "" %></td>
+
+            <% case player.position%>
+            <% when "QB"%>
+              <td><%= player.season_projection ? player.season_projection.sos_qb_rank : "" %></td>
+              <td><%= player.season_projection ? player.season_projection.sos_qb_fpa : "" %></td>
+            <% when "RB"%>
+              <td><%= player.season_projection ? player.season_projection.sos_rb_rank : "" %></td>
+              <td><%= player.season_projection ? player.season_projection.sos_rb_fpa : "" %></td>
+            <% when "WR"%>
+              <td><%= player.season_projection ? player.season_projection.sos_wr_rank : "" %></td>
+              <td><%= player.season_projection ? player.season_projection.sos_wr_fpa : "" %></td>
+            <% when "TE"%>
+              <td><%= player.season_projection ? player.season_projection.sos_te_rank : "" %></td>
+              <td><%= player.season_projection ? player.season_projection.sos_te_fpa : "" %></td>
+            <% else %>
+              <td> </td>
+              <td> </td>
+            <% end %>
+
             
             <td><%= player.season_stat ? player.season_stat.fantasy_points : "" %></td>
             <td><%= player.season_projection ? player.season_projection.fantasy_points  : "" %></td>
@@ -113,16 +135,18 @@
         {"sWidth": "5%"},
         {"sWidth": "5%"},
         {"sWidth": "12%"},
+        {"sWidth": "4%"},
         {"sWidth": "5%"},
-        {"sWidth": "5%"},
-        {"sWidth": "5%"},
+        {"sWidth": "3%"},
         {"sType": "text-blankslast", "sWidth":"14%"},
         {"sType": "text-blankslast", "sWidth": "5%"},
-        {"sWidth": "5%"},
-        { "asSorting": [ "desc", "asc" ], "sWidth": "9%"},
-        { "asSorting": [ "desc", "asc" ], "sWidth": "9%" },
-        { "asSorting": [ "desc", "asc" ], "sWidth": "9%" },
-        { "asSorting": [ "desc", "asc" ], "sWidth": "9%" }
+        {"sType": "text-blankslast", "sWidth": "5%"},
+        {"sType": "text-blankslast", "sWidth": "7%"},
+        {"sType": "text-blankslast", "sWidth": "7%"},
+        {"sType": "text-blankslast", "asSorting": [ "desc", "asc" ], "sWidth": "7%"},
+        {"sType": "text-blankslast", "asSorting": [ "desc", "asc" ], "sWidth": "7%" },
+        {"sType": "text-blankslast", "asSorting": [ "desc", "asc" ], "sWidth": "7%" },
+        {"sType": "text-blankslast", "asSorting": [ "desc", "asc" ], "sWidth": "7%" }
       ]
 
     });

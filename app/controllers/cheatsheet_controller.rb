@@ -10,8 +10,4 @@ class CheatsheetController < ApplicationController
     # .where("overall_rank > 0")
 
   end
-
-  def KsAndDSTs
-    
-  end
 end
