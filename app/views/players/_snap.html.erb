@@ -1,0 +1,36 @@
+<div class="row-fluid">
+  
+  <div class="span8">
+      <p class="text-left">Games Played</p>
+  </div>
+  <div class="span4">
+      <p class="text-left"><%= @stat["snap_games_played"] %></p>
+  </div>
+
+</div>
+
+
+
+<div class="row-fluid">
+
+  <div class="span12">
+      <p class="text-center">Snap Totals</p>
+  </div>
+
+</div>
+
+<div class="row-fluid">
+
+  <div class="span8">
+    <p>Played</p>
+    <p>Played/Game</p>
+    <p>Played Percent</p>
+  </div>
+
+  <div class="span4">
+    <p><%= @stat["snap_snaps"] %></p>
+    <p><%= @stat["snap_snaps_per_game"] %></p>
+    <p><%= @stat["snap_percent"] %></p>
+  </div>
+
+</div>

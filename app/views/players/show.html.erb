@@ -1,29 +1,147 @@
-<h2><%= @player.display_name %> (<%=@player.position%>) </h3>
-<h3><%= @player.team %> (ByeWeek: <%= @player.bye_week %>)</h4>
-<%= image_tag "logos/" + @player.team_abbreviation.upcase + ".gif" %>
+<div class="row-fluid">
 
-<br>
+  <div class="span1">
+  
+    <div class="row-fluid">
+      <div class="span12">
+        <%= image_tag "logos/" + @player.team_abbreviation.upcase + ".gif" %>
+      </div>
+    </div>    
 
-<% if @projections != nil %>
-  <h4>Projections</h4>
-  <ul>
-  <% @projections.attributes.each do |key, value| %>
-    <% if value != nil %>
-      <li><%= key %>: <%= value %></li>
+  </div>
+
+  <div class="span4">
+
+    <div class="row-fluid">
+      <div class="span12">
+        <h2><%= @player.display_name %> (<%=@player.position%>)</h2>
+        <h3><%= @player.team %> (<%= @player.team_abbreviation %>)</h3>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="span7">
+
+    <div class="row-fluid">
+      <div class="span12 text-center">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:13%">Bye Week</th>
+              <th style="width:15%">Depth Chart</th>
+              <th style="width:15%">Overall Rank</th>
+              <th style="width:15%">Position Rank</th>
+              <th style="width:21%">Overall Draft Pick</th>
+              <th style="width:21%">Position Draft Pick</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @player.bye_week %></td>
+              <td><%= @player.depth_chart_position %></td>
+              <td><%= @player.overall_rank %></td>
+              <td><%= @player.position_rank %></td>
+              <td><%= @player.overall_draft_position %></td>
+              <td><%= @player.position_draft_position %></td>
+            </tr>
+          </tbody>
+        </table>  
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<hr>
+
+<div class="row-fluid all_stats">
+
+  <div class="span2">
+
+    <div class="row-fluid">
+      <div class="span12">
+        <h5 class="text-left">2014 Projections</h5>
+      </div>
+    </div>
+    <hr>
+
+    <!-- render -->
+    <% case @player.position %>
+    <% when "QB" %>
+      <%= render "qb_projection" %>
+    <% when "RB" %>
+      <%= render "rb_projection" %>
+    <% when "WR" %>
+      <%= render "wr_projection" %>
+    <% when "TE" %>
+      <%= render "te_projection" %>
+    <% else %>
     <% end %>
-  <% end %>
-  </ul>
-<% end %>
-<br>
+    <!-- render -->
 
-<% if @stats != nil %>
-  <h4>2013 Stats</h4>
-  <ul>
-  <% @stats.attributes.each do |key, value| %>
-    <% if value != nil %>
-      <li><%= key %>: <%= value %></li>
+  </div>
+
+
+
+  <div class="span2">
+
+    <div class="row-fluid">
+      <div class="span12">
+        <h5 class="text-left">2013 Stats</h5>
+      </div>
+    </div>
+    <hr>
+
+    <% case @player.position %>
+    <% when "QB" %>
+      <%= render "qb_stat" %>
+    <% when "RB" %>
+      <%= render "rb_stat" %>
+    <% when "WR" %>
+      <%= render "wr_stat" %>
+    <% when "TE" %>
+      <%= render "te_stat" %>
+    <% else %>
     <% end %>
-  <% end %>
-  </ul>
-<% end %>
-<br>
+
+
+  </div>
+
+
+  <div class="span2">
+
+    <div class="row-fluid">
+      <div class="span12">
+        <h5 class="text-left">2013 Snaps</h5>
+      </div>
+    </div>
+    <hr>
+
+    <%= render "snap" %>
+
+  </div>
+
+
+  <div class="span2">
+
+    <div class="row-fluid">
+      <div class="span12">
+        <h5 class="text-left">Strength of Schedule</h5>
+      </div>
+    </div>
+    <hr>
+
+   <%= render "sos" %>
+
+  </div>
+
+  <div class="span4">
+  </div>
+
+</div>
+
+<br><br>
+

@@ -18,6 +18,7 @@ def create_projections(position)
       projection.delete("team_abbreviation")
       projection.delete("rank")
       projection.delete("position")
+      projection["year"] = 2014
 
       player = Player.where(name: name.downcase).where(team_abbreviation: team_abbreviation).first
 

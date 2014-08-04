@@ -1,0 +1,84 @@
+<div class="row-fluid">
+
+  <div class="span12">
+      <p class="text-center">Passing</p>
+  </div>
+
+</div>
+
+<div class="row-fluid">
+
+  <div class="span8">
+    <p>QB Rating</p>
+    <p>Completions</p>
+    <p>Attempts</p>
+    <p>Completion %</p>
+    <p>Yards</p>
+    <p>Yards/Attempt</p>
+    <p>Touchdowns</p>
+    <p>Interceptions</p>
+  </div>
+
+  <div class="span4">
+    <p><%= @stat["qb_rating"] ? @stat["qb_rating"] : "----" %></p>
+    <p><%= @stat["pass_completions"] ? @stat["pass_completions"] : "----" %></p>
+    <p><%= @stat["pass_attempts"] ? @stat["pass_attempts"] : "----" %></p>
+    <p><%= @stat["pass_completion_percent"] ? @stat["pass_completion_percent"] : "----" %></p>
+    <p><%= @stat["pass_yards"] ? @stat["pass_yards"] : "----" %></p>
+    <p><%= @stat["pass_yards_per_attempt"] ? @stat["pass_yards_per_attempt"] : "----" %></p>
+    <p><%= @stat["pass_touchdowns"] ? @stat["pass_touchdowns"] : "----" %></p>
+    <p><%= @stat["pass_interceptions"] ? @stat["pass_interceptions"] : "----" %></p>
+  </div>
+
+</div>
+
+
+<div class="row-fluid">
+
+  <div class="span12">
+      <p class="text-center">Rushing</p>
+  </div>
+
+</div>
+
+<div class="row-fluid">
+
+  <div class="span8">
+    <p>Attempts</p>
+    <p>Yards</p>
+    <p>Touchdowns</p>
+  </div>
+
+  <div class="span4">
+    <p><%= @stat["rush_attempts"] ? @stat["rush_attempts"] : "----" %></p>
+    <p><%= @stat["rush_yards"] ? @stat["rush_yards"] : "----" %></p>
+    <p><%= @stat["rush_touchdowns"] ? @stat["rush_touchdowns"] : "----" %></p>
+  </div>
+
+</div>
+
+<div class="row-fluid">
+
+  <div class="span12">
+      <p class="text-center">Fantasy</p>
+  </div>
+
+</div>
+
+<div class="row-fluid">
+
+  <div class="span8">
+    <p>Fumbles</p>
+    <p>Fumbles Lost</p>
+    <p>Fantasy Points</p>
+    <p>Fantasy Points/Week</p>
+  </div>
+
+  <div class="span4">
+    <p><%= @stat["fumbles"] ? @stat["fumbles"] : "----" %></p>
+    <p><%= @stat["fumbles_lost"] ? @stat["fumbles_lost"] : "----" %></p>
+    <p><%= @stat["fantasy_points"] ? @stat["fantasy_points"] : "----" %></p>
+    <p><%= @stat["fantasy_points_per_week"] ? @stat["fantasy_points_per_week"] : "----" %></p>
+  </div>
+
+</div>
