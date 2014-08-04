@@ -1,0 +1,48 @@
+<div class="row-fluid">
+
+  <div class="span8">
+    <p>Tackles for Loss</p>
+    <p>Sacks</p>
+    <p>QB Hits</p>
+    <p>Interceptions</p>
+    <p>Fumble Recoveries</p>
+    <p>Safeties</p>
+    <p>Touchdowns</p>
+    <p>Return TDs</p>    
+  </div>
+
+  <div class="span4">
+    <p><%= @stat["defense_tackles_for_loss"] ? @stat["defense_tackles_for_loss"] : "----" %></p>
+    <p><%= @stat["defense_sacks"] ? @stat["defense_sacks"] : "----" %></p>
+    <p><%= @stat["defense_qb_hits"] ? @stat["defense_qb_hits"] : "----" %></p>
+    <p><%= @stat["defense_interceptions"] ? @stat["defense_interceptions"] : "----" %></p>
+    <p><%= @stat["defense_fumble_recoveries"] ? @stat["defense_fumble_recoveries"] : "----" %></p>
+    <p><%= @stat["defense_safeties"] ? @stat["defense_safeties"] : "----" %></p>
+    <p><%= @stat["defense_touchdowns"] ? @stat["defense_touchdowns"] : "----" %></p>
+    <p><%= @stat["defense_return_touchdowns"] ? @stat["defense_return_touchdowns"] : "----" %></p>
+  </div>
+
+</div>
+
+
+<div class="row-fluid">
+
+  <div class="span12">
+      <p class="text-center">Fantasy</p>
+  </div>
+
+</div>
+
+<div class="row-fluid">
+
+  <div class="span8">
+    <p>Fantasy Points</p>
+    <p>FPoints Allowed</p>
+  </div>
+
+  <div class="span4">
+    <p><%= @stat["fantasy_points"] ? @stat["fantasy_points"] : "----" %></p>
+    <p><%= @stat["defense_points_allowed"] ? @stat["defense_points_allowed"] : "----" %></p>
+  </div>
+
+</div>

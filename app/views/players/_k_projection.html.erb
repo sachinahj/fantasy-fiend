@@ -1,0 +1,66 @@
+<div class="row-fluid">
+
+  <div class="span12">
+      <p class="text-center">Field Goals</p>
+  </div>
+
+</div>
+
+<div class="row-fluid">
+
+  <div class="span8">
+    <p>Made</p>
+    <p>Attempts</p>
+  </div>
+
+  <div class="span4">
+    <p><%= @projection["field_goals_made"] ? @projection["field_goals_made"] : "----" %></p>
+    <p><%= @projection["field_goals_attempts"] ? @projection["field_goals_attempts"] : "----" %></p>
+  </div>
+
+</div>
+
+
+<div class="row-fluid">
+
+  <div class="span12">
+      <p class="text-center">Extra Points</p>
+  </div>
+
+</div>
+
+<div class="row-fluid">
+
+  <div class="span8">
+    <p>Made</p>
+  </div>
+
+  <div class="span4">
+    <p><%= @projection["extra_points_made"] ? @projection["extra_points_made"] : "----" %></p>
+  </div>
+
+</div>
+
+
+
+<div class="row-fluid">
+
+  <div class="span12">
+      <p class="text-center">Fantasy</p>
+  </div>
+
+</div>
+
+<div class="row-fluid">
+
+  <div class="span8">
+    <p>Fantasy Points</p>
+    <p>Fantasy Points/Week</p>
+  </div>
+
+  <div class="span4">
+    <p><%= @projection["fantasy_points"] ? @projection["fantasy_points"] : "----" %></p>
+    <p><%= @projection["fantasy_points_per_week"] ? @projection["fantasy_points_per_week"] : "----" %></p>
+  </div>
+
+</div>

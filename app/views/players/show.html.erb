@@ -38,12 +38,12 @@
           </thead>
           <tbody>
             <tr>
-              <td><%= @player.bye_week %></td>
-              <td><%= @player.depth_chart_position %></td>
-              <td><%= @player.overall_rank %></td>
-              <td><%= @player.position_rank %></td>
-              <td><%= @player.overall_draft_position %></td>
-              <td><%= @player.position_draft_position %></td>
+              <td><%= @player.bye_week ? @player.bye_week : "----" %></td>
+              <td><%= @player.depth_chart_position ? @player.depth_chart_position : "----" %></td>
+              <td><%= @player.overall_rank ? @player.overall_rank : "----" %></td>
+              <td><%= @player.position_rank ? @player.position_rank : "----" %></td>
+              <td><%= @player.overall_draft_position ? @player.overall_draft_position : "----" %></td>
+              <td><%= @player.position_draft_position ? @player.position_draft_position : "----" %></td>
             </tr>
           </tbody>
         </table>  
@@ -78,6 +78,8 @@
       <%= render "wr_projection" %>
     <% when "TE" %>
       <%= render "te_projection" %>
+    <% when "K" %>
+      <%= render "k_projection" %>
     <% else %>
     <% end %>
     <!-- render -->
@@ -104,6 +106,10 @@
       <%= render "wr_stat" %>
     <% when "TE" %>
       <%= render "te_stat" %>
+    <% when "K" %>
+      <%= render "k_stat" %>
+    <% when "DST" %>
+      <%= render "dst_stat" %>
     <% else %>
     <% end %>
 
@@ -120,7 +126,9 @@
     </div>
     <hr>
 
-    <%= render "snap" %>
+    <% if @player.position != "DST" && @player.position != "K"%>
+      <%= render "snap" %>
+    <% end %>
 
   </div>
 
