@@ -1,10 +1,10 @@
-class CompareController < ApplicationController
-  before_action :get_positions, only: [:index, :laboratory]
+class BreakdownController < ApplicationController
+  before_action :get_positions, only: [:draft, :players]
 
-  def index
+  def draft
   end
 
-  def laboratory    
+  def players
   end
 
   private 
@@ -41,5 +41,6 @@ class CompareController < ApplicationController
     end
 
   end
-  
+
+
 end

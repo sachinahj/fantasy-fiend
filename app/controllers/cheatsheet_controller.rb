@@ -11,4 +11,7 @@ class CheatsheetController < ApplicationController
 
   end
 
+  def KsAndDSTs
+    
+  end
 end

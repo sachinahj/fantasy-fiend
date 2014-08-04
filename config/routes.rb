@@ -3,12 +3,11 @@ Rails.application.routes.draw do
 
 
 
+  get 'breakdown/draft' , to: "breakdown#draft"
+  get 'breakdown/players', to: "breakdown#players"
+
   get 'cheatsheet', to: 'cheatsheet#index'
-  get 'cheatsheet/quarterbacks', to: 'cheatsheet#quarterbacks'
-  get 'cheatsheet/flex', to: 'cheatsheet#flex'
-  get 'cheatsheet/kickers', to: 'cheatsheet#kickers'
-  get 'cheatsheet/defenses', to: 'cheatsheet#defenses'
-  get 'cheatsheet/snaps', to: 'cheatsheet#snaps'
+  get 'cheatsheet/KsAndDSTs', to: 'cheatsheet#KsAndDSTs'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -16,12 +15,8 @@ Rails.application.routes.draw do
 
   # resources :players
 
-  get '/players', to: 'players#index'
   get '/players/:id', to: 'players#show', as: :player
-  
-  get 'compare', to: 'compare#index'
-  get 'compare/laboratory', to: 'compare#laboratory'
-  
+    
   root :to => "players#index" 
 
   # You can have the root of your site routed with "root"
