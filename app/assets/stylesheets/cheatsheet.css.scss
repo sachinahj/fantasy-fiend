@@ -6,10 +6,11 @@
 #indexTable { 
   table-layout: fixed; 
 }
-table#indexTable td, table#indexTable th {
+table#indexTable td {
   text-align: left;
   font-size: .9em;
   padding: 0px 0px;
+  background-color: rgba(255, 22, 0, 0.250);
 }
 table#indexTable th {
   text-align: left;
@@ -18,7 +19,7 @@ table#indexTable th {
 }
 
 table.dataTable tbody tr.highlight {
-  background-color: #a5ffe8;
+  background-color: gray;
 }
 table.dataTable tbody td {
   cursor: pointer;
