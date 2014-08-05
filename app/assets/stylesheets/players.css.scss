@@ -25,10 +25,6 @@
   }
 }
 
-img {
-  width: 100%;
-  margin-top: 2.3em;
-}
 
 #searchSummaryTable {
   font-size: 0.9em;
@@ -43,6 +39,31 @@ i {
   cursor: pointer;
 }
 
+.showTopContainer {
+  background: black;
+  padding: 1em;
+  border-radius: 3em;
+  color: white;
+}
+
+.columnDefault {
+  background: black;
+  padding: 1em;
+  border-radius: 3em;
+  color: white;
+  margin-left: 0px;
+  a {
+    color: teal;
+  }
+}
+#mainShowDivider {
+  border-top: 1px solid black;
+}
 .all_stats p {
-  font-size: 0.8em;
+  font-size: 0.9em;
+}
+img {
+  width: 100%;
+  margin-top: 2.3em;
+  border-radius: 30%;
 }

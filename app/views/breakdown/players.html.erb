@@ -25,16 +25,6 @@
                 <option value = "<%= te.id %>"><%= te.display_name %></option>
               <% end %>
             </optgroup>
-            <optgroup label="Kickers" class="K">
-              <% @kickers.each do |k| %>
-                <option value = "<%= k.id %>"><%= k.display_name %></option>
-              <% end %>
-            </optgroup>
-            <optgroup label="Defense" class="Defense">
-              <% @defenses.each do |dst| %>
-                <option value = "<%= dst.id %>"><%= dst.display_name %></option>
-              <% end %>
-            </optgroup>
             <optgroup label="Other" class="Other">
               <% @others.each do |other| %>
                 <option value = "<%= other.id %>"><%= other.display_name %></option>
@@ -60,12 +50,6 @@
     <div class="row-fluid">
       <div class="span3">
         <label class="labChecks" for="te"><input id="te" type="checkbox" checked> TEs</label>
-      </div>
-      <div class="span3">
-        <label class="labChecks" for="k"><input id="k" type="checkbox" checked> Ks</label>
-      </div>
-      <div class="span3">
-        <label class="labChecks" for="dst"><input id="dst" type="checkbox" checked> DSTs</label>
       </div>
       <div class="span3">
         <label class="labChecks" for="select"><input id="select" type="checkbox" checked> All</label>    

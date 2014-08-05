@@ -1,4 +1,4 @@
-<div class="row-fluid">
+<div class="row-fluid showTopContainer">
 
   <div class="span1">
   
@@ -30,7 +30,7 @@
             <tr>
               <th style="width:13%">Bye Week</th>
               <th style="width:15%">Depth Chart</th>
-              <th style="width:15%">Overall Rank</th>
+              <th style="width:15%">Over_stat Rank</th>
               <th style="width:15%">Position Rank</th>
               <th style="width:21%">Overall Draft Pick</th>
               <th style="width:21%">Position Draft Pick</th>
@@ -59,11 +59,11 @@
 
 </div>
 
-<hr>
+<hr id="mainShowDivider">
 
 <div class="row-fluid all_stats">
 
-  <div class="span2">
+  <div class="span2 columnDefault">
 
     <% if @player.position != "DST" %>
       <%= render "projection" %>
@@ -73,7 +73,7 @@
 
   </div>
 
-  <div class="span2">
+  <div class="span2 columnDefault">
 
     <% if @player.position != "DST" && @player.position != "K"%>
       <%= render "sos" %>
@@ -86,7 +86,7 @@
   </div>
 
 
-  <div class="span2">
+  <div class="span2 columnDefault">
 
     <% if @player.position != "DST" && @player.position != "K"%>
       <%= render "stat" %>
@@ -95,7 +95,7 @@
   </div>
 
 
-  <div class="span2">
+  <div class="span2 columnDefault">
 
     <% if @player.position != "DST" && @player.position != "K"%>
       <%= render "snap" %>
@@ -103,7 +103,7 @@
 
   </div>
 
-  <div class="span4">
+  <div class="span4 columnDefault">
 
     <% if @player.position == "QB" %>
       <%= render "throws_to" %>
