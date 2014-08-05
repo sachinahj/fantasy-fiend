@@ -1,7 +1,6 @@
 class PlayersController < ApplicationController
 
   def index
-    @page = "homepage"
     @players = Player.all.includes(:season_stat, :season_projection)
     @qbs = []
     @rbs = []
