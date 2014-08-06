@@ -10,53 +10,46 @@ table#indexTable td {
   text-align: left;
   font-size: .9em;
   padding: 0px 0px;
-  background-color: rgba(255, 22, 0, 0.250);
 }
 table#indexTable th {
   text-align: left;
-  font-size: .7em;
+  font-size: .6em;
   padding: 0px 0px;
 }
 
 table.dataTable tbody tr.highlight {
-  background-color: gray;
+  background-color: teal;
 }
 table.dataTable tbody td {
   cursor: pointer;
   -moz-user-select: none; /* mozilla browsers */
   -webkit-user-select: none; /* webkit browsers */
 }
-tr.qb {
+tr.QB {
   color: red;
 }
-tr.rb {
+tr.RB {
   color: orange;
 }
-tr.wr {
+tr.WR {
   color: green;
 }
-tr.te {
+tr.TE {
   color: blue;
 }
-tr.k {
+tr.K {
   color: purple;
 }
-tr.dst {
+tr.DST {
   color: black;
 }
-#searchBar {
-  float: right;
-}
-.checkboxes {
-  position: absolute;
-  margin-top: 10px;
-  z-index: 1;
-}
-.labChart {
-  display: none;
-}
-label.cheatsheetChecks {
-  display: inline-block;
-  float: left;
-  margin-left: 10px;
+
+
+/* cheat sheet sidebar and sidebar buttons */
+/*div.cheatsheetSidebarNav#sidebarNav {
+  padding: 0px;
+}*/
+button.btn.cheatsheetButtons {
+  width: 100%;
+  margin-top: 5px;
 }

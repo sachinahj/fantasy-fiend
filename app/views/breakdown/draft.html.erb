@@ -1,115 +1,128 @@
+<div class="col-sm-4 col-md-3 draftSidebarNav" id="sidebarNav">
+  <div class="row-fluid">
+      <button type="button" for="pie" class="btn breakdownDraftButtons btn-primary">Top 30 Comparison by Position</button>
+      <button type="button" for="scatter" class="btn breakdownDraftButtons btn-default">Fantasy Points vs Pick/Rank</button>
+      <button type="button" for="spline" class="btn breakdownDraftButtons btn-default">Projected Relative Point Drop Off</button>
+      <button type="button" for="stacked" class="btn breakdownDraftButtons btn-default">Picks(Ranks) Percentiles by Position</button>
+  </div>
+</div>
+
+
+
+
+<div class="col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3 draftMain" id="main">
+
 <br>
-<div class="row-fluid">
+<br>
 
-  <div class="span4">
-    <div class="row-fluid">
-      <div class="span12 text-right">
-        <div class="btn btn-primary pie_selector">By Rank</div>
+
+  <div class="row-fluid pieContainer draftChartContainer">
+    
+    <div class="col-sm-12 col-md-12">
+      <div id="pie" class="breakdownChart"></div>
+
+      <hr>
+
+      <div class="col-sm-6 col-md-6">
+        <div class="btn btn-info pie_selector">By Rank</div>
       </div>
+      <div class="col-sm-6 col-md-6">
+      </div>
+
     </div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porttitor vestibulum ligula sed lobortis. Nam non aliquam nibh, id feugiat erat. Aenean congue eget est ac pulvinar. Nullam imperdiet turpis sagittis ante euismod blandit. Nam posuere mi non ante facilisis cursus. Mauris eleifend ultrices fermentum. Quisque sagittis eu sem tempor sagittis. Nullam dolor neque, iaculis accumsan convallis vel, tempor in risus. Nulla hendrerit nulla ac sollicitudin ornare. Aliquam ultricies tincidunt aliquet. Duis sollicitudin suscipit sollicitudin. Sed porttitor rutrum mattis. Suspendisse cursus felis velit, placerat bibendum eros rhoncus suscipit.</p>
+
   </div>
 
-  <div class="span8">
-    <div class="row-fluid">
-      <div class="span12">
-        <div id="pie" class="breakdownChart"></div>
+
+
+
+  <div class="row-fluid scatterContainer draftChartContainer" style="display:none">
+    
+    <div class="col-sm-12 col-md-12">
+      <div id="scatter" class="breakdownChart"></div>    
+      <hr>
+
+      <div class="col-sm-6 col-md-6">
+        <div id="y_select" class="btn btn-info scatter_selector">By '13 Fantasy Points</div>
       </div>
+      <div class="col-sm-6 col-md-6 text-right">
+        <div id="x_select" class="btn btn-info scatter_selector">By Rank</div>  
+      </div>
+
     </div>
+
   </div>
 
-</div>
 
-<hr>
 
-<div class="row-fluid">
 
-  <div class="span4">
-    <div class="row-fluid">
-      <div class="span12 text-right">
-        <div id="x_select" class="btn btn-primary scatter_selector">By Rank</div>
+
+
+  <div class="row-fluid splineContainer draftChartContainer" style="display:none">
+    
+    <div class="col-sm-12 col-md-12">
+      <div id="spline" class="breakdownChart"></div>
+      <hr>
+
+      <div class="col-sm-6 col-md-6">
+        <div class="btn btn-info spline_selector">By '13 Fantasy Points</div>
       </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span12 text-right">
-        <div id="y_select" class="btn btn-primary scatter_selector">By '13 Fantasy Points</div>
+      <div class="col-sm-6 col-md-6 text-right">
       </div>
+
     </div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sagittis mi venenatis, venenatis neque non, convallis neque. Proin a vestibulum arcu, ut rutrum felis. Donec sapien nisi, tincidunt ut dictum quis, tincidunt vel risus. Vestibulum luctus urna sit amet porttitor vestibulum. Integer vitae nunc leo. Aliquam non aliquet ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eros ligula, sollicitudin molestie magna in, vulputate tempus quam. Morbi elementum ipsum vel est condimentum dignissim. Quisque semper vestibulum sem vel commodo. Suspendisse nunc ante, accumsan vitae volutpat et, ornare sed erat.</p>
+
   </div>
 
-  <div class="span8">
-    <div class="row-fluid">
-      <div class="span12">
-        <div id="scatter" class="breakdownChart"></div>    
+
+
+  <div class="row-fluid stackedContainer draftChartContainer" style="display:none">
+    
+    <div class="col-sm-12 col-md-12">
+      <div id="stacked" class="breakdownChart"></div>
+      <hr>
+
+      <div class="col-sm-6 col-md-6">
+        <div class="btn btn-info stacked_selector">By Rank</div>
       </div>
-    </div>
-  </div>
-
-</div>
-
-<hr>
-
-<div class="row-fluid">
-
-  <div class="span4">
-    <div class="row-fluid">
-      <div class="span12 text-right">
-        <div class="btn btn-primary spline_selector">By '13 Fantasy Points</div>
+      <div class="col-sm-6 col-md-6 text-right">
       </div>
+
     </div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam auctor et felis ac sollicitudin. Aenean ut arcu ac lectus aliquet condimentum eu eu nunc. Sed venenatis dolor magna. Praesent a sem nec augue luctus venenatis. Aliquam quis congue tellus. Proin sed sagittis arcu. Suspendisse et nibh porttitor, sagittis lectus vel, laoreet justo. Etiam in imperdiet felis. Praesent ut viverra enim.</p>
-  </div>
 
-  <div class="span8">
-    <div class="row-fluid">
-      <div class="span12">
-        <div id="spline" class="breakdownChart"></div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<hr>
-
-<div class="row-fluid">
-
-  <div class="span4">
-    <div class="row-fluid">
-      <div class="span12 text-right">
-        <div class="btn btn-primary stacked_selector">By Rank</div>
-      </div>
-    </div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dictum vitae nibh quis porttitor. Sed blandit dolor sit amet nulla viverra, et mattis ipsum scelerisque. Nam pretium, dolor sit amet porttitor blandit, arcu libero malesuada lectus, sed aliquam ligula sapien vitae sem. Aenean erat tortor, viverra ac erat ut, pulvinar dapibus magna. Praesent nec orci vitae urna venenatis tincidunt sodales quis sem. Quisque felis metus, semper eu semper a, tincidunt a nisi. Aenean sit amet risus velit. Vivamus lacinia vulputate magna id ultricies. Sed rhoncus tincidunt lacus, ac euismod turpis mattis sit amet. Suspendisse vitae interdum tellus. Nam quam augue, pellentesque at mauris a, faucibus rhoncus nunc. Etiam vel eleifend urna, quis tristique risus. Mauris lobortis dignissim metus, nec gravida elit dignissim sed.</p>
-  </div>
-
-  <div class="span8">
-    <div class="row-fluid">
-      <div class="span12">
-       <div id="stacked" class="breakdownChart"></div>
-      </div>
-    </div>
   </div>
 
 </div>
-<br><br>
 
 
 <script type="text/javascript">
 
   $(document).ready(function () {
 
+
+    $('button.btn.breakdownDraftButtons').on('click', function () {
+      $('.draftChartContainer').hide();
+      chart = $(this).attr('for');
+      $('.' + chart + 'Container').show();
+      $(window).resize();
+
+      $('.breakdownDraftButtons').removeClass('btn-primary');
+      $('.breakdownDraftButtons').addClass('btn-default');
+
+      $(this).addClass("btn-primary");
+      $(this).removeClass("btn-default");
+    });
+
     // ---- axis switch for scatter series ----
     var scatter_season = 2014;
     var scatter_stat = "odp";
     $(document).on('click', '.scatter_selector', function () {
 
-      $(this).toggleClass('btn-primary');
-      $(this).toggleClass('btn-inverse');
+      $(this).toggleClass('btn-info');
+      $(this).toggleClass('btn-warning');
 
 
-      if ($(this).hasClass('btn-primary')) {
+      if ($(this).hasClass('btn-info')) {
         $(this).text('By Rank');
       } else {
         $(this).text('By Position');
@@ -124,7 +137,7 @@
           scatter_season = 2014;
         }
 
-        if ($(this).hasClass('btn-primary')) {
+        if ($(this).hasClass('btn-info')) {
           $(this).text("By '13 Fantasy Points");
         } else {
           $(this).text("By Projected Fantasy Points");
@@ -138,7 +151,7 @@
           scatter_stat = "odp";
         }
 
-        if ($(this).hasClass('btn-primary')) {
+        if ($(this).hasClass('btn-info')) {
           $(this).text("By Rank");
         } else {
           $(this).text("By Projected Overall Pick");
@@ -161,11 +174,11 @@
     var stacked_stat = "odp";
     $(document).on('click', '.stacked_selector', function () {
 
-      $(this).toggleClass('btn-primary');
-      $(this).toggleClass('btn-inverse');
+      $(this).toggleClass('btn-info');
+      $(this).toggleClass('btn-warning');
 
 
-      if ($(this).hasClass('btn-primary')) {
+      if ($(this).hasClass('btn-info')) {
         $(this).text('By Rank');
       } else {
         $(this).text('By Position');
@@ -189,10 +202,10 @@
     var pie_stat = "odp";
     $(document).on('click', '.pie_selector', function () {
 
-      $(this).toggleClass('btn-primary');
-      $(this).toggleClass('btn-inverse');
+      $(this).toggleClass('btn-info');
+      $(this).toggleClass('btn-warning');
 
-      if ($(this).hasClass('btn-primary')) {
+      if ($(this).hasClass('btn-info')) {
         $(this).text('By Rank');
       } else {
         $(this).text('By Position');
@@ -216,10 +229,10 @@
     var spline_season = 2014;
     $(document).on('click', '.spline_selector', function () {
 
-      $(this).toggleClass('btn-primary');
-      $(this).toggleClass('btn-inverse');
+      $(this).toggleClass('btn-info');
+      $(this).toggleClass('btn-warning');
 
-      if ($(this).hasClass('btn-primary')) {
+      if ($(this).hasClass('btn-info')) {
         $(this).text("By '13 Fantasy Points");
       } else {
         $(this).text("By Projected Fantasy Points");
@@ -500,8 +513,10 @@
       $('#scatter').highcharts({
         chart: {
           type: 'scatter',
-          backgroundColor: "#fec5c0",
           zoomType: 'xy'
+        },
+        credits: {
+          enabled: false
         },
         title: {
           text: scatter_info.title
@@ -558,8 +573,10 @@
     function StackedChart (stacked_info) {
       $('#stacked').highcharts({
         chart: {
-          backgroundColor: "#fec5c0",
           type: 'column'
+        },
+        credits: {
+          enabled: false
         },
         title: {
           text: stacked_info.title
@@ -626,10 +643,12 @@
     function PieChart (pie_info) {
       $('#pie').highcharts({
         chart: {
-          backgroundColor: "#fec5c0",
           plotBackgroundColor: null,
           plotBorderWidth: null,
           plotShadow: false
+        },
+        credits: {
+          enabled: false
         },
         title: {
           text: pie_info.title
@@ -661,8 +680,10 @@
     function SplineChart (spline_info) {
       $('#spline').highcharts({
         chart: {
-          backgroundColor: "#fec5c0",
           type: 'spline'
+        },
+        credits: {
+          enabled: false
         },
         title: {
           text: spline_info.title

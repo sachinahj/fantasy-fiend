@@ -1,115 +1,162 @@
-<div class="row-fluid">
-  <div class="span6 checkboxes">
-    <label class="cheatsheetChecks" for="qb"><input id="qb" type="checkbox" checked> QBs</label>
-    <label class="cheatsheetChecks" for="rb"><input id="rb" type="checkbox" checked> RBs</label>
-    <label class="cheatsheetChecks" for="wr"><input id="wr" type="checkbox" checked> WRs</label>
-    <label class="cheatsheetChecks" for="te"><input id="te" type="checkbox" checked> TEs</label>
-    <label class="cheatsheetChecks" for="k"><input id="k" type="checkbox" checked> Ks</label>
-    <label class="cheatsheetChecks" for="dst"><input id="dst" type="checkbox" checked> DSTs</label>
-    <label class="cheatsheetChecks" for="select"><input id="select" type="checkbox" checked> All</label>  
+<div class="col-sm-1 col-md-1 cheatsheetSidebarNav" id="sidebarNav">
+  <div class="row-fluid">
+    
+      <button type="button" id="QB" class="btn cheatsheetButtons btn-success">QBs</button>
+      <button type="button" id="RB" class="btn cheatsheetButtons btn-success">RBs</button>
+      <button type="button" id="WR" class="btn cheatsheetButtons btn-success">WRs</button>
+      <button type="button" id="TE" class="btn cheatsheetButtons btn-success">TEs</button>
+      <button type="button" id="K" class="btn cheatsheetButtons btn-success">Ks</button>
+      <button type="button" id="DST" class="btn cheatsheetButtons btn-success">DSTs</button>
+      <button type="button" id="ALL" class="btn cheatsheetButtons btn-success">All</button>
+
   </div>
 </div>
 
-<div class="row-fluid">
-  <div class="span12">
-<center>
-    <table id="indexTable">
-      <thead>
-        <tr>
-          <th>Rank</th>
-          <th>Pos.<br>Rank</th>
 
-          <th>Name</th>
-          <th>Pos.</th>
-          <th>Team</th>
-          <th>Bye</th>
-          <th>Quarterback</th>
-          <th>Depth<br>Chart</th>
-          
-          <th>ODP</th>
-          <th>SOS Rank</th>
-          <th>SOS FPA/Week</th>
+<div class="col-sm-11 col-sm-offset-1 col-md-11 col-md-offset-1 cheatsheetMain" id="main">
+  <br>
+  <div class="row-fluid">
+    <div class="span12">
+  <center>
+      <table id="indexTable">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Pos.<br>Rank</th>
 
-
-          <th>'13 Points</th>
-          <th>'14 Projected</th>
-          <th>'13 Pts/Week</th>
-          <th>'14 Pts/Week</th>
-          
-        </tr>
-      </thead>
-      <tbody>
-        <% @players.each do |player|  %>
-          <tr id="player<%=player.id%>" class="playerRow <%= player.position.downcase %>">
-            <td><%= player.overall_rank.to_i != 0 ? player.overall_rank.to_i : 300 %></td>
-            <td><%= player.position_rank %></td>
-
-            <td><%= player.display_name %></td>
-            <td><%= player.position %></td>
-            <td><%= player.team_abbreviation %></td>
-            <td><%= player.bye_week.to_i %></td>
-            <td><%= player.quarterback ? player.quarterback : "" %></td>
-            <td><%= player.depth_chart_position ? player.depth_chart_position : "" %></td>
-
-            <td><%= player.overall_draft_position.to_i != 0 ? player.overall_draft_position.to_i : 300 %></td>
-
-            <% case player.position%>
-            <% when "QB"%>
-              <td><%= player.season_projection ? player.season_projection.sos_qb_rank : "" %></td>
-              <td><%= player.season_projection ? player.season_projection.sos_qb_fpa : "" %></td>
-            <% when "RB"%>
-              <td><%= player.season_projection ? player.season_projection.sos_rb_rank : "" %></td>
-              <td><%= player.season_projection ? player.season_projection.sos_rb_fpa : "" %></td>
-            <% when "WR"%>
-              <td><%= player.season_projection ? player.season_projection.sos_wr_rank : "" %></td>
-              <td><%= player.season_projection ? player.season_projection.sos_wr_fpa : "" %></td>
-            <% when "TE"%>
-              <td><%= player.season_projection ? player.season_projection.sos_te_rank : "" %></td>
-              <td><%= player.season_projection ? player.season_projection.sos_te_fpa : "" %></td>
-            <% else %>
-              <td> </td>
-              <td> </td>
-            <% end %>
-
+            <th>Name</th>
+            <th>Pos.</th>
+            <th>Team</th>
+            <th>Bye</th>
+            <th>Quarterback</th>
+            <th>Depth<br>Chart</th>
             
-            <td><%= player.season_stat ? player.season_stat.fantasy_points : "" %></td>
-            <td><%= player.season_projection ? player.season_projection.fantasy_points  : "" %></td>
-            <td><%= player.season_stat ? player.season_stat.fantasy_points_per_week : "" %></td>
-            <td><%= player.season_projection ? player.season_projection.fantasy_points_per_week : "" %></td>
+            <th>ODP</th>
+            <th>SOS Rank</th>
+            <th>SOS FPA/Week</th>
+
+
+            <th>'13 Points</th>
+            <th>'14 Projected</th>
+            <th>'13 Pts/Week</th>
+            <th>'14 Pts/Week</th>
+            
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-</center>
+        </thead>
+        <tbody>
+          <% @players.each do |player|  %>
+            <tr id="player<%=player.id%>" class="playerRow <%= player.position %>">
+              <td><%= player.overall_rank.to_i != 0 ? player.overall_rank.to_i : 300 %></td>
+              <td><%= player.position_rank %></td>
+
+              <td><%= player.display_name %></td>
+              <td><%= player.position %></td>
+              <td><%= player.team_abbreviation %></td>
+              <td><%= player.bye_week.to_i %></td>
+              <td><%= player.quarterback ? player.quarterback : "" %></td>
+              <td><%= player.depth_chart_position ? player.depth_chart_position : "" %></td>
+
+              <td><%= player.overall_draft_position.to_i != 0 ? player.overall_draft_position.to_i : 300 %></td>
+
+              <% case player.position%>
+              <% when "QB"%>
+                <td><%= player.season_projection ? player.season_projection.sos_qb_rank : "" %></td>
+                <td><%= player.season_projection ? player.season_projection.sos_qb_fpa : "" %></td>
+              <% when "RB"%>
+                <td><%= player.season_projection ? player.season_projection.sos_rb_rank : "" %></td>
+                <td><%= player.season_projection ? player.season_projection.sos_rb_fpa : "" %></td>
+              <% when "WR"%>
+                <td><%= player.season_projection ? player.season_projection.sos_wr_rank : "" %></td>
+                <td><%= player.season_projection ? player.season_projection.sos_wr_fpa : "" %></td>
+              <% when "TE"%>
+                <td><%= player.season_projection ? player.season_projection.sos_te_rank : "" %></td>
+                <td><%= player.season_projection ? player.season_projection.sos_te_fpa : "" %></td>
+              <% else %>
+                <td> </td>
+                <td> </td>
+              <% end %>
+
+              
+              <td><%= player.season_stat ? player.season_stat.fantasy_points : "" %></td>
+              <td><%= player.season_projection ? player.season_projection.fantasy_points  : "" %></td>
+              <td><%= player.season_stat ? player.season_stat.fantasy_points_per_week : "" %></td>
+              <td><%= player.season_projection ? player.season_projection.fantasy_points_per_week : "" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+  </center>
+    </div>
   </div>
+
+
+
+
+
 </div>
+
+
+
+
+
+
+
+
+
 
 <script type="text/javascript">
   
   $(document).ready(function () {
 
-    $('input[type="checkbox"]').on("click", function () {
-      if ($(this).parent().prop('for') == 'select'){
+    
+    // position selector buttons 
+    $('.btn.cheatsheetChecks').on("click", function () {
 
-        if (this.checked){
-          $('input[type="checkbox"]').each(function () {
-            this.checked = true;
-          });
-            $('.playerRow').show();
-        } else {
-          $('input[type="checkbox"]').each(function () {
-            this.checked = false;
-          });
-            $('.playerRow').hide();
-        }
+      position = $(this).attr("id");
+      $('.'+position).fadeToggle();
+
+      if ($(this).hasClass('btn-success')) {
+
+        $(this).removeClass('btn-success');
+        $(this).addClass('btn-danger');
+
+      } else {
+
+        $(this).addClass('btn-success');
+        $(this).removeClass('btn-danger');
+
       }
+
     });
 
-    $('input[type="checkbox"]').on("click", function () {
-      a = $(this).attr("id");
-      $('.'+a).fadeToggle();
+    // select all functionality
+    $('.btn.cheatsheetChecks').on("click",function () {
+      // check if all button was pressed 
+      if ($(this).prop('id') === "ALL") {
+        // check if all button is sucess 
+        if ($(this).hasClass('btn-success')){
+          // make all buttons success and show all players
+          $('.btn.cheatsheetChecks').each(function () {
+            $(this).removeClass('btn-danger');
+            $(this).addClass('btn-success');
+          });
+          $('.playerRow').show();
+
+        } else {
+          // all buttons danger and hide all players
+          $('.btn.cheatsheetChecks').each(function () {
+            $(this).removeClass('btn-success');
+            $(this).addClass('btn-danger');
+          });
+          $('.playerRow').hide();
+
+        }
+
+      }
+
     });
 
+    // add highlight class to row on click
     $('tr').click(function (e) {
       $(this).toggleClass("highlight");
     });
@@ -130,7 +177,6 @@
       "iDisplayLength" : -1,
       "paging": false,
       "info": false,
-      "background-color": "#B0BED9",
       "bAutoWidth" : false,
       "aoColumns": [
         {"sWidth": "5%"},
@@ -153,8 +199,9 @@
     });
 
     $('#indexTable').on('search.dt', function () {
-      $('input[type="checkbox"]').each(function () {
-        this.checked = true;
+      $('.btn.cheatsheetChecks').each(function () {
+        $(this).removeClass('btn-danger');
+        $(this).addClass('btn-success');
       });
       $('.playerRow').show();
     });
