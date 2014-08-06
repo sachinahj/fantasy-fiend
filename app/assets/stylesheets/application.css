@@ -12,10 +12,13 @@
  *
  *= require_self
  *= require_tree .
+ *= require custom_bootstrap/custom_bootstrap
  * require jquery.mobile
  *= require select2
  *= require select2-bootstrap
  *= require dataTables/jquery.dataTables
+
+
  */
 /** {
   border: 1px solid red;

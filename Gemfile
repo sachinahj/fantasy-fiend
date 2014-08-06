@@ -49,8 +49,8 @@ gem 'jquery-ui-rails'
 gem 'nokogiri'
 
 gem 'therubyracer'  
-gem "less-rails"
-gem 'twitter-bootstrap-rails'
+gem 'less-rails-bootstrap'
+# gem 'twitter-bootstrap-rails'
 # gem 'jquery_mobile_rails'
 
 group :production do
