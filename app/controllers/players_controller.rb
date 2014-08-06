@@ -1,33 +1,8 @@
 class PlayersController < ApplicationController
+  before_action :get_positions, only: [:index, :show]
 
   def index
-    @players = Player.all.includes(:season_stat, :season_projection)
-    @qbs = []
-    @rbs = []
-    @wrs = []
-    @tes = []
-    @ks = []
-    @dsts = []
-    @others = []
-
-    @players.each do |player|
-      case player.position
-      when 'QB'
-        @qbs << [player.id, player.display_name] 
-      when 'RB'
-        @rbs << [player.id, player.display_name] 
-      when 'WR'
-        @wrs << [player.id, player.display_name] 
-      when 'TE'
-        @tes << [player.id, player.display_name] 
-      when 'K'
-        @ks << [player.id, player.display_name] 
-      when 'DST'
-        @dsts << [player.id, player.display_name] 
-      else
-        @others << [player.id, player.display_name]
-      end
-    end
+    
 
   end
 
@@ -143,6 +118,40 @@ class PlayersController < ApplicationController
 
   end
 
+
+private 
+def get_positions
+
+    @players = Player.all.includes(:season_stat, :season_projection).order("overall_rank ASC")
+    @quarterbacks = []
+    @runningbacks = []
+    @receivers = []
+    @tightends = []
+    @kickers = []
+    @defenses = []
+    @others = []
+
+
+    @players.each do |player|
+      case player.position
+      when 'QB'
+        @quarterbacks << player
+      when 'RB'
+        @runningbacks << player
+      when 'WR'
+        @receivers << player
+      when 'TE'
+        @tightends << player
+      when 'K'
+        @kickers << player
+      when 'DST'
+        @defenses << player
+      else
+        @others << player
+      end
+    end
+    
+  end
 
 end
 

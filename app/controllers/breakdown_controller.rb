@@ -14,7 +14,7 @@ class BreakdownController < ApplicationController
 
   def get_positions
 
-    @players = Player.all.includes(:season_stat, :season_projection)
+    @players = Player.all.includes(:season_stat, :season_projection).order("overall_rank ASC")
     @quarterbacks = []
     @runningbacks = []
     @receivers = []
@@ -42,7 +42,7 @@ class BreakdownController < ApplicationController
         @others << player
       end
     end
-
+    
   end
 
 

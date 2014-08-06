@@ -88,7 +88,7 @@
   </center>
     </div>
   </div>
-
+<br><br>
 
 
 
@@ -109,8 +109,10 @@
   $(document).ready(function () {
 
     
+
+
     // position selector buttons 
-    $('.btn.cheatsheetChecks').on("click", function () {
+    $('.btn.cheatsheetButtons').on("click", function () {
 
       position = $(this).attr("id");
       $('.'+position).fadeToggle();
@@ -130,13 +132,13 @@
     });
 
     // select all functionality
-    $('.btn.cheatsheetChecks').on("click",function () {
+    $('.btn.cheatsheetButtons').on("click",function () {
       // check if all button was pressed 
       if ($(this).prop('id') === "ALL") {
         // check if all button is sucess 
         if ($(this).hasClass('btn-success')){
           // make all buttons success and show all players
-          $('.btn.cheatsheetChecks').each(function () {
+          $('.btn.cheatsheetButtons').each(function () {
             $(this).removeClass('btn-danger');
             $(this).addClass('btn-success');
           });
@@ -144,7 +146,7 @@
 
         } else {
           // all buttons danger and hide all players
-          $('.btn.cheatsheetChecks').each(function () {
+          $('.btn.cheatsheetButtons').each(function () {
             $(this).removeClass('btn-success');
             $(this).addClass('btn-danger');
           });
@@ -159,6 +161,13 @@
     // add highlight class to row on click
     $('tr').click(function (e) {
       $(this).toggleClass("highlight");
+    });
+
+    $('tr').dblclick(function (e) {
+      var htmlID = $(this).prop('id')
+      var playerID = htmlID.slice(6);
+      window.open('/players/' + playerID, '_blank');
+
     });
 
     $.fn.dataTableExt.oSort['text-blankslast-asc'] = function (x, y) {  
@@ -199,7 +208,7 @@
     });
 
     $('#indexTable').on('search.dt', function () {
-      $('.btn.cheatsheetChecks').each(function () {
+      $('.btn.cheatsheetButtons').each(function () {
         $(this).removeClass('btn-danger');
         $(this).addClass('btn-success');
       });

@@ -1,78 +1,97 @@
-<div class="row-fluid">
-  <div class="span2 fixed">
-    <div class="row-fluid">
-      <div class="span12">
-        <div class="select-container">
-          <select id ="labSelectBox" style="width:90%">
-            <option></option>
-            <optgroup label="Quarterbacks" class="QB">
-              <% @quarterbacks.each do |qb| %>
-                <option value = "<%= qb.id %>"><%= qb.display_name %></option>
-              <% end %>
-            </optgroup>
-            <optgroup label="Running Backs" class="RB">
-              <% @runningbacks.each do |rb| %>
-                <option value = "<%= rb.id %>"><%= rb.display_name %></option>
-              <% end %>
-            </optgroup>
-            <optgroup label="Wide Receivers" class="WR">
-              <% @receivers.each do |wr| %>
-                <option value = "<%= wr.id %>"><%= wr.display_name %></option>
-              <% end %>
-            </optgroup>
-            <optgroup label="Tight Ends" class="TE">
-              <% @tightends.each do |te| %>
-                <option value = "<%= te.id %>"><%= te.display_name %></option>
-              <% end %>
-            </optgroup>
-            <optgroup label="Other" class="Other">
-              <% @others.each do |other| %>
-                <option value = "<%= other.id %>"><%= other.display_name %></option>
-              <% end %>
-            </optgroup>
-          </select>
-        </div>
-      </div>
+<div class="col-sm-4 col-md-3 playersSidebarNav" id="sidebarNav">
+
+  <div class="row-fluid">
+    <div class="col-sm-4 col-med-4 chartsButtonContainer">
+      <button type="button" id="projections" class="btn chartsButtons btn-info">Projections</button>
     </div>
-    <div class="row-fluid">
-      <div class="span3">
-        <label class="labChecks" for="qb"><input id="qb" type="checkbox" checked> QBs</label>
-      </div>
-      <div class="span3">
-        <label class="labChecks" for="rb"><input id="rb" type="checkbox" checked> RBs</label>
-      </div>
-      <div class="span3">
-        <label class="labChecks" for="wr"><input id="wr" type="checkbox" checked> WRs</label>
-      </div>
-      <div class="span3">
-      </div>
+    <div class="col-sm-4 col-med-4 chartsButtonContainer">
+      <button type="button" id="stats" class="btn chartsButtons btn-default">Stats</button>
     </div>
-    <div class="row-fluid">
-      <div class="span3">
-        <label class="labChecks" for="te"><input id="te" type="checkbox" checked> TEs</label>
-      </div>
-      <div class="span3">
-        <label class="labChecks" for="select"><input id="select" type="checkbox" checked> All</label>    
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span12">
-        <span id="selectedText">
-          <!-- selected players -->
-        </span>
-      </div>
+    <div class="col-sm-4 col-med-4 chartsButtonContainer">
+      <button type="button" id="snaps" class="btn chartsButtons btn-default">Snaps</button>
     </div>
   </div>
-  <div class="span10 pull-right">
-    <div id="projectionsChart" class="labChart"></div>
-    <div id="statsChart" class="labChart"></div>
-    <div id="snapsChart" class="labChart"></div>
+
+
+  <div class="row-fluid">
+    <div class="col-sm-2 col-med-2 playersButtonContainer">
+      <button type="button" id="QB" class="btn playersButtons btn-success">QBs</button>
+    </div>
+    <div class="col-sm-2 col-med-2 playersButtonContainer">
+      <button type="button" id="RB" class="btn playersButtons btn-success">RBs</button>
+    </div>
+    <div class="col-sm-2 col-med-2 playersButtonContainer">
+      <button type="button" id="WR" class="btn playersButtons btn-success">WRs</button>
+    </div>
+    <div class="col-sm-2 col-med-2 playersButtonContainer">
+      <button type="button" id="TE" class="btn playersButtons btn-success">TEs</button>
+    </div>
+    <div class="col-sm-2 col-med-2 playersButtonContainer">
+    </div>
+    <div class="col-sm-2 col-med-2 playersButtonContainer">
+      <button type="button" id="ALL" class="btn playersButtons btn-success">All</button>
+    </div>
   </div>
+
+  <div class="row-fluid">
+          <div class="select-container text-center">
+            <select id ="labSelectBox" style="width:90%">
+              <option></option>
+              <optgroup label="Quarterbacks" class="QB">
+                <% @quarterbacks.each do |qb| %>
+                  <option value = "<%= qb.id %>"><%= qb.display_name %></option>
+                <% end %>
+              </optgroup>
+              <optgroup label="Running Backs" class="RB">
+                <% @runningbacks.each do |rb| %>
+                  <option value = "<%= rb.id %>"><%= rb.display_name %></option>
+                <% end %>
+              </optgroup>
+              <optgroup label="Wide Receivers" class="WR">
+                <% @receivers.each do |wr| %>
+                  <option value = "<%= wr.id %>"><%= wr.display_name %></option>
+                <% end %>
+              </optgroup>
+              <optgroup label="Tight Ends" class="TE">
+                <% @tightends.each do |te| %>
+                  <option value = "<%= te.id %>"><%= te.display_name %></option>
+                <% end %>
+              </optgroup>
+              <optgroup label="Other" class="Other">
+                <% @others.each do |other| %>
+                  <option value = "<%= other.id %>"><%= other.display_name %></option>
+                <% end %>
+              </optgroup>
+            </select>
+          </div>
+  </div>
+  <br>
+
+  <div class="row-fluid">
+    <div class="col-sm-12 col-med-12">
+      <span id="selectedText">
+        <!-- selected players -->
+      </span>
+    </div>
+  </div>
+
 </div>
 
 
+<div class="col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3 draftMain" id="main">
+<br><br>
+  <div class="row-fluid projectionsChartContainer labChartContainer">
+      <div id="projectionsChart" class="labChart"></div>
+  </div>
+  <div class="row-fluid statsChartContainer labChartContainer" style="display:none">
+      <div id="statsChart" class="labChart"></div>
+  </div>
+  <div class="row-fluid snapsChartContainer labChartContainer" style="display:none">
+      <div id="snapsChart" class="labChart"></div>
+  </div>
+  </div>
 
-
+</div>
 
 
 <script type="text/javascript">
@@ -87,18 +106,68 @@
     var ks = <%= raw @kickers.to_json(include: :season_projection) %>;
     var dsts = <%= raw @defenses.to_json(include: :season_projection) %>;
 
-    // ---- select all functionality ---
-    $('input[type="checkbox"]').on("click", function () {
-      if ($(this).parent().prop('for') == 'select'){
 
-        if (this.checked){
-          $('input[type="checkbox"]').each(function () {
-            this.checked = true;
+
+
+
+
+    $('.btn.chartsButtons').on("click", function () {
+      type = $(this).attr("id");
+      $('.chartsButtons').removeClass('btn-info');
+      $('.chartsButtons').addClass('btn-default');
+      $(this).addClass('btn-info');
+
+
+      $('.labChartContainer').hide();
+      $('.' + type + 'ChartContainer').show();
+      $(window).resize();
+
+    });
+
+
+
+
+    // position selector buttons 
+    $('.btn.playersButtons').on("click", function () {
+
+      position = $(this).attr("id");
+      // $('.'+position).fadeToggle();
+
+      if ($(this).hasClass('btn-success')) {
+
+        $(this).removeClass('btn-success');
+        $(this).addClass('btn-danger');
+
+      } else {
+
+        $(this).addClass('btn-success');
+        $(this).removeClass('btn-danger');
+
+      }
+      RenderSelectBox();
+    });
+
+
+    // ---- select all functionality ---
+    // select all functionality
+    $('.btn.playersButtons').on("click",function () {
+      // check if all button was pressed 
+      if ($(this).prop('id') === "ALL") {
+        // check if all button is sucess 
+        if ($(this).hasClass('btn-success')){
+          // make all buttons success 
+          $('.btn.playersButtons').each(function () {
+            $(this).removeClass('btn-danger');
+            $(this).addClass('btn-success');
           });
+
         } else {
-          $('input[type="checkbox"]').each(function () {
-            this.checked = false;
+          // all buttons danger 
+          $('.btn.playersButtons').each(function () {
+            $(this).removeClass('btn-success');
+            $(this).addClass('btn-danger');
           });
+
         }
 
       }
@@ -109,25 +178,20 @@
     function RenderSelectBox () {
       html = '<select id ="labSelectBox" style="width : 90%"><option></option>';
       
-      if ($('input[type="checkbox"]#qb').prop('checked') == true){
+      if ($('.playersButtons#QB').hasClass('btn-success')){
         html += PositionOptGroup('Quarterbacks', qbs);
       }
-      if ($('input[type="checkbox"]#rb').prop('checked') == true){
+      if ($('.playersButtons#RB').hasClass('btn-success')){
         html += PositionOptGroup('Running Backs', rbs);
       }
-      if ($('input[type="checkbox"]#wr').prop('checked') == true){
+      if ($('.playersButtons#WR').hasClass('btn-success')){
         html += PositionOptGroup('Wide Receivers', wrs);
       }
-      if ($('input[type="checkbox"]#te').prop('checked') == true){
+      if ($('.playersButtons#TE').hasClass('btn-success')){
         html += PositionOptGroup('Tight Ends', tes);
       }
-      if ($('input[type="checkbox"]#k').prop('checked') == true){
-        html += PositionOptGroup('Kickers', ks);
-      }
-      if ($('input[type="checkbox"]#dst').prop('checked') == true){
-        html += PositionOptGroup('Defenses', dsts);
-      }
       html += "</select>";
+      console.log("html", html);
       $('.select-container').empty().append(html);
       $('#labSelectBox').select2('destroy').select2({
         placeholder: "Select a Player",
@@ -507,7 +571,6 @@
       $('#'+chart_id).show();
       $('#'+chart_id).highcharts({
         chart: {
-          backgroundColor: "#fec5c0",
           type: 'bar'
         },
         title: {

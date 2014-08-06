@@ -1,131 +1,184 @@
-<div class="row-fluid showTopContainer">
-
-  <div class="span1">
-  
-    <div class="row-fluid">
-      <div class="span12">
-        <%= image_tag "logos/" + @player.team_abbreviation.upcase + ".gif" %>
+<div class="col-sm-3 col-md-2 showSidebarNav" id="sidebarNav">
+  <div class="row-fluid showSearchBox">
+      <div class="select-container text-center">
+        <select id ="showSelectBox" style="width:90%">
+          <option></option>
+          <optgroup label="Quarterbacks" class="QB">
+            <% @quarterbacks.each do |qb| %>
+              <option value = "<%= qb.id %>"><%= qb.display_name %></option>
+            <% end %>
+          </optgroup>
+          <optgroup label="Running Backs" class="RB">
+            <% @runningbacks.each do |rb| %>
+              <option value = "<%= rb.id %>"><%= rb.display_name %></option>
+            <% end %>
+          </optgroup>
+          <optgroup label="Wide Receivers" class="WR">
+            <% @receivers.each do |wr| %>
+              <option value = "<%= wr.id %>"><%= wr.display_name %></option>
+            <% end %>
+          </optgroup>
+          <optgroup label="Tight Ends" class="TE">
+            <% @tightends.each do |te| %>
+              <option value = "<%= te.id %>"><%= te.display_name %></option>
+            <% end %>
+          </optgroup>
+          <optgroup label="Kickers" class="K">
+            <% @kickers.each do |k| %>
+              <option value = "<%= k.id %>"><%= k.display_name %></option>
+            <% end %>
+          </optgroup>
+          <optgroup label="Defenses" class="DST">
+            <% @defenses.each do |dst| %>
+              <option value = "<%= dst.id %>"><%= dst.display_name %></option>
+            <% end %>
+          </optgroup>
+          <optgroup label="Other" class="Other">
+            <% @others.each do |other| %>
+              <option value = "<%= other.id %>"><%= other.display_name %></option>
+            <% end %>
+          </optgroup>
+        </select>
       </div>
-    </div>    
-
   </div>
-
-  <div class="span4">
-
-    <div class="row-fluid">
-      <div class="span12">
-        <h2><%= @player.display_name %> (<%=@player.position%>)</h2>
-        <h3><%= @player.team %> (<%= @player.team_abbreviation %>)</h3>
-      </div>
+  <div class="row-fluid playerInfoContainer">
+    <div class="col-sm-12 col-md-12 logoContainer">
+      
+          <%= image_tag "logos/" + @player.team_abbreviation.upcase + ".gif", {class: "logo"} %>
     </div>
-
   </div>
-
-  <div class="span7">
-
-    <div class="row-fluid">
-      <div class="span12 text-center">
-        <table>
-          <thead>
-            <tr>
-              <th style="width:13%">Bye Week</th>
-              <th style="width:15%">Depth Chart</th>
-              <th style="width:15%">Over_stat Rank</th>
-              <th style="width:15%">Position Rank</th>
-              <th style="width:21%">Overall Draft Pick</th>
-              <th style="width:21%">Position Draft Pick</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><%= @player.bye_week ? @player.bye_week : "----" %></td>
-              <td><%= @player.depth_chart_position ? @player.depth_chart_position : "----" %></td>
-              <td><%= @player.overall_rank ? @player.overall_rank : "----" %></td>
-              <td><%= @player.position_rank ? @player.position_rank : "----" %></td>
-              <td><%= @player.overall_draft_position ? @player.overall_draft_position : "----" %></td>
-              <td><%= @player.position_draft_position ? @player.position_draft_position : "----" %></td>
-            </tr>
-          </tbody>
-        </table>  
-
-      </div>
-    </div>
-
-    <% if @player.position != "DST" && @player.position != "K" && @player.position != "QB"%>
-      <%= render "quarterback" %>
-    <% end %>
-
-  </div>
-
 </div>
 
-<hr id="mainShowDivider">
 
-<div class="row-fluid all_stats">
 
-  <div class="span2 columnDefault">
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 draftMain" id="main">
+  <div class="row-fluid showTopContainer">
 
-    <% if @player.position != "DST" %>
-      <%= render "projection" %>
-    <% else %>
-      <%= render "stat" %>
-    <% end %>
+    <div class="span1">
+    
+      <div class="row-fluid">
+        <div class="span12">
+        </div>
+      </div>    
+
+    </div>
+
+    <div class="span4">
+
+      <div class="row-fluid">
+        <div class="span12">
+          <h2><%= @player.display_name %> (<%=@player.position%>)</h2>
+          <h3><%= @player.team %> (<%= @player.team_abbreviation %>)</h3>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="span7">
+
+      <div class="row-fluid">
+        <div class="span12 text-center">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:13%">Bye Week</th>
+                <th style="width:15%">Depth Chart</th>
+                <th style="width:15%">Over_stat Rank</th>
+                <th style="width:15%">Position Rank</th>
+                <th style="width:21%">Overall Draft Pick</th>
+                <th style="width:21%">Position Draft Pick</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= @player.bye_week ? @player.bye_week : "----" %></td>
+                <td><%= @player.depth_chart_position ? @player.depth_chart_position : "----" %></td>
+                <td><%= @player.overall_rank ? @player.overall_rank : "----" %></td>
+                <td><%= @player.position_rank ? @player.position_rank : "----" %></td>
+                <td><%= @player.overall_draft_position ? @player.overall_draft_position : "----" %></td>
+                <td><%= @player.position_draft_position ? @player.position_draft_position : "----" %></td>
+              </tr>
+            </tbody>
+          </table>  
+
+        </div>
+      </div>
+
+      <% if @player.position != "DST" && @player.position != "K" && @player.position != "QB"%>
+        <%= render "quarterback" %>
+      <% end %>
+
+    </div>
 
   </div>
 
-  <div class="span2 columnDefault">
+  <hr id="mainShowDivider">
 
-    <% if @player.position != "DST" && @player.position != "K"%>
-      <%= render "sos" %>
-    <% elsif @player.position == "K" %> 
-      <%= render "stat" %>
-    <% else %>
-      <%= render "fpa" %>
-    <% end %>
+  <div class="row-fluid all_stats">
 
-  </div>
+    <div class="span2 columnDefault">
+
+      <% if @player.position != "DST" %>
+        <%= render "projection" %>
+      <% else %>
+        <%= render "stat" %>
+      <% end %>
+
+    </div>
+
+    <div class="span2 columnDefault">
+
+      <% if @player.position != "DST" && @player.position != "K"%>
+        <%= render "sos" %>
+      <% elsif @player.position == "K" %> 
+        <%= render "stat" %>
+      <% else %>
+        <%= render "fpa" %>
+      <% end %>
+
+    </div>
 
 
-  <div class="span2 columnDefault">
+    <div class="span2 columnDefault">
 
-    <% if @player.position != "DST" && @player.position != "K"%>
-      <%= render "stat" %>
-    <% end %>
+      <% if @player.position != "DST" && @player.position != "K"%>
+        <%= render "stat" %>
+      <% end %>
 
-  </div>
+    </div>
 
 
-  <div class="span2 columnDefault">
+    <div class="span2 columnDefault">
 
-    <% if @player.position != "DST" && @player.position != "K"%>
-      <%= render "snap" %>
-    <% end %>
+      <% if @player.position != "DST" && @player.position != "K"%>
+        <%= render "snap" %>
+      <% end %>
 
-  </div>
+    </div>
 
-  <div class="span4 columnDefault">
+    <div class="span4 columnDefault">
 
-    <% if @player.position == "QB" %>
-      <%= render "throws_to" %>
-    <% end %>
+      <% if @player.position == "QB" %>
+        <%= render "throws_to" %>
+      <% end %>
 
-    <div class="row-fluid">
-      <div class="span12">
-        <h5 class="text-center">Player News</h5>
+      <div class="row-fluid">
+        <div class="span12">
+          <h5 class="text-center">Player News</h5>
+        </div>
+      </div>
+      <hr>
+      <div class="row-fluid">
+        <div class="span12 playerNews">
+        </div>
       </div>
     </div>
-    <hr>
-    <div class="row-fluid">
-      <div class="span12 playerNews">
-      </div>
-    </div>
+
   </div>
+
+  <br><br>
 
 </div>
-
-<br><br>
-
-
 
 
 
@@ -134,6 +187,19 @@
 
 
   $(document).ready(function () {
+
+    $('#showSelectBox').select2('destroy').select2({
+      placeholder: "Select a Player",
+      allowClear: true
+    });
+
+    $(document).on('change','#showSelectBox', function() {
+      var theID = $('#showSelectBox').select2('data').id
+      console.log("theID", theID);
+
+    });
+
+
 
     var name = "<%= @player.name %>";
     var name = name.split(' ').join('%20');
