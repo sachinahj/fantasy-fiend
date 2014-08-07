@@ -1,5 +1,9 @@
+<!-- full width row -->
 <div class="row">
+
+<!-- passing data -->
   <div class="col-sm-6 col-md-6">
+    <!-- passing -->
     <div class="row">
       <div class="col-sm-12 col-md-12 text-center">
         <h5>Passing</h5> 
@@ -45,9 +49,12 @@
         <p><%= @projection["pass_interceptions"] ? @projection["pass_interceptions"] : "----" %></p>
       </div>
     </div>
+
   </div>
 
+  <!-- rushing and fantasy data -->
   <div class="col-sm-6 col-md-6">
+    <!-- rushing -->
     <div class="row">
       <div class="col-sm-12 col-md-12 text-center">
         <h5>Rushing</h5> 
@@ -78,11 +85,12 @@
       </div>
     </div>
 
-  <div class="row">
+    <!-- fantasy -->
+    <div class="row">
       <div class="col-sm-12 col-md-12 text-center">
         <h5>Fantasy</h5>
+      </div>
     </div>
-  </div>
     <div class="row">
       <div class="col-sm-8 col-md-8 text-left">
         <p>Fumbles</p>
@@ -107,5 +115,7 @@
         <p><%= @projection["fantasy_points_per_week"] ? @projection["fantasy_points_per_week"] : "----" %></p>
       </div>
     </div>
+
   </div>
+
 </div>

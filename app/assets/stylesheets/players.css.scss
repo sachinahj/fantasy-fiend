@@ -2,101 +2,39 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.welcomebackground {
-  background-color: #bebebe;
-  opacity: 0.95;
-  padding: 1em;
-  border-radius: 2em;
-}
-
-.maintext {
-  color: black;
-}
-
-.playerselect {
-  background-color: #bebebe;
-  opacity: 0.95;
-  padding: 1em;
-  border-radius: 2em;
-  padding-bottom: 3em;
-  a {
-    color: black;
-    font-size: 1.1em;
-  }
-}
-
-
-#searchSummaryTable {
-  font-size: 0.9em;
-  width: 100%;
-}
-#searchSummaryTable th {
-  font-style: normal;
-  text-align: left;
-}
-
-i {
-  cursor: pointer;
-}
-/*---------- show ---------*/
-div.showSearchBox {
+/* show#players css */
+div.show-search-box {
   margin-top: 20px;
 }
-div.row-fluid.logoContainer {
+div.show-player-name {
+  margin-top: 20px;
+}
+div.show-quick-stats {
+  margin-top: 40px;
+  font-size: 0.9em;
+}
+div.row-fluid.show-logo-container {
   position: relative;
   vertical-align: bottom;
   height: 100%
 }
-div.logoColumn {
+div.show-logo-column {
   position: absolute;
   bottom: 0;
   margin-bottom: 10em;
 }
-img.logo {
+img.show-logo-img {
   width: 100%;
   border-radius: 30%;
 }
-div.quickStats {
-  margin-top: 40px;
-  font-size: 0.9em;
-}
-div.playerName {
-  margin-top: 20px;
-}
-div.projectionsAndStats p {
+div.show-projections-and-stats p {
   font-size: 0.8em;
 }
-div.throwToHeader{
+div.throwToHeader {
   font-size: 1em;
   margin-top: 20px;
 }
-div.throwToPlayers{
+div.throwToPlayers {
   font-size: 0.8em;
   margin-top: 0px;
 }
-
-/*.showTopContainer {
-  background: black;
-  padding: 1em;
-  border-radius: 3em;
-  color: white;
-}
-
-.columnDefault {
-  background: black;
-  padding: 1em;
-  border-radius: 3em;
-  color: white;
-  margin-left: 0px;
-  a {
-    color: teal;
-  }
-}
-#mainShowDivider {
-  border-top: 1px solid black;
-}
-#player {
-  font-size: 0.9em;
-  color: white;
-}
-*/

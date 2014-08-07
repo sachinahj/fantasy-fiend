@@ -1,5 +1,8 @@
+<!-- full width row -->
 <div class="row">
+  <!-- rushing and receptions data -->
   <div class="col-sm-6 col-md-6">
+    <!-- rushing -->
     <div class="row">
       <div class="col-sm-12 col-md-12 text-center">
         <h5>Rushing</h5> 
@@ -34,6 +37,8 @@
         <h5>Receiving</h5> 
       </div>
     </div>
+
+    <!-- receptions -->
     <div class="row">
       <div class="col-sm-8 col-md-8 text-left">
         <p>Receptions</p>
@@ -58,9 +63,12 @@
         <p><%= @projection["receive_touchdowns"] ? @projection["receive_touchdowns"] : "----" %></p>
       </div>
     </div>
+
   </div>
 
+  <!-- fantasy data  -->
   <div class="col-sm-6 col-md-6"> 
+    <!-- fantasy -->
     <div class="row">
       <div class="col-sm-12 col-md-12 text-center">
         <h5>Fantasy</h5>
@@ -90,5 +98,7 @@
         <p><%= @projection["fantasy_points_per_week"] ? @projection["fantasy_points_per_week"] : "----" %></p>
       </div>
     </div>
+
   </div>
+  
 </div>

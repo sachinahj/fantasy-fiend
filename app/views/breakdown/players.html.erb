@@ -1,74 +1,80 @@
-<div class="col-sm-4 col-md-3 playersSidebarNav" id="sidebarNav">
+<!-- sidebar -->
+<div class="col-sm-4 col-md-3" id="sidebarNav">
 
+<!--type of chart buttons in sidebar -->
   <div class="row-fluid">
-    <div class="col-sm-4 col-med-4 chartsButtonContainer">
-      <button type="button" id="projections" class="btn chartsButtons btn-info">'14 Projections</button>
+    <div class="col-sm-4 col-med-4 charts-buttons-container">
+      <button type="button" id="projections" class="btn charts-buttons btn-info">'14 Projections</button>
     </div>
-    <div class="col-sm-4 col-med-4 chartsButtonContainer">
-      <button type="button" id="stats" class="btn chartsButtons btn-default">'13 Stats</button>
+    <div class="col-sm-4 col-med-4 charts-buttons-container">
+      <button type="button" id="stats" class="btn charts-buttons btn-default">'13 Stats</button>
     </div>
-    <div class="col-sm-4 col-med-4 chartsButtonContainer">
-      <button type="button" id="snaps" class="btn chartsButtons btn-default">'13 Snaps</button>
+    <div class="col-sm-4 col-med-4 charts-buttons-container">
+      <button type="button" id="snaps" class="btn charts-buttons btn-default">'13 Snaps</button>
     </div>
   </div>
 
-
+  <!-- which positions to show in search bar buttons in sidebar -->
   <div class="row-fluid">
-    <div class="col-sm-2 col-med-2 playersButtonContainer">
-      <button type="button" id="QB" class="btn playersButtons btn-success">QBs</button>
+    <div class="col-sm-2 col-med-2 players-buttons-container">
+      <button type="button" id="QB" class="btn players-buttons btn-success">QBs</button>
     </div>
-    <div class="col-sm-2 col-med-2 playersButtonContainer">
-      <button type="button" id="RB" class="btn playersButtons btn-success">RBs</button>
+    <div class="col-sm-2 col-med-2 players-buttons-container">
+      <button type="button" id="RB" class="btn players-buttons btn-success">RBs</button>
     </div>
-    <div class="col-sm-2 col-med-2 playersButtonContainer">
-      <button type="button" id="WR" class="btn playersButtons btn-success">WRs</button>
+    <div class="col-sm-2 col-med-2 players-buttons-container">
+      <button type="button" id="WR" class="btn players-buttons btn-success">WRs</button>
     </div>
-    <div class="col-sm-2 col-med-2 playersButtonContainer">
-      <button type="button" id="TE" class="btn playersButtons btn-success">TEs</button>
+    <div class="col-sm-2 col-med-2 players-buttons-container">
+      <button type="button" id="TE" class="btn players-buttons btn-success">TEs</button>
     </div>
-    <div class="col-sm-2 col-med-2 playersButtonContainer">
+    <div class="col-sm-2 col-med-2 players-buttons-container">
     </div>
-    <div class="col-sm-2 col-med-2 playersButtonContainer">
-      <button type="button" id="ALL" class="btn playersButtons btn-success">All</button>
+    <div class="col-sm-2 col-med-2 players-buttons-container">
+      <button type="button" id="ALL" class="btn players-buttons btn-success">All</button>
     </div>
   </div>
 
-  <div class="row-fluid">
-          <div class="select-container text-center">
-            <select id ="labSelectBox" style="width:90%">
-              <option></option>
-              <optgroup label="Quarterbacks" class="QB">
-                <% @quarterbacks.each do |qb| %>
-                  <option value = "<%= qb.id %>"><%= qb.display_name %></option>
-                <% end %>
-              </optgroup>
-              <optgroup label="Running Backs" class="RB">
-                <% @runningbacks.each do |rb| %>
-                  <option value = "<%= rb.id %>"><%= rb.display_name %></option>
-                <% end %>
-              </optgroup>
-              <optgroup label="Wide Receivers" class="WR">
-                <% @receivers.each do |wr| %>
-                  <option value = "<%= wr.id %>"><%= wr.display_name %></option>
-                <% end %>
-              </optgroup>
-              <optgroup label="Tight Ends" class="TE">
-                <% @tightends.each do |te| %>
-                  <option value = "<%= te.id %>"><%= te.display_name %></option>
-                <% end %>
-              </optgroup>
-              <optgroup label="Other" class="Other">
-                <% @others.each do |other| %>
-                  <option value = "<%= other.id %>"><%= other.display_name %></option>
-                <% end %>
-              </optgroup>
-            </select>
-          </div>
-  </div>
-  <br>
-
+  <!-- Select2 box -->
   <div class="row-fluid">
     <div class="col-sm-12 col-med-12">
+      <div class="select-container text-center">
+        <select id ="breakdown-players-selectbox" style="width:90%">
+          <option></option>
+          <optgroup label="Quarterbacks" class="QB">
+            <% @quarterbacks.each do |qb| %>
+              <option value = "<%= qb.id %>"><%= qb.display_name %></option>
+            <% end %>
+          </optgroup>
+          <optgroup label="Running Backs" class="RB">
+            <% @runningbacks.each do |rb| %>
+              <option value = "<%= rb.id %>"><%= rb.display_name %></option>
+            <% end %>
+          </optgroup>
+          <optgroup label="Wide Receivers" class="WR">
+            <% @receivers.each do |wr| %>
+              <option value = "<%= wr.id %>"><%= wr.display_name %></option>
+            <% end %>
+          </optgroup>
+          <optgroup label="Tight Ends" class="TE">
+            <% @tightends.each do |te| %>
+              <option value = "<%= te.id %>"><%= te.display_name %></option>
+            <% end %>
+          </optgroup>
+          <optgroup label="Other" class="Other">
+            <% @others.each do |other| %>
+              <option value = "<%= other.id %>"><%= other.display_name %></option>
+            <% end %>
+          </optgroup>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- area where slected player get appended to -->
+  <div class="row-fluid">
+    <div class="col-sm-12 col-med-12">
+      <br>
       <span id="selectedText">
         <!-- selected players -->
       </span>
@@ -78,16 +84,16 @@
 </div>
 
 
-<div class="col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3 playerBreakdownMain" id="main">
+<div class="col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3 breakdown-players-main" id="main">
 <br><br>
-  <div class="row-fluid projectionsChartContainer labChartContainer">
-      <div id="projectionsChart" class="labChart"></div>
+  <div class="row-fluid projections-chart-container breakdown-players-chart-container">
+      <div id="projections-chart" class="breakdown-chart"></div>
   </div>
-  <div class="row-fluid statsChartContainer labChartContainer" style="display:none">
-      <div id="statsChart" class="labChart"></div>
+  <div class="row-fluid stats-chart-container breakdown-players-chart-container" style="display:none">
+      <div id="stats-chart" class="breakdown-chart"></div>
   </div>
-  <div class="row-fluid snapsChartContainer labChartContainer" style="display:none">
-      <div id="snapsChart" class="labChart"></div>
+  <div class="row-fluid snaps-chart-container breakdown-players-chart-container" style="display:none">
+      <div id="snaps-chart" class="breakdown-chart"></div>
   </div>
   </div>
 
@@ -111,15 +117,15 @@
 
 
 
-    $('.btn.chartsButtons').on("click", function () {
+    $('.btn.charts-buttons').on("click", function () {
       type = $(this).attr("id");
-      $('.chartsButtons').removeClass('btn-info');
-      $('.chartsButtons').addClass('btn-default');
+      $('.charts-buttons').removeClass('btn-info');
+      $('.charts-buttons').addClass('btn-default');
       $(this).addClass('btn-info');
 
 
-      $('.labChartContainer').hide();
-      $('.' + type + 'ChartContainer').show();
+      $('.breakdown-players-chart-container').hide();
+      $('.' + type + '-chart-container').show();
 
     });
 
@@ -127,7 +133,7 @@
 
 
     // position selector buttons 
-    $('.btn.playersButtons').on("click", function () {
+    $('.btn.players-buttons').on("click", function () {
 
       position = $(this).attr("id");
       // $('.'+position).fadeToggle();
@@ -149,20 +155,20 @@
 
     // ---- select all functionality ---
     // select all functionality
-    $('.btn.playersButtons').on("click",function () {
+    $('.btn.players-buttons').on("click",function () {
       // check if all button was pressed 
       if ($(this).prop('id') === "ALL") {
         // check if all button is sucess 
         if ($(this).hasClass('btn-success')){
           // make all buttons success 
-          $('.btn.playersButtons').each(function () {
+          $('.btn.players-buttons').each(function () {
             $(this).removeClass('btn-danger');
             $(this).addClass('btn-success');
           });
 
         } else {
           // all buttons danger 
-          $('.btn.playersButtons').each(function () {
+          $('.btn.players-buttons').each(function () {
             $(this).removeClass('btn-success');
             $(this).addClass('btn-danger');
           });
@@ -175,24 +181,24 @@
 
     // ---- render select box with appropiate positions ----
     function RenderSelectBox () {
-      html = '<select id ="labSelectBox" style="width : 90%"><option></option>';
+      html = '<select id ="breakdown-players-selectbox" style="width : 90%"><option></option>';
       
-      if ($('.playersButtons#QB').hasClass('btn-success')){
+      if ($('.players-buttons#QB').hasClass('btn-success')){
         html += PositionOptGroup('Quarterbacks', qbs);
       }
-      if ($('.playersButtons#RB').hasClass('btn-success')){
+      if ($('.players-buttons#RB').hasClass('btn-success')){
         html += PositionOptGroup('Running Backs', rbs);
       }
-      if ($('.playersButtons#WR').hasClass('btn-success')){
+      if ($('.players-buttons#WR').hasClass('btn-success')){
         html += PositionOptGroup('Wide Receivers', wrs);
       }
-      if ($('.playersButtons#TE').hasClass('btn-success')){
+      if ($('.players-buttons#TE').hasClass('btn-success')){
         html += PositionOptGroup('Tight Ends', tes);
       }
       html += "</select>";
       console.log("html", html);
       $('.select-container').empty().append(html);
-      $('#labSelectBox').select2('destroy').select2({
+      $('#breakdown-players-selectbox').select2('destroy').select2({
         placeholder: "Select a Player",
         allowClear: true
       });
@@ -210,17 +216,17 @@
     }
     
     // ---- initialize select box on startup
-    $('#labSelectBox').select2({
+    $('#breakdown-players-selectbox').select2({
       placeholder: "Select a Player",
       allowClear: true
     });
 
     // ---- event listener for change on select box ----
     // ---- add player to view and to ids array ---
-    $(document).on('change','#labSelectBox', function() {
+    $(document).on('change','#breakdown-players-selectbox', function() {
       amount = $('span#delete').length
       if (amount < 5){
-        var theID = $('#labSelectBox').select2('data').id
+        var theID = $('#breakdown-players-selectbox').select2('data').id
         if (ids.indexOf(parseInt(theID)) > -1) {
           return;
         }
@@ -228,9 +234,9 @@
 
 
         var player = GetData(theID);
-        var html = '<div id="player">' + 
-          '<div id="delete_tag"> x </div>' + 
-          '<p id="player_info_header">' + 
+        var html = '<div id="breakdown-player-quick-info">' + 
+          '<div id="breakdown-players-delete_tag"> x </div>' + 
+          '<p id="breakdown-player_info_header">' + 
           '<a target="_blank" data-id="' + player.id + '" href="/players/'+player.id +'">' + player.display_name + '</a>' +
           ' (' + player.position + ')</p>' + 
           '<ul>' +
@@ -546,9 +552,9 @@
           }
           snaps_series.push({name: players[i].display_name, data: cat})
         }
-        ProjectionsStatsSnapsChart('Projections','projectionsChart', CategoryDisplayMaker(projections_categories), projections_series);
-        ProjectionsStatsSnapsChart('Stats','statsChart',CategoryDisplayMaker(stats_categories), stats_series);
-        ProjectionsStatsSnapsChart('Snaps','snapsChart',CategoryDisplayMaker(snaps_categories), snaps_series);
+        ProjectionsStatsSnapsChart('Projections','projections-chart', CategoryDisplayMaker(projections_categories), projections_series);
+        ProjectionsStatsSnapsChart('Stats','stats-chart',CategoryDisplayMaker(stats_categories), stats_series);
+        ProjectionsStatsSnapsChart('Snaps','snaps-chart',CategoryDisplayMaker(snaps_categories), snaps_series);
 
         // ProjectionsStatsSnapsChart('Projections','projectionsChart', projections_categories, projections_series);
         // ProjectionsStatsSnapsChart('Stats','statsChart',stats_categories, stats_series);
@@ -556,7 +562,7 @@
 
       } else {
 
-        $('.labChart').hide();
+        $('.breakdown-players-chart-container').hide();
 
       }
 
@@ -567,7 +573,7 @@
       categories = typeof categories !== 'undefined' ? categories : [];
       series = typeof series !== 'undefined' ? series : [];
 
-      var width = $('.playerBreakdownMain').width() * 0.95;
+      var width = $('.breakdown-players-main').width() * 0.95;
 
       $('#'+chart_id).show();
       $('#'+chart_id).highcharts({

@@ -1,6 +1,7 @@
+<!-- sidebar with buttons to control which positions are being shown -->
 <div class="col-sm-1 col-md-1 cheatsheetSidebarNav" id="sidebarNav">
+  <!-- all buttons -->
   <div class="row-fluid">
-    
       <button type="button" id="QB" class="btn cheatsheetButtons btn-success">QBs</button>
       <button type="button" id="RB" class="btn cheatsheetButtons btn-success">RBs</button>
       <button type="button" id="WR" class="btn cheatsheetButtons btn-success">WRs</button>
@@ -8,17 +9,21 @@
       <button type="button" id="K" class="btn cheatsheetButtons btn-success">Ks</button>
       <button type="button" id="DST" class="btn cheatsheetButtons btn-success">DSTs</button>
       <button type="button" id="ALL" class="btn cheatsheetButtons btn-success">All</button>
-
   </div>
+
 </div>
 
 
-<div class="col-sm-11 col-sm-offset-1 col-md-11 col-md-offset-1 cheatsheetMain" id="main">
-  <br>
+<!-- main view -->
+<div class="col-sm-11 col-sm-offset-1 col-md-11 col-md-offset-1" id="main">
+  
   <div class="row-fluid">
-    <div class="span12">
-  <center>
-      <table id="indexTable">
+
+    <!-- table column container -->
+    <div class="col-sm-12 col-md-12">
+      <br>
+      <table id="cheatsheet-table">
+        <!-- table header -->
         <thead>
           <tr>
             <th>Rank</th>
@@ -43,9 +48,11 @@
             
           </tr>
         </thead>
+
+        <!-- table body -->
         <tbody>
           <% @players.each do |player|  %>
-            <tr id="player<%=player.id%>" class="playerRow <%= player.position %>">
+            <tr id="player<%=player.id%>" class="player-row <%= player.position %>">
               <td><%= player.overall_rank.to_i != 0 ? player.overall_rank.to_i : 300 %></td>
               <td><%= player.position_rank %></td>
 
@@ -84,15 +91,11 @@
             </tr>
           <% end %>
         </tbody>
-      </table>
-  </center>
+      </table>  
+
     </div>
+
   </div>
-<br><br>
-
-
-
-
 </div>
 
 
@@ -109,8 +112,6 @@
   $(document).ready(function () {
 
     
-
-
     // position selector buttons 
     $('.btn.cheatsheetButtons').on("click", function () {
 
@@ -142,7 +143,7 @@
             $(this).removeClass('btn-danger');
             $(this).addClass('btn-success');
           });
-          $('.playerRow').show();
+          $('.player-row').show();
 
         } else {
           // all buttons danger and hide all players
@@ -150,7 +151,7 @@
             $(this).removeClass('btn-success');
             $(this).addClass('btn-danger');
           });
-          $('.playerRow').hide();
+          $('.player-row').hide();
 
         }
 
@@ -163,6 +164,7 @@
       $(this).toggleClass("highlight");
     });
 
+    // open show#player page in new tab
     $('tr').dblclick(function (e) {
       var htmlID = $(this).prop('id')
       var playerID = htmlID.slice(6);
@@ -170,6 +172,7 @@
 
     });
 
+    // ----- functions to help dataTable sort blank cells last -----
     $.fn.dataTableExt.oSort['text-blankslast-asc'] = function (x, y) {  
        x = (x == "") ? String.fromCharCode(255) : x;  
        y = (y == "") ? String.fromCharCode(255) : y;  
@@ -181,8 +184,10 @@
        y = (y == "") ? String.fromCharCode(0) : y;  
        return ((x < y) ? 1 : ((x > y) ? -1 : 0));  
     };  
+    
 
-    $('#indexTable').dataTable({
+    // dataTable initialization
+    $('#cheatsheet-table').dataTable({
       "iDisplayLength" : -1,
       "paging": false,
       "info": false,
@@ -207,12 +212,13 @@
 
     });
 
-    $('#indexTable').on('search.dt', function () {
+    // reset all buttons to on and show all players on table search
+    $('#cheatsheet-table').on('search.dt', function () {
       $('.btn.cheatsheetButtons').each(function () {
         $(this).removeClass('btn-danger');
         $(this).addClass('btn-success');
       });
-      $('.playerRow').show();
+      $('.player-row').show();
     });
 
 

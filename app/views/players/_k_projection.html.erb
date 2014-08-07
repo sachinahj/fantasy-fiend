@@ -1,5 +1,9 @@
+<!-- full width row -->
 <div class="row">
+
+  <!-- field goals and extra points data -->
   <div class="col-sm-6 col-md-6">
+    <!-- field goals -->
     <div class="row">
       <div class="col-sm-12 col-md-12 text-center">
         <h5>Field Goals</h5> 
@@ -21,6 +25,8 @@
         <p><%= @projection["field_goals_attempts"] ? @projection["field_goals_attempts"] : "----" %></p>
       </div>
     </div>
+
+    <!-- extra points -->
     <div class="row">
       <div class="col-sm-12 col-md-12 text-center">
         <h5>Extra Points</h5> 
@@ -36,7 +42,10 @@
     </div>
   </div>
 
+  <!-- fantasy data -->
   <div class="col-sm-6 col-md-6"> 
+
+    <!-- fantasy -->
     <div class="row">
       <div class="col-sm-12 col-md-12 text-center">
         <h5>Fantasy</h5>
@@ -58,5 +67,7 @@
         <p><%= @projection["fantasy_points_per_week"] ? @projection["fantasy_points_per_week"] : "----" %></p>
       </div>
     </div>
+
   </div>
+  
 </div>
