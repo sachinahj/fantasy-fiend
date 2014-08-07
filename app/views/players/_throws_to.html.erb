@@ -18,21 +18,21 @@
     <div class="col-sm-4 col-md-4">
       <p>
         <% @onTeamRBs.each do |rb| %>
-          <%= rb.display_name %><br>
+          <%= link_to rb.display_name, rb %><br>
         <% end %>
       </p>
     </div>
     <div class="col-sm-4 col-md-4">
       <p>
         <% @onTeamWRs.each do |wr| %>
-          <%= wr.display_name %><br>
+          <%= link_to wr.display_name, wr %><br>
         <% end %>
       </p>
     </div>
     <div class="col-sm-4 col-md-4">  
       <p>
         <% @onTeamTEs.each do |te| %>
-          <%= te.display_name %><br>
+          <%= link_to te.display_name, te %><br>
         <% end %>
       </p>
     </div>

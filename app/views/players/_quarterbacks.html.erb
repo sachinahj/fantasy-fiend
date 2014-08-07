@@ -17,7 +17,7 @@
     <div class="col-sm-4 col-md-4">
       <p>
         <% @onTeamQBs.each do |qb| %>
-          <%= qb.display_name %><br>
+          <%= link_to qb.display_name, qb %><br>
         <% end %>
       </p>
     </div>
