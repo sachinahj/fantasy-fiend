@@ -1,133 +1,131 @@
-<div class="row-fluid">
-  <!-- sidebar  -->
-  <div class="col-sm-3 col-md-2 showSidebarNav" id="sidebarNav">
-    <!-- search box container -->
-    <div class="row-fluid show-search-box text-center">
-      <!-- select box using Select2 -->
-      <select id ="show-select-box" style="width:90%">
-        <option></option>
-        <optgroup label="Quarterbacks" class="QB">
-          <% @quarterbacks.each do |qb| %>
-            <option value = "<%= qb.id %>"><%= qb.display_name %></option>
-          <% end %>
-        </optgroup>
-        <optgroup label="Running Backs" class="RB">
-          <% @runningbacks.each do |rb| %>
-            <option value = "<%= rb.id %>"><%= rb.display_name %></option>
-          <% end %>
-        </optgroup>
-        <optgroup label="Wide Receivers" class="WR">
-          <% @receivers.each do |wr| %>
-            <option value = "<%= wr.id %>"><%= wr.display_name %></option>
-          <% end %>
-        </optgroup>
-        <optgroup label="Tight Ends" class="TE">
-          <% @tightends.each do |te| %>
-            <option value = "<%= te.id %>"><%= te.display_name %></option>
-          <% end %>
-        </optgroup>
-        <optgroup label="Kickers" class="K">
-          <% @kickers.each do |k| %>
-            <option value = "<%= k.id %>"><%= k.display_name %></option>
-          <% end %>
-        </optgroup>
-        <optgroup label="Defenses" class="DST">
-          <% @defenses.each do |dst| %>
-            <option value = "<%= dst.id %>"><%= dst.display_name %></option>
-          <% end %>
-        </optgroup>
-        <optgroup label="Other" class="Other">
-          <% @others.each do |other| %>
-            <option value = "<%= other.id %>"><%= other.display_name %></option>
-          <% end %>
-        </optgroup>
-      </select>
-    </div> 
+<!-- sidebar  -->
+<div class="col-sm-3 col-md-2 showSidebarNav" id="sidebarNav">
+  <!-- search box container -->
+  <div class="row-fluid show-search-box text-center">
+    <!-- select box using Select2 -->
+    <select id ="show-select-box" style="width:90%">
+      <option></option>
+      <optgroup label="Quarterbacks" class="QB">
+        <% @quarterbacks.each do |qb| %>
+          <option value = "<%= qb.id %>"><%= qb.display_name %></option>
+        <% end %>
+      </optgroup>
+      <optgroup label="Running Backs" class="RB">
+        <% @runningbacks.each do |rb| %>
+          <option value = "<%= rb.id %>"><%= rb.display_name %></option>
+        <% end %>
+      </optgroup>
+      <optgroup label="Wide Receivers" class="WR">
+        <% @receivers.each do |wr| %>
+          <option value = "<%= wr.id %>"><%= wr.display_name %></option>
+        <% end %>
+      </optgroup>
+      <optgroup label="Tight Ends" class="TE">
+        <% @tightends.each do |te| %>
+          <option value = "<%= te.id %>"><%= te.display_name %></option>
+        <% end %>
+      </optgroup>
+      <optgroup label="Kickers" class="K">
+        <% @kickers.each do |k| %>
+          <option value = "<%= k.id %>"><%= k.display_name %></option>
+        <% end %>
+      </optgroup>
+      <optgroup label="Defenses" class="DST">
+        <% @defenses.each do |dst| %>
+          <option value = "<%= dst.id %>"><%= dst.display_name %></option>
+        <% end %>
+      </optgroup>
+      <optgroup label="Other" class="Other">
+        <% @others.each do |other| %>
+          <option value = "<%= other.id %>"><%= other.display_name %></option>
+        <% end %>
+      </optgroup>
+    </select>
+  </div> 
 
 
-    <!-- player name in sidebar -->
-    <div class="row-fluid show-player-name">
-      <div class="col-sm-12 col-md-12">
-        <h4><%= @player.display_name %></h4>
-      </div>
-    </div>
-
-    <!-- quick look stats in sidebar -->
-    <div class="row-fluid show-quick-stats">
-      <div class="col-sm-9 col-md-9">
-        <p>Bye Week</p>
-        <p>Depth Chart</p>
-        <p>Overall Rank</p>
-        <p>Position Rank</p>
-        <p>Overall Draft Pick</p>
-        <p>Position Draft Pick</p>
-      </div>
-      <div class="col-sm-1 col-md-1">    
-      </div>
-      <div class="col-sm-2 col-md-2"> 
-        <p><%= @player.bye_week ? @player.bye_week : "-" %></p>
-        <p><%= @player.depth_chart_position ? @player.depth_chart_position : "-" %></p>
-        <p><%= @player.overall_rank ? @player.overall_rank : "-" %></p>
-        <p><%= @player.position_rank ? @player.position_rank : "-" %></p>
-        <p><%= @player.overall_draft_position ? @player.overall_draft_position : "-" %></p>
-        <p><%= @player.position_draft_position ? @player.position_draft_position : "-" %></p>
-      </div>
-    </div>
-
-    <!-- logo in sidebar absolute postioning with bottom = 0 -->
-    <div class="row-fluid show-logo-container">
-      <div class="col-sm-12 col-md-12 show-logo-column">    
-        <%= image_tag "logos/" + @player.team_abbreviation.upcase + ".gif", {class: "show-logo-img"} %>
-      </div>
+  <!-- player name in sidebar -->
+  <div class="row-fluid show-player-name">
+    <div class="col-sm-12 col-md-12">
+      <h4><%= @player.display_name %></h4>
     </div>
   </div>
 
-
-  <!-- main view -->
-  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2" id="main">
-    <!-- top header with player name/team and throws to stats -->
-    <div class="row">
-      <!-- player name and team -->
-      <div class="col-sm-7 col-md-7">    
-        <h1><%= @player.display_name %> (<%=@player.position%>)</h1>
-        <h3><%= @player.team %> (<%= @player.team_abbreviation %>)</h3>
-      </div>
-      <!-- throws to stats -->
-      <div class="col-sm-5 col-md-5">
-          <% if @player.position == 'QB' %>
-            <div class="row-fluid">
-              <%= render "throws_to" %>
-            </div>
-          <% elsif @player.position != "DST" && @player.position != "K" %>
-            <div class="row-fluid">
-              <%= render "quarterbacks" %>
-            </div>
-          <% end %>
-      </div>
+  <!-- quick look stats in sidebar -->
+  <div class="row-fluid show-quick-stats">
+    <div class="col-sm-9 col-md-9">
+      <p>Bye Week</p>
+      <p>Depth Chart</p>
+      <p>Overall Rank</p>
+      <p>Position Rank</p>
+      <p>Overall Draft Pick</p>
+      <p>Position Draft Pick</p>
     </div>
+    <div class="col-sm-1 col-md-1">    
+    </div>
+    <div class="col-sm-2 col-md-2"> 
+      <p><%= @player.bye_week ? @player.bye_week : "-" %></p>
+      <p><%= @player.depth_chart_position ? @player.depth_chart_position : "-" %></p>
+      <p><%= @player.overall_rank ? @player.overall_rank : "-" %></p>
+      <p><%= @player.position_rank ? @player.position_rank : "-" %></p>
+      <p><%= @player.overall_draft_position ? @player.overall_draft_position : "-" %></p>
+      <p><%= @player.position_draft_position ? @player.position_draft_position : "-" %></p>
+    </div>
+  </div>
 
-    <!-- rendering partial views for projections/stats -->
-    <div class="row-fluid show-projections-and-stats">
-      <div class="col-sm-12 col-md-12">    
-        
-        <!-- render projections if player positions is not DST -->
-        <% if @player.position != "DST" %>
+  <!-- logo in sidebar absolute postioning with bottom = 0 -->
+  <div class="row-fluid show-logo-container">
+    <div class="col-sm-12 col-md-12 show-logo-column">    
+      <%= image_tag "logos/" + @player.team_abbreviation.upcase + ".gif", {class: "show-logo-img"} %>
+    </div>
+  </div>
+</div>
+
+
+<!-- main view -->
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2" id="main">
+  <!-- top header with player name/team and throws to stats -->
+  <div class="row">
+    <!-- player name and team -->
+    <div class="col-sm-7 col-md-7">    
+      <h1><%= @player.display_name %> (<%=@player.position%>)</h1>
+      <h3><%= @player.team %> (<%= @player.team_abbreviation %>)</h3>
+    </div>
+    <!-- throws to stats -->
+    <div class="col-sm-5 col-md-5">
+        <% if @player.position == 'QB' %>
           <div class="row-fluid">
-            <%= render "projection_and_strength_of_schedule" %>
+            <%= render "throws_to" %>
+          </div>
+        <% elsif @player.position != "DST" && @player.position != "K" %>
+          <div class="row-fluid">
+            <%= render "quarterbacks" %>
           </div>
         <% end %>
-
-        <!-- always render stats_and_snaps -->
-        <div class="row-fluid">
-          <%= render "stats_and_snaps" %>
-        </div>
-
-      </div>
     </div>
+  </div>
 
+  <!-- rendering partial views for projections/stats -->
+  <div class="row-fluid show-projections-and-stats">
+    <div class="col-sm-12 col-md-12">    
+      
+      <!-- render projections if player positions is not DST -->
+      <% if @player.position != "DST" %>
+        <div class="row-fluid">
+          <%= render "projection_and_strength_of_schedule" %>
+        </div>
+      <% end %>
+
+      <!-- always render stats_and_snaps -->
+      <div class="row-fluid">
+        <%= render "stats_and_snaps" %>
+      </div>
+
+    </div>
   </div>
 
 </div>
+
 
 
 

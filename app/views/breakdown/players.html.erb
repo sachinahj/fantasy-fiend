@@ -116,16 +116,15 @@
 
 
 
-
+    var current_container = "projections"
     $('.btn.charts-buttons').on("click", function () {
-      type = $(this).attr("id");
+      current_container = $(this).attr("id");
       $('.charts-buttons').removeClass('btn-info');
       $('.charts-buttons').addClass('btn-default');
       $(this).addClass('btn-info');
 
-
       $('.breakdown-players-chart-container').hide();
-      $('.' + type + '-chart-container').show();
+      $('.' + current_container + '-chart-container').show();
 
     });
 
@@ -224,7 +223,7 @@
     // ---- event listener for change on select box ----
     // ---- add player to view and to ids array ---
     $(document).on('change','#breakdown-players-selectbox', function() {
-      amount = $('span#delete').length
+      amount = $('div#breakdown-players-delete_tag').length
       if (amount < 5){
         var theID = $('#breakdown-players-selectbox').select2('data').id
         if (ids.indexOf(parseInt(theID)) > -1) {
@@ -279,7 +278,7 @@
     });
 
     // ---- delete event listener to remove player from view and ids array ----
-    $('#selectedText').on('click','#delete_tag', function () {
+    $('#selectedText').on('click','#breakdown-players-delete_tag', function () {
       id = $(this).parent().find('a').data('id')
       $(this).parent().remove();
       DeleteID(id);
@@ -555,10 +554,7 @@
         ProjectionsStatsSnapsChart('Projections','projections-chart', CategoryDisplayMaker(projections_categories), projections_series);
         ProjectionsStatsSnapsChart('Stats','stats-chart',CategoryDisplayMaker(stats_categories), stats_series);
         ProjectionsStatsSnapsChart('Snaps','snaps-chart',CategoryDisplayMaker(snaps_categories), snaps_series);
-
-        // ProjectionsStatsSnapsChart('Projections','projectionsChart', projections_categories, projections_series);
-        // ProjectionsStatsSnapsChart('Stats','statsChart',stats_categories, stats_series);
-        // ProjectionsStatsSnapsChart('Snaps','snapsChart',snaps_categories, snaps_series);
+        $('.' + current_container + '-chart-container').show();
 
       } else {
 

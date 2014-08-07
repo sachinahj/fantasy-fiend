@@ -10,13 +10,18 @@ class PlayersController < ApplicationController
 
     @player = Player.find(params[:id])
 
+
     
-    if @player.season_projection
+    if @player.season_projection != nil
       @projection = @player.season_projection
+    else
+      @projection = {}
     end
-     
-    if @player.season_stat
+    
+    if @player.season_stat != nil
       @stat = @player.season_stat
+    else
+      @stat = {}
     end
 
     if @player.position != "DST"
