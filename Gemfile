@@ -50,6 +50,7 @@ gem 'nokogiri'
 
 gem 'therubyracer'  
 gem 'less-rails-bootstrap'
+gem 'underscore-rails'
 # gem 'twitter-bootstrap-rails'
 # gem 'jquery_mobile_rails'
 

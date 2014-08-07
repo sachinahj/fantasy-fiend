@@ -73,11 +73,10 @@
 
   <!-- area where slected player get appended to -->
   <div class="row-fluid">
-    <div class="col-sm-12 col-med-12">
-      <br>
-      <span id="selectedText">
+    <div class="col-sm-12 col-med-12 selectedText">
+      
         <!-- selected players -->
-      </span>
+      
     </div>
   </div>
 
@@ -95,13 +94,66 @@
   <div class="row-fluid snaps-chart-container breakdown-players-chart-container" style="display:none">
       <div id="snaps-chart" class="breakdown-chart"></div>
   </div>
+</div>
+
+
+<script type="text/template" class="player-info-template">
+  <div class="row-fluid" id="breakdown-player-quick-info" data-id="{{id}}">
+
+    <div class="col-sm-12 col-md-12">
+      
+      <div class="row-fluid">
+        <div class="col-sm-10 col-md-10">
+          <a target="_blank" href="/players/{{id}}">
+            <h6>{{display_name}} ({{position}})</h6>
+          </a>
+        </div>
+
+        <div class="col-sm-2 col-md-2">
+          <h6 id="breakdown-players-delete_tag">x</h6>
+        </div>
+      </div>
+      
+
+      <div class="row-fluid">
+
+
+        <div class="col-sm-8 col-md-8">
+          <p>Team:</p>
+          <p>Bye:</p> 
+          <p>Overall Rank:</p>
+          <p>Depth Chart Position:</p>
+          <p>SOS Rank:</p>
+          <p>SOS FPA:</p>
+
+        </div>
+
+
+        <div class="col-sm-4 col-md-4">
+          <p>{{team_abbreviation}}</p>
+          <p>{{bye_week}}</p>
+          <p>{{overall_rank}}</p>
+          <p>{{depth_chart_position}}</p>
+          <p>{{sos_rank}}</p>
+          <p>{{sos_fpa}}</p>
+        </div>
+
+      </div>
+        
+    </div>
+
+
   </div>
 
-</div>
+</script>
 
 
 <script type="text/javascript">
   
+  _.templateSettings = {
+    interpolate: /\{\{(.+?)\}\}/g
+  };
+
   $(document).ready(function () {
 
     // ---- get data from backend server ---
@@ -134,7 +186,7 @@
     // position selector buttons 
     $('.btn.players-buttons').on("click", function () {
 
-      position = $(this).attr("id");
+      var position = $(this).attr("id");
       // $('.'+position).fadeToggle();
 
       if ($(this).hasClass('btn-success')) {
@@ -180,7 +232,7 @@
 
     // ---- render select box with appropiate positions ----
     function RenderSelectBox () {
-      html = '<select id ="breakdown-players-selectbox" style="width : 90%"><option></option>';
+      var html = '<select id ="breakdown-players-selectbox" style="width : 90%"><option></option>';
       
       if ($('.players-buttons#QB').hasClass('btn-success')){
         html += PositionOptGroup('Quarterbacks', qbs);
@@ -205,7 +257,7 @@
 
     // ---- create html of each position players for render funcation --- 
     function PositionOptGroup (label, positionJSON){
-      html = '<optgroup label="' + label + '" class="QB">';
+      var html = '<optgroup label="' + label + '" class="QB">';
       for (position in positionJSON){
         option_html = '<option value = "' + positionJSON[position].id + '">' + positionJSON[position].display_name + '</option>';
         html += option_html;
@@ -223,64 +275,52 @@
     // ---- event listener for change on select box ----
     // ---- add player to view and to ids array ---
     $(document).on('change','#breakdown-players-selectbox', function() {
-      amount = $('div#breakdown-players-delete_tag').length
-      if (amount < 5){
+      var amount = $('h6#breakdown-players-delete_tag').length
+      
+      if (amount < 4){
         var theID = $('#breakdown-players-selectbox').select2('data').id
         if (ids.indexOf(parseInt(theID)) > -1) {
           return;
         }
-
-
-
         var player = GetData(theID);
-        var html = '<div id="breakdown-player-quick-info">' + 
-          '<div id="breakdown-players-delete_tag"> x </div>' + 
-          '<p id="breakdown-player_info_header">' + 
-          '<a target="_blank" data-id="' + player.id + '" href="/players/'+player.id +'">' + player.display_name + '</a>' +
-          ' (' + player.position + ')</p>' + 
-          '<ul>' +
-          '<li><b>Team</b>: ' + player.team_abbreviation + ' (bye: ' + player.bye_week + ')</li>';
-        if (player.overall_rank) {
-          html += '<li><b>Overall Rank</b>: ' + player.overall_rank + '</li>';
-        }
-        if (player.depth_chart_position) {
-          html += '<li><b>Depth Chart</b>: ' + player.depth_chart_position + '</li>'
-        }
         if (player.season_projection) {
           switch (player.position){
             case 'QB':
-              html += '<li><b>SOS Rank</b>: ' + player.season_projection.sos_qb_rank + '</li>'
-              html += '<li><b>SOS FPA</b>: ' + player.season_projection.sos_qb_fpa + '</li>'
+              player['sos_rank'] = player.season_projection.sos_qb_rank;
+              player['sos_fpa'] = player.season_projection.sos_qb_fpa;
               break;
             case 'RB':
-              html += '<li><b>SOS Rank</b>: ' + player.season_projection.sos_rb_rank + '</li>'
-              html += '<li><b>SOS FPA</b>: ' + player.season_projection.sos_rb_fpa + '</li>'
+              player['sos_rank'] = player.season_projection.sos_rb_rank;
+              player['sos_fpa'] = player.season_projection.sos_rb_fpa;
               break;
             case 'WR':
-              html += '<li><b>SOS Rank</b>: ' + player.season_projection.sos_wr_rank + '</li>'
-              html += '<li><b>SOS FPA</b>: ' + player.season_projection.sos_wr_fpa + '</li>'
+              player['sos_rank'] = player.season_projection.sos_wr_rank;
+              player['sos_fpa'] = player.season_projection.sos_wr_fpa;
               break;
             case 'TE':
-              html += '<li><b>SOS Rank</b>: ' + player.season_projection.sos_te_rank + '</li>'
-              html += '<li><b>SOS FPA</b>: ' + player.season_projection.sos_te_fpa + '</li>'
+              player['sos_rank'] = player.season_projection.sos_te_rank;
+              player['sos_fpa'] = player.season_projection.sos_te_fpa;
               break;
             default:
-              console.log("defaulted switch statment in select#change listener");
+              player['sos_rank'] = "-";
+              player['sos_fpa'] = "-";
+              break;
           }
         }
-        html +=  '</ul></div>'
-
-
-        $('#selectedText').append(html);
+        var template = _.template($('.player-info-template').text());
+        var html = template(player)
+        $('.selectedText').append(html);
         AddID(parseInt(theID));
         Render();
       }
+
     });
 
     // ---- delete event listener to remove player from view and ids array ----
-    $('#selectedText').on('click','#breakdown-players-delete_tag', function () {
-      id = $(this).parent().find('a').data('id')
-      $(this).parent().remove();
+    $('.selectedText').on('click','#breakdown-players-delete_tag', function () {
+      id = $(this).parent().parent().parent().parent().data('id')
+      console.log("id", id);
+      $(this).parent().parent().parent().parent().remove();
       DeleteID(id);
       Render();
     });

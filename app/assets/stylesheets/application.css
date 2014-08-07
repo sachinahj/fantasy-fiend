@@ -33,6 +33,7 @@ html, body {
 #sidebarNav {
   position: fixed;
   background-color: #B1C4CD;
+  border: 1px solid #DFBA91;
   height: 100%;
   padding: 0px;
   margin-left: 0px;

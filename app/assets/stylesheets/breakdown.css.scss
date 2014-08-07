@@ -47,31 +47,28 @@ button.players-buttons {
 }
 
 div#breakdown-player-quick-info {
-  margin: 0px 10px 5px 0px;
-  display: block;
   cursor: pointer;
   -moz-user-select: none; /* mozilla browsers */
   -webkit-user-select: none; /* webkit browsers */
 }
-p#breakdown-player_info_header {
-  display: inline-block;
-  margin-bottom: 0px;
+div#breakdown-player-quick-info p {
+  margin: 0px 0px 0px 2px;
+  font-size: 0.8em;
 }
-div#breakdown-player-quick-info li{
-  list-style: none;
-  margin-bottom: 0px;
-  font-size: 0.9em;
-  line-height: 1.1em;
-}
-div#breakdown-players-delete_tag {
+h6#breakdown-players-delete_tag {
   display: inline-block;
   margin-right: 5px;
   line-height: 100%
 }
-div#breakdown-players-delete_tag:hover {
+h6#breakdown-players-delete_tag:hover {
   cursor: pointer;
   color: white;
   background-color: black;
   border-radius:30%;
   text-align: center;
 }
+
+
+
+
+

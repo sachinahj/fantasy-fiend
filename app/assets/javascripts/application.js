@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 // require jquery.mobile
+//= require underscore
 //= require turbolinks
 //= require_tree .
 //= require select2
