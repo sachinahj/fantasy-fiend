@@ -104,7 +104,6 @@
       $('.draftChartContainer').hide();
       chart = $(this).attr('for');
       $('.' + chart + 'Container').show();
-      $(window).resize();
 
       $('.breakdownDraftButtons').removeClass('btn-primary');
       $('.breakdownDraftButtons').addClass('btn-default');
@@ -510,10 +509,12 @@
 
     // ------- chart functions ----------
     function ScatterChart (scatter_info) {
+      var width = $('.draftMain').width();
       $('#scatter').highcharts({
         chart: {
           type: 'scatter',
-          zoomType: 'xy'
+          zoomType: 'xy',
+          width: width
         },
         credits: {
           enabled: false
@@ -571,9 +572,11 @@
     }
 
     function StackedChart (stacked_info) {
+      var width = $('.draftMain').width();
       $('#stacked').highcharts({
         chart: {
-          type: 'column'
+          type: 'column',
+          width: width
         },
         credits: {
           enabled: false
@@ -641,11 +644,13 @@
     }
 
     function PieChart (pie_info) {
+      var width = $('.draftMain').width();
       $('#pie').highcharts({
         chart: {
           plotBackgroundColor: null,
           plotBorderWidth: null,
-          plotShadow: false
+          plotShadow: false,
+          width: width
         },
         credits: {
           enabled: false
@@ -678,9 +683,11 @@
     }
 
     function SplineChart (spline_info) {
+      var width = $('.draftMain').width();
       $('#spline').highcharts({
         chart: {
-          type: 'spline'
+          type: 'spline',
+          width: width
         },
         credits: {
           enabled: false
@@ -711,7 +718,7 @@
               return this.value
             }
           },
-          // min: 0
+          min: 0
         },
         tooltip: {
           crosshairs: true,

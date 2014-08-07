@@ -1,80 +1,149 @@
 <div class="row-fluid">
+  <div class="col-sm-6 col-md-6 text-center">
+    <div class="row-fluid">
+      <div class="col-sm-12 col-md-12 text-center">
+        <h5>Passing</h5> 
+      </div>
+    </div>
+    
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>QB Rating</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["qb_rating"] ? @stat["qb_rating"] : "----" %></p>
+      </div>
+    </div>
 
-  <div class="span12">
-      <p class="text-center">Passing</p>
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Completions</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["pass_completions"] ? @stat["pass_completions"] : "----" %></p>
+      </div>
+    </div>
+
+
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Attempts</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["pass_attempts"] ? @stat["pass_attempts"] : "----" %></p>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Completion %</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["pass_completion_percent"] ? @stat["pass_completion_percent"] : "----" %></p>
+      </div>
+    </div>
+    
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Yards</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["pass_yards"] ? @stat["pass_yards"] : "----" %></p>
+      </div>
+    </div>
+
+
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Yards/Attempt</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["pass_yards_per_attempt"] ? @stat["pass_yards_per_attempt"] : "----" %></p>
+      </div>
+    </div>
+
+
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Touchdowns</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["pass_touchdowns"] ? @stat["pass_touchdowns"] : "----" %></p>
+      </div>
+    </div>
+
+
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Interceptions</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["pass_interceptions"] ? @stat["pass_interceptions"] : "----" %></p>
+      </div>      
+    </div>
+
   </div>
 
-</div>
+  <div class="col-sm-6 col-md-6 text-center">
+    <div class="row-fluid">
+      <div class="col-sm-12 col-md-12 text-center">
+        <h5>Rushing</h5> 
+      </div>
+    </div>
+    
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Attempts</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["rush_attempts"] ? @stat["rush_attempts"] : "----" %></p>
+      </div>
+    </div>
 
-<div class="row-fluid">
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Yards</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["rush_yards"] ? @stat["rush_yards"] : "----" %></p>
+      </div>
+    </div>
 
-  <div class="span8">
-    <p>QB Rating</p>
-    <p>Completions</p>
-    <p>Attempts</p>
-    <p>Completion %</p>
-    <p>Yards</p>
-    <p>Yards/Attempt</p>
-    <p>Touchdowns</p>
-    <p>Interceptions</p>
+
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Touchdowns</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["rush_touchdowns"] ? @stat["rush_touchdowns"] : "----" %></p>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="col-sm-12 col-md-12 text-center">
+        <h5>Fantasy</h5>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Fantasy Points</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["fantasy_points"] ? @stat["fantasy_points"] : "----" %></p>
+      </div>
+    </div>
+    
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>FPts/Week</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["fantasy_points_per_week"] ? @stat["fantasy_points_per_week"] : "----" %></p>
+      </div>
+    </div>
+  
+
   </div>
 
-  <div class="span4">
-    <p><%= @stat["qb_rating"] ? @stat["qb_rating"] : "----" %></p>
-    <p><%= @stat["pass_completions"] ? @stat["pass_completions"] : "----" %></p>
-    <p><%= @stat["pass_attempts"] ? @stat["pass_attempts"] : "----" %></p>
-    <p><%= @stat["pass_completion_percent"] ? @stat["pass_completion_percent"] : "----" %></p>
-    <p><%= @stat["pass_yards"] ? @stat["pass_yards"] : "----" %></p>
-    <p><%= @stat["pass_yards_per_attempt"] ? @stat["pass_yards_per_attempt"] : "----" %></p>
-    <p><%= @stat["pass_touchdowns"] ? @stat["pass_touchdowns"] : "----" %></p>
-    <p><%= @stat["pass_interceptions"] ? @stat["pass_interceptions"] : "----" %></p>
-  </div>
-
-</div>
-
-
-<div class="row-fluid">
-
-  <div class="span12">
-      <p class="text-center">Rushing</p>
-  </div>
-
-</div>
-
-<div class="row-fluid">
-
-  <div class="span8">
-    <p>Attempts</p>
-    <p>Yards</p>
-    <p>Touchdowns</p>
-  </div>
-
-  <div class="span4">
-    <p><%= @stat["rush_attempts"] ? @stat["rush_attempts"] : "----" %></p>
-    <p><%= @stat["rush_yards"] ? @stat["rush_yards"] : "----" %></p>
-    <p><%= @stat["rush_touchdowns"] ? @stat["rush_touchdowns"] : "----" %></p>
-  </div>
-
-</div>
-
-<div class="row-fluid">
-
-  <div class="span12">
-      <p class="text-center">Fantasy</p>
-  </div>
-
-</div>
-
-<div class="row-fluid">
-
-  <div class="span8">
-    <p>Fantasy Points</p>
-    <p>Fantasy Points/Week</p>
-  </div>
-
-  <div class="span4">
-    <p><%= @stat["fantasy_points"] ? @stat["fantasy_points"] : "----" %></p>
-    <p><%= @stat["fantasy_points_per_week"] ? @stat["fantasy_points_per_week"] : "----" %></p>
-  </div>
 
 </div>

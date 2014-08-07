@@ -1,60 +1,133 @@
 <div class="row-fluid">
+  <div class="col-sm-6 col-md-6 text-center">
+    <div class="row-fluid">
+      <div class="col-sm-12 col-md-12 text-center">
+        <h5>Receiving</h5> 
+      </div>
+    </div>
+    
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Targets</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["receive_receptions"] ? @stat["receive_receptions"] : "----" %></p>
+      </div>
+    </div>
 
-  <div class="span12">
-      <p class="text-center">Receiving</p>
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Receptions</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["receive_receptions"] ? @stat["receive_receptions"] : "----" %></p>
+      </div>
+    </div>
+
+
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Completion %</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["receive_completion_percent"] ? @stat["receive_completion_percent"] : "----" %></p>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Yards</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["receive_yards"] ? @stat["receive_yards"] : "----" %></p>
+      </div>
+    </div>
+    
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Touchdowns</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["receive_touchdowns"] ? @stat["receive_touchdowns"] : "----" %></p>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Long</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["receive_long"] ? @stat["receive_long"] : "----" %></p>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Yards/Target</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["receive_yards_per_target"] ? @stat["receive_yards_per_target"] : "----" %></p>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Yards/Reception</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["receive_yards_per_reception"] ? @stat["receive_yards_per_reception"] : "----" %></p>
+      </div>
+    </div>
+    
   </div>
 
-</div>
+  <div class="col-sm-6 col-md-6 text-center">
 
-<div class="row-fluid">
+    <div class="row-fluid">
+      <div class="col-sm-12 col-md-12 text-center">
+        <h5>Fantasy</h5>
+      </div>
+    </div>
 
-  <div class="span8">
-    <p>Targets</p>
-    <p>Receptions</p>
-    <p>Completion %</p>
-    <p>Yards</p>
-    <p>Touchdowns</p>
-    <p>Long</p>
-    <p>Yards/Target</p>
-    <p>Yards/Reception</p>
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Fumbles</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["fumbles"] ? @stat["fumbles"] : "----" %></p>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Fumbles Lost</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["fumbles_lost"] ? @stat["fumbles_lost"] : "----" %></p>
+      </div>
+    </div>
+    
+
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Fantasy Points</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["fantasy_points"] ? @stat["fantasy_points"] : "----" %></p>
+      </div>
+    </div>
+    
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>FPts/Week</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["fantasy_points_per_week"] ? @stat["fantasy_points_per_week"] : "----" %></p>
+      </div>
+    </div>
+  
+
   </div>
 
-  <div class="span4">
-    <p><%= @stat["receive_targets"] ? @stat["receive_targets"] : "----" %></p>
-    <p><%= @stat["receive_receptions"] ? @stat["receive_receptions"] : "----" %></p>
-    <p><%= @stat["receive_completion_percent"] ? @stat["receive_completion_percent"] : "----" %></p>
-    <p><%= @stat["receive_yards"] ? @stat["receive_yards"] : "----" %></p>
-    <p><%= @stat["receive_touchdowns"] ? @stat["receive_touchdowns"] : "----" %></p>
-    <p><%= @stat["receive_long"] ? @stat["receive_long"] : "----" %></p>
-    <p><%= @stat["receive_yards_per_target"] ? @stat["receive_yards_per_target"] : "----" %></p>
-    <p><%= @stat["receive_yards_per_reception"] ? @stat["receive_yards_per_reception"] : "----" %></p>
-  </div>
-
-</div>
-
-
-<div class="row-fluid">
-
-  <div class="span12">
-      <p class="text-center">Fantasy</p>
-  </div>
-
-</div>
-
-<div class="row-fluid">
-
-  <div class="span8">
-    <p>Fumbles</p>
-    <p>Fumbles Lost</p>
-    <p>Fantasy Points</p>
-    <p>Fantasy Points/Week</p>
-  </div>
-
-  <div class="span4">
-    <p><%= @stat["fumbles"] ? @stat["fumbles"] : "----" %></p>
-    <p><%= @stat["fumbles_lost"] ? @stat["fumbles_lost"] : "----" %></p>
-    <p><%= @stat["fantasy_points"] ? @stat["fantasy_points"] : "----" %></p>
-    <p><%= @stat["fantasy_points_per_week"] ? @stat["fantasy_points_per_week"] : "----" %></p>
-  </div>
 
 </div>

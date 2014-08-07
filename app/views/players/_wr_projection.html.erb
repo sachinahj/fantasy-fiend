@@ -1,73 +1,94 @@
 <div class="row-fluid">
-
-  <div class="span12">
-      <p class="text-center">Receiving</p>
+  <div class="col-sm-6 col-md-6">
+    <div class="row-fluid">
+      <div class="col-sm-12 col-md-12 text-center">
+        <h5>Receiving</h5> 
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Receptions</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @projection["receive_receptions"] ? @projection["receive_receptions"] : "----" %></p>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Yards</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @projection["receive_yards"] ? @projection["receive_yards"] : "----" %></p>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Touchdowns</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right"  >
+        <p><%= @projection["receive_touchdowns"] ? @projection["receive_touchdowns"] : "----" %></p>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="col-sm-12 col-md-12 text-center">
+        <h5>Rushing</h5> 
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Attempts</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @projection["rush_attempts"] ? @projection["rush_attempts"] : "----" %></p>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Yards</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @projection["rush_yards"] ? @projection["rush_yards"] : "----" %></p>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Touchdowns</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right"  >
+        <p><%= @projection["rush_touchdowns"] ? @projection["rush_touchdowns"] : "----" %></p>
+      </div>
+    </div>
   </div>
 
-</div>
-
-<div class="row-fluid">
-
-  <div class="span8">
-    <p>Receptions</p>
-    <p>Yards</p>
-    <p>Touchdowns</p>
+  <div class="col-sm-6 col-md-6"> 
+    <div class="row-fluid">
+      <div class="col-sm-12 col-md-12 text-center">
+        <h5>Fantasy</h5>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Fumbles</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @projection["fumbles"] ? @projection["fumbles"] : "----" %></p>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Fantasy Points</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @projection["fantasy_points"] ? @projection["fantasy_points"] : "----" %></p>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>FPts/Week</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @projection["fantasy_points_per_week"] ? @projection["fantasy_points_per_week"] : "----" %></p>
+      </div>
+    </div>
   </div>
-
-  <div class="span4">
-    <p><%= @projection["receive_receptions"] ? @projection["receive_receptions"] : "----" %></p>
-    <p><%= @projection["receive_yards"] ? @projection["receive_yards"] : "----" %></p>
-    <p><%= @projection["receive_touchdowns"] ? @projection["receive_touchdowns"] : "----" %></p>
-  </div>
-
-</div>
-
-
-<div class="row-fluid">
-
-  <div class="span12">
-      <p class="text-center">Rushing</p>
-  </div>
-
-</div>
-
-<div class="row-fluid">
-
-  <div class="span8">
-    <p>Attempts</p>
-    <p>Yards</p>
-    <p>Touchdowns</p>
-  </div>
-
-  <div class="span4">
-    <p><%= @projection["rush_attempts"] ? @projection["rush_attempts"] : "----" %></p>
-    <p><%= @projection["rush_yards"] ? @projection["rush_yards"] : "----" %></p>
-    <p><%= @projection["rush_touchdowns"] ? @projection["rush_touchdowns"] : "----" %></p>
-  </div>
-
-</div>
-
-
-<div class="row-fluid">
-
-  <div class="span12">
-      <p class="text-center">Fantasy</p>
-  </div>
-
-</div>
-
-<div class="row-fluid">
-
-  <div class="span8">
-    <p>Fumbles</p>
-    <p>Fantasy Points</p>
-    <p>Fantasy Points/Week</p>
-  </div>
-
-  <div class="span4">
-    <p><%= @projection["fumbles"] ? @projection["fumbles"] : "----" %></p>
-    <p><%= @projection["fantasy_points"] ? @projection["fantasy_points"] : "----" %></p>
-    <p><%= @projection["fantasy_points_per_week"] ? @projection["fantasy_points_per_week"] : "----" %></p>
-  </div>
-
 </div>

@@ -111,12 +111,33 @@ class PlayersController < ApplicationController
       @onTeam = Player.where(team_abbreviation: @player.team_abbreviation).where(position: ["RB", "WR", "TE"]).order("depth_chart_position ASC")
     end
 
-    puts "----on team--------"
-    p @onTeam
-
+    @onTeamRBs = []
+    @onTeamWRs = []
+    @onTeamTEs = []
+    @onTeam.each do |player|
+      case player.position
+      when "RB"
+        @onTeamRBs << player
+      when "WR"
+        @onTeamWRs << player
+      when "TE"
+        @onTeamTEs << player
+      else
+      end
+    end
+    @onTeamRBs.sort do |a,b|
+      a.depth_chart_position[2..-1].to_i <=> b.depth_chart_position[2..-1].to_i
+    end
+    @onTeamWRs.sort do |a,b|
+      a.depth_chart_position[2..-1].to_i <=> b.depth_chart_position[2..-1].to_i
+    end
+    @onTeamTEs.sort do |a,b|
+      a.depth_chart_position[2..-1].to_i <=> b.depth_chart_position[2..-1].to_i
+    end
 
 
   end
+
 
 
 private 

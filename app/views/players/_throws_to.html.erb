@@ -1,27 +1,39 @@
-<div class="row-fluid">
-  <div class="span12">
-    <h5 class="text-center">Throws To</h5>
+<div class="col-sm-12 col-md-12">  
+
+  <div class="row-fluid throwToHeader">
+    <div class="col-sm-4 col-md-4">  
+      <p>Running Backs</p>
+    </div>
+    <div class="col-sm-4 col-md-4">  
+      <p>Wide Receivers</p>
+    </div>
+    <div class="col-sm-4 col-md-4">  
+      <p>Tight Ends</p>
+    </div>
   </div>
+
+  <div class="row-fluid throwToPlayers">
+    <div class="col-sm-4 col-md-4">
+      <p>
+        <% @onTeamRBs.each do |rb| %>
+          <%= rb.display_name %><br>
+        <% end %>
+      </p>
+    </div>
+    <div class="col-sm-4 col-md-4">
+      <p>
+        <% @onTeamWRs.each do |wr| %>
+          <%= wr.display_name %><br>
+        <% end %>
+      </p>
+    </div>
+    <div class="col-sm-4 col-md-4">  
+      <p>
+        <% @onTeamTEs.each do |te| %>
+          <%= te.display_name %><br>
+        <% end %>
+      </p>
+    </div>
+  </div>
+
 </div>
-<hr>
-
-
-<% half = @onTeam.length/2 %>
-<div class="row-fluid">
-  <div class="span6">
-    <% @onTeam.each_with_index do |player, index| %>
-      <% if index < half %>
-        <p><%= player.display_name %> (<%= player.depth_chart_position %>)</p>
-      <% end %>
-    <% end %>
-  </div>
-
-  <div class="span6">
-    <% @onTeam.each_with_index do |player, index| %>
-      <% if index >= half %>
-        <p><%= player.display_name %> (<%= player.depth_chart_position %>)</p>
-      <% end %>
-    <% end %>
-  </div>
-</div>
-<hr>

@@ -42,22 +42,40 @@ i {
 div.showSearchBox {
   margin-top: 20px;
 }
-div.row-fluid.playerInfoContainer {
+div.row-fluid.logoContainer {
   position: relative;
   vertical-align: bottom;
   height: 100%
 }
-div.logoContainer {
+div.logoColumn {
   position: absolute;
   bottom: 0;
-  margin-bottom: 8em;
+  margin-bottom: 10em;
 }
 img.logo {
   width: 100%;
   border-radius: 30%;
 }
+div.quickStats {
+  margin-top: 40px;
+  font-size: 0.9em;
+}
+div.playerName {
+  margin-top: 20px;
+}
+div.projectionsAndStats p {
+  font-size: 0.8em;
+}
+div.throwToHeader{
+  font-size: 1em;
+  margin-top: 10px;
+}
+div.throwToPlayers{
+  font-size: 0.8em;
+  margin-top: 10px;
+}
 
-.showTopContainer {
+/*.showTopContainer {
   background: black;
   padding: 1em;
   border-radius: 3em;
@@ -81,3 +99,4 @@ img.logo {
   font-size: 0.9em;
   color: white;
 }
+*/

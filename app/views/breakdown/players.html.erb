@@ -2,13 +2,13 @@
 
   <div class="row-fluid">
     <div class="col-sm-4 col-med-4 chartsButtonContainer">
-      <button type="button" id="projections" class="btn chartsButtons btn-info">Projections</button>
+      <button type="button" id="projections" class="btn chartsButtons btn-info">'14 Projections</button>
     </div>
     <div class="col-sm-4 col-med-4 chartsButtonContainer">
-      <button type="button" id="stats" class="btn chartsButtons btn-default">Stats</button>
+      <button type="button" id="stats" class="btn chartsButtons btn-default">'13 Stats</button>
     </div>
     <div class="col-sm-4 col-med-4 chartsButtonContainer">
-      <button type="button" id="snaps" class="btn chartsButtons btn-default">Snaps</button>
+      <button type="button" id="snaps" class="btn chartsButtons btn-default">'13 Snaps</button>
     </div>
   </div>
 
@@ -78,7 +78,7 @@
 </div>
 
 
-<div class="col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3 draftMain" id="main">
+<div class="col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3 playerBreakdownMain" id="main">
 <br><br>
   <div class="row-fluid projectionsChartContainer labChartContainer">
       <div id="projectionsChart" class="labChart"></div>
@@ -120,7 +120,6 @@
 
       $('.labChartContainer').hide();
       $('.' + type + 'ChartContainer').show();
-      $(window).resize();
 
     });
 
@@ -568,10 +567,14 @@
       categories = typeof categories !== 'undefined' ? categories : [];
       series = typeof series !== 'undefined' ? series : [];
 
+      var width = $('.playerBreakdownMain').width();
+      console.log("width", width);
+
       $('#'+chart_id).show();
       $('#'+chart_id).highcharts({
         chart: {
-          type: 'bar'
+          type: 'bar',
+          width: width
         },
         title: {
           text: titleofchart

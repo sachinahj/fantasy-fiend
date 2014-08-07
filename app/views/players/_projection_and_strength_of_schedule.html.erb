@@ -1,0 +1,41 @@
+<div class="col-sm-12 col-md-12">
+  
+  <div class="row-fluid text-center">
+    <div class="col-sm-12 col-md-12">
+      <hr>
+      <h3>2014 Projections</h3>
+      <hr>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="col-sm-6 col-md-6">
+      <div class="row-fluid text-center">
+        <div class="col-sm-12 col-md-12">
+          <h4>Projections</h4>
+        </div>
+      </div>
+
+      <% case @player.position %>
+      <% when "QB" %>
+        <%= render "qb_projection" %>
+      <% when "RB" %>
+        <%= render "rb_projection" %>
+      <% when "WR" %>
+        <%= render "wr_projection" %>
+      <% when "TE" %>
+        <%= render "te_projection" %>
+      <% end %>
+      
+    </div>
+    <div class="col-sm-6 col-md-6">
+      <div class="row-fluid text-center">
+        <div class="col-sm-12 col-md-12">
+          <h4>Strength of Schedule</h4>
+        </div>
+      </div>
+      <%= render 'sos' %>
+    </div>
+  </div>
+
+</div>
