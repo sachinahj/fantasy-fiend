@@ -107,32 +107,38 @@ class PlayersController < ApplicationController
       @stat = @player.season_stat
     end
 
-    if @player.position == "QB"
-      @onTeam = Player.where(team_abbreviation: @player.team_abbreviation).where(position: ["RB", "WR", "TE"]).order("depth_chart_position ASC")
-    end
+    if @player.position != "DST"
+      @onTeam = Player.where(team_abbreviation: @player.team_abbreviation).where(position: ["QB", "RB", "WR", "TE"]).order("depth_chart_position ASC")
 
-    @onTeamRBs = []
-    @onTeamWRs = []
-    @onTeamTEs = []
-    @onTeam.each do |player|
-      case player.position
-      when "RB"
-        @onTeamRBs << player
-      when "WR"
-        @onTeamWRs << player
-      when "TE"
-        @onTeamTEs << player
-      else
+      @onTeamQBs = []
+      @onTeamRBs = []
+      @onTeamWRs = []
+      @onTeamTEs = []
+      @onTeam.each do |player|
+        case player.position
+        when "QB"
+          @onTeamQBs << player
+        when "RB"
+          @onTeamRBs << player
+        when "WR"
+          @onTeamWRs << player
+        when "TE"
+          @onTeamTEs << player
+        else
+        end
       end
-    end
-    @onTeamRBs.sort do |a,b|
-      a.depth_chart_position[2..-1].to_i <=> b.depth_chart_position[2..-1].to_i
-    end
-    @onTeamWRs.sort do |a,b|
-      a.depth_chart_position[2..-1].to_i <=> b.depth_chart_position[2..-1].to_i
-    end
-    @onTeamTEs.sort do |a,b|
-      a.depth_chart_position[2..-1].to_i <=> b.depth_chart_position[2..-1].to_i
+      @onTeamQBs.sort do |a,b|
+        a.depth_chart_position[2..-1].to_i <=> b.depth_chart_position[2..-1].to_i
+      end
+      @onTeamRBs.sort do |a,b|
+        a.depth_chart_position[2..-1].to_i <=> b.depth_chart_position[2..-1].to_i
+      end
+      @onTeamWRs.sort do |a,b|
+        a.depth_chart_position[2..-1].to_i <=> b.depth_chart_position[2..-1].to_i
+      end
+      @onTeamTEs.sort do |a,b|
+        a.depth_chart_position[2..-1].to_i <=> b.depth_chart_position[2..-1].to_i
+      end
     end
 
 

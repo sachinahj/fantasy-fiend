@@ -56,6 +56,10 @@ html, body {
   background-color: #d0d0d0;
   height: 100%;
   padding: 0px;
+  margin-left: 0px;
+}
+#main {
+  padding-bottom: 50px;
 }
 
 /*.sideButton {

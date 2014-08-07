@@ -77,7 +77,7 @@
 
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 draftMain" id="main">
-  <div class="row-fluid playerHeader">
+  <div class="row playerHeader">
     <div class="col-sm-5 col-md-5 playerColumn">    
       <h1><%= @player.display_name %> (<%=@player.position%>)</h1>
       <h3><%= @player.team %> (<%= @player.team_abbreviation %>)</h3>
@@ -87,20 +87,22 @@
           <div class="row-fluid">
             <%= render "throws_to" %>
           </div>
-        <% elsif @player.position != "DST" || @player.position != "K" %>
-
+        <% elsif @player.position != "DST" && @player.position != "K" %>
+          <div class="row-fluid">
+            <%= render "quarterbacks" %>
+          </div>
         <% end %>
     </div>
   </div>
 
-  <hr id="playerHeaderDivider">
   <div class="row-fluid projectionsAndStats">
     <div class="col-sm-12 col-md-12">    
       
-
-    <div class="row-fluid">
-      <%= render "projection_and_strength_of_schedule" %>
-    </div>
+    <% if @player.position != "DST" %>
+      <div class="row-fluid">
+        <%= render "projection_and_strength_of_schedule" %>
+      </div>
+    <% end %>
     <div class="row-fluid">
       <%= render "stats_and_snaps" %>
     </div>
@@ -133,7 +135,7 @@
     $(document).on('change','#showSelectBox', function() {
       var theID = $('#showSelectBox').select2('data').id
       console.log("theID", theID);
-      window.open('/players/'+theID);
+      window.open('/players/'+theID, "_self");
 
     });
 

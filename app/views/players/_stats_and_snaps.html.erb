@@ -1,6 +1,6 @@
 <div class="col-sm-12 col-md-12 text-center">
 
-  <div class="row-fluid text-center">
+  <div class="row text-center">
     <div class="col-sm-12 col-md-12">
       <hr>
       <h3>2013 Stats</h3>
@@ -8,9 +8,9 @@
     </div>
   </div>
 
-  <div class="row-fluid">
+  <div class="row">
     <div class="col-sm-6 col-md-6">
-      <div class="row-fluid text-center">
+      <div class="row text-center">
         <div class="col-sm-12 col-md-12">
           <h4>Stats</h4>
         </div>
@@ -24,16 +24,29 @@
         <%= render "wr_stat" %>
       <% when "TE" %>
         <%= render "te_stat" %>
+      <% when "K" %>
+        <%= render "k_stat" %>
+      <% when "DST" %>
+        <%= render "dst_stat" %>
       <% else %>
+
       <% end %>
     </div>
     <div class="col-sm-6 col-md-6">
-      <div class="row-fluid text-center">
+      <div class="row text-center">
         <div class="col-sm-12 col-md-12">
-          <h4>Snaps</h4>
+          <% if @player.position != "DST"  %>
+            <h4>Snaps</h4>
+          <% else %>
+            <h4>Fantasy Points Allowed</h4>
+          <% end %>
         </div>
       </div>
-      <%= render 'snap' %>
+      <% if @player.position != "DST"  %>
+        <%= render 'snap' %>
+      <% elsif @player.position == "DST" %>
+        <%= render 'fpa' %>
+      <% end %>
     </div>
   </div>
 

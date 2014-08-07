@@ -1,72 +1,93 @@
-<div class="row-fluid">
+<div class="row">
+  <div class="col-sm-6 col-md-6 text-center">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 text-center">
+        <h5>Field Goals</h5> 
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Made</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["field_goals_made"] ? @stat["field_goals_made"] : "----" %></p>
+      </div>
+    </div>
 
-  <div class="span12">
-      <p class="text-center">Field Goals</p>
+    <div class="row">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Attempts</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["field_goals_attempts"] ? @stat["field_goals_attempts"] : "----" %></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Long</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["field_goals_long"] ? @stat["field_goals_long"] : "----" %></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-12 text-center">
+        <h5>Extra Points</h5> 
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Made</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["extra_points_made"] ? @stat["extra_points_made"] : "----" %></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Attempts</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["extra_points_attempts"] ? @stat["extra_points_attempts"] : "----" %></p>
+      </div>
+    </div>
+    
   </div>
 
-</div>
+  <div class="col-sm-6 col-md-6 text-center">
 
-<div class="row-fluid">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 text-center">
+        <h5>Fantasy</h5>
+      </div>
+    </div>
 
-  <div class="span8">
-    <p>Made</p>
-    <p>Attempts</p>
-    <p>Made %</p>
-    <p>Long</p>
+
+    <div class="row">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>Fantasy Points</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["fantasy_points"] ? @stat["fantasy_points"] : "----" %></p>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-8 col-md-8 text-left">
+        <p>FPts/Week</p>
+      </div>
+      <div class="col-sm-4 col-md-4 text-right">
+        <p><%= @stat["fantasy_points_per_week"] ? @stat["fantasy_points_per_week"] : "----" %></p>
+      </div>
+    </div>
+  
+
   </div>
 
-  <div class="span4">
-    <p><%= @stat["field_goals_made"] ? @stat["field_goals_made"] : "----" %></p>
-    <p><%= @stat["field_goals_attempts"] ? @stat["field_goals_attempts"] : "----" %></p>
-    <p><%= @stat["field_goals_made"] ? @stat["field_goals_made"] : "----" %></p>
-    <p><%= @stat["field_goals_long"] ? @stat["field_goals_long"] : "----" %></p>
-  </div>
-
-</div>
-
-
-<div class="row-fluid">
-
-  <div class="span12">
-      <p class="text-center">Extra Points</p>
-  </div>
-
-</div>
-
-<div class="row-fluid">
-
-  <div class="span8">
-    <p>Made</p>
-    <p>Attempts</p>
-  </div>
-
-  <div class="span4">
-    <p><%= @stat["extra_points_made"] ? @stat["extra_points_made"] : "----" %></p>
-    <p><%= @stat["extra_points_attempts"] ? @stat["extra_points_attempts"] : "----" %></p>
-  </div>
-
-</div>
-
-
-
-<div class="row-fluid">
-
-  <div class="span12">
-      <p class="text-center">Fantasy</p>
-  </div>
-
-</div>
-
-<div class="row-fluid">
-
-  <div class="span8">
-    <p>Fantasy Points</p>
-    <p>Fantasy Points/Week</p>
-  </div>
-
-  <div class="span4">
-    <p><%= @stat["fantasy_points"] ? @stat["fantasy_points"] : "----" %></p>
-    <p><%= @stat["fantasy_points_per_week"] ? @stat["fantasy_points_per_week"] : "----" %></p>
-  </div>
 
 </div>

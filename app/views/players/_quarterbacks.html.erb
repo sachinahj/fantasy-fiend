@@ -2,37 +2,27 @@
 
   <div class="row throwToHeader">
     <div class="col-sm-4 col-md-4">  
-      <h6><u>Running Backs</u></h6>
     </div>
     <div class="col-sm-4 col-md-4">  
-      <h6><u>Wide Receivers</u></h6>
+      <p>Quarterbacks</p>
     </div>
     <div class="col-sm-4 col-md-4">  
-      <h6><u>Tight Ends</u></h6>
     </div>
   </div>
 
   <div class="row throwToPlayers">
     <div class="col-sm-4 col-md-4">
-      <p>
-        <% @onTeamRBs.each do |rb| %>
-          <%= rb.display_name %><br>
-        <% end %>
-      </p>
+      
     </div>
     <div class="col-sm-4 col-md-4">
       <p>
-        <% @onTeamWRs.each do |wr| %>
-          <%= wr.display_name %><br>
+        <% @onTeamQBs.each do |qb| %>
+          <%= qb.display_name %><br>
         <% end %>
       </p>
     </div>
     <div class="col-sm-4 col-md-4">  
-      <p>
-        <% @onTeamTEs.each do |te| %>
-          <%= te.display_name %><br>
-        <% end %>
-      </p>
+
     </div>
   </div>
 
