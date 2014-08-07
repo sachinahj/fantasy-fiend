@@ -127,18 +127,6 @@ class PlayersController < ApplicationController
         else
         end
       end
-      @onTeamQBs.sort do |a,b|
-        a.depth_chart_position[2..-1].to_i <=> b.depth_chart_position[2..-1].to_i
-      end
-      @onTeamRBs.sort do |a,b|
-        a.depth_chart_position[2..-1].to_i <=> b.depth_chart_position[2..-1].to_i
-      end
-      @onTeamWRs.sort do |a,b|
-        a.depth_chart_position[2..-1].to_i <=> b.depth_chart_position[2..-1].to_i
-      end
-      @onTeamTEs.sort do |a,b|
-        a.depth_chart_position[2..-1].to_i <=> b.depth_chart_position[2..-1].to_i
-      end
     end
 
 

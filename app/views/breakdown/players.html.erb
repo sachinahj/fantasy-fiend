@@ -567,8 +567,7 @@
       categories = typeof categories !== 'undefined' ? categories : [];
       series = typeof series !== 'undefined' ? series : [];
 
-      var width = $('.playerBreakdownMain').width();
-      console.log("width", width);
+      var width = $('.playerBreakdownMain').width() * 0.95;
 
       $('#'+chart_id).show();
       $('#'+chart_id).highcharts({

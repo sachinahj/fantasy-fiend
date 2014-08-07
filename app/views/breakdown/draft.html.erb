@@ -509,7 +509,7 @@
 
     // ------- chart functions ----------
     function ScatterChart (scatter_info) {
-      var width = $('.draftMain').width();
+      var width = $('.draftMain').width() * 0.95;
       $('#scatter').highcharts({
         chart: {
           type: 'scatter',
@@ -572,7 +572,7 @@
     }
 
     function StackedChart (stacked_info) {
-      var width = $('.draftMain').width();
+      var width = $('.draftMain').width() * 0.95;
       $('#stacked').highcharts({
         chart: {
           type: 'column',
@@ -644,7 +644,7 @@
     }
 
     function PieChart (pie_info) {
-      var width = $('.draftMain').width();
+      var width = $('.draftMain').width() * 0.95;
       $('#pie').highcharts({
         chart: {
           plotBackgroundColor: null,
@@ -683,7 +683,7 @@
     }
 
     function SplineChart (spline_info) {
-      var width = $('.draftMain').width();
+      var width = $('.draftMain').width() * 0.95;
       $('#spline').highcharts({
         chart: {
           type: 'spline',
