@@ -174,6 +174,9 @@
 
     var current_container = "projections"
     $('.btn.charts-buttons').on("click", function () {
+      if (ids[0] == null){
+        return;
+      }
       current_container = $(this).attr("id");
       $('.charts-buttons').removeClass('btn-info');
       $('.charts-buttons').addClass('btn-default');
@@ -181,6 +184,7 @@
 
       $('.breakdown-players-chart-container').hide();
       $('.' + current_container + '-chart-container').show();
+      
 
     });
 
@@ -251,7 +255,6 @@
         html += PositionOptGroup('Tight Ends', tes);
       }
       html += "</select>";
-      console.log("html", html);
       $('.select-container').empty().append(html);
       $('#breakdown-players-selectbox').select2('destroy').select2({
         placeholder: "Select a Player",
@@ -323,7 +326,6 @@
     // ---- delete event listener to remove player from view and ids array ----
     $('.selectedText').on('click','#breakdown-players-delete_tag', function () {
       id = $(this).parent().parent().parent().parent().data('id')
-      console.log("id", id);
       $(this).parent().parent().parent().parent().remove();
       DeleteID(id);
       Render();
