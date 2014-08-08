@@ -290,6 +290,13 @@
           return;
         }
         var player = GetData(theID);
+        var stats_to_show = ["team_abbreviation","bye_week","overall_rank","depth_chart_position","sos_rank","sos_fpa"];
+        for (var i = 0; i < stats_to_show.length; i++) {
+          if (player[stats_to_show[i]] == null) {
+            player[stats_to_show[i]] = "-"
+          }
+        }
+
         if (player.season_projection) {
           switch (player.position){
             case 'QB':
