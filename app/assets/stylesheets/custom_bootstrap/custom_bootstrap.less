@@ -9,26 +9,173 @@
 
 
 
-@navbar-default-bg: #2E5363;
-@navbar-default-border: #DFBA91;
+@navbar-default-bg: #110B35;
+@navbar-default-border: white;
 
-@navbar-default-brand-color: #B1C4CD;
-@navbar-default-link-color: #B1C4CD;
+@navbar-default-brand-color: white;
+@navbar-default-link-color: white;
 
-@navbar-default-brand-hover-color: #DFBA91;
-@navbar-default-link-hover-color: #DFBA91;
+@navbar-default-brand-hover-color: #E1D0A1;
+@navbar-default-link-hover-color: #E1D0A1;
 
-@dropdown-bg: #2E5363;
-@dropdown-link-hover-bg: #2E5363;
+@dropdown-bg: #E1D0A1;
+@dropdown-link-hover-bg: #E1D0A1;
 
-@dropdown-link-color: #B1C4CD;
-@dropdown-link-active-bg: #B1C4CD;
-@navbar-default-link-active-bg: #B1C4CD;
+@dropdown-link-color: #110B35;
+@dropdown-link-active-bg: #E1D0A1;
+@navbar-default-link-active-bg: #E1D0A1;
 
-@dropdown-link-hover-color: #DFBA91;
-@dropdown-divider-bg: #DFBA91;
-@dropdown-border: #DFBA91;
+@dropdown-link-hover-color: white;
+@dropdown-divider-bg: white;
+@dropdown-border: white;
 
+
+@media (min-width: @screen-sm-min)  {
+  /* cheatsheet media queries */
+  table#cheatsheet-table th {
+    font-size: 0.6em;
+  }
+  table#cheatsheet-table td {
+    font-size: .7em;
+  }
+  button.btn.cheatsheetButtons {
+    font-size: 0.7em;
+  }
+  /* breakdown draft media queries */
+  button.breakdown-draft-buttons {
+    font-size: 1.0em;
+  }
+  div.breakdown-button {
+    font-size: 1.0em;
+  }
+  /* breakdown players media queries */
+  button.players-buttons {
+    font-size: 1.0em;
+  }
+  .charts-buttons-container .charts-buttons {
+    font-size: 0.8em; 
+  }
+  div#breakdown-player-quick-info p {
+    font-size: 0.7em;
+  }
+  h5.breakdown-player-info-name {
+    font-size: 0.6em;
+  }
+  .breakdown-player-extra-info {
+    display: block;
+  }
+  h6#breakdown-player-delete_tag {
+    font-size: 1.0em;
+  }
+  /* show players media queries */
+  div.show-projections-and-stats p {
+    font-size: 0.6em;
+  }
+  div.show-player-name {
+    display: block;
+  }
+  div.show-quick-stats {
+    display: block;
+  }
+}
+
+@media (min-width: @screen-md-min)  {
+  /* cheatsheet media queries */
+  table#cheatsheet-table th {
+    font-size: 0.7em;
+  }
+  table#cheatsheet-table td {
+    font-size: 0.8em;
+  }
+  button.btn.cheatsheetButtons {
+    font-size: 0.8em;
+  }
+  /* breakdown draft media queries */
+  button.breakdown-draft-buttons {
+    font-size: 1.0em;
+  }
+  div.breakdown-button {
+    font-size: 1.0em;
+  }
+  /* breakdown players media queries */
+  button.players-buttons {
+    font-size: 1.0em;
+  }
+  .charts-buttons-container .charts-buttons {
+    font-size: 1.0em; 
+  }
+  div#breakdown-player-quick-info p {
+    font-size: 0.9em;
+  }
+  h5.breakdown-player-info-name {
+    font-size: 1.0em;
+  }
+  .breakdown-player-extra-info {
+    display: block;
+  }
+  h6#breakdown-player-delete_tag {
+    font-size: 1.0em;
+  }
+  /* show players media queries */
+  div.show-projections-and-stats p {
+    font-size: 0.6em;
+  } 
+  div.show-player-name {
+    display: block;
+  }
+  div.show-quick-stats {
+    display: block;
+  }
+}
+
+@media (min-width: @screen-lg-min)  {
+  /* cheatsheet media queries */
+  table#cheatsheet-table th {
+    font-size: 0.7em;
+  }
+  table#cheatsheet-table td {
+    font-size: 0.9em;
+  }
+  button.btn.cheatsheetButtons {
+    font-size: 1.0em;
+  }
+  /* breakdown draft media queries */
+  button.breakdown-draft-buttons {
+    font-size: 1.2em;
+  }
+  div.breakdown-button {
+    font-size: 1.2em;
+  }
+  /* breakdown players media queries */
+  button.players-buttons {
+    font-size: 1.0em;
+  }
+  .charts-buttons-container .charts-buttons {
+    font-size: 1.0em; 
+  }
+  div#breakdown-player-quick-info p {
+    font-size: 0.9em;
+  }
+  h5.breakdown-player-info-name {
+    font-size: 1.0em;
+  }
+  .breakdown-player-extra-info {
+    display: block;
+  }
+  h6#breakdown-player-delete_tag {
+    font-size: 1.0em;
+  }
+  /* show players media queries */
+  div.show-projections-and-stats p {
+    font-size: 0.8em;
+  }
+  div.show-player-name {
+    display: block;
+  }
+  div.show-quick-stats {
+    display: block;
+  }
+}
 
 
 @import "./custom_bootstrap/variables.less"; // Modify this for custom colors, font-sizes, etc

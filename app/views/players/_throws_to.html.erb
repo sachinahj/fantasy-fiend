@@ -1,21 +1,11 @@
 <div class="col-sm-12 col-md-12">  
 
-  <!-- position headers -->
-  <div class="row throwToHeader">
-    <div class="col-sm-4 col-md-4">  
-      <h6><u>Running Backs</u></h6>
-    </div>
-    <div class="col-sm-4 col-md-4">  
-      <h6><u>Wide Receivers</u></h6>
-    </div>
-    <div class="col-sm-4 col-md-4">  
-      <h6><u>Tight Ends</u></h6>
-    </div>
-  </div>
+  
 
   <!-- position players sorted by depth chart position in controller -->
   <div class="row throwToPlayers">
     <div class="col-sm-4 col-md-4">
+      <h6><u>Running Backs</u></h6>
       <p>
         <% @onTeamRBs.each do |rb| %>
           <%= link_to rb.display_name, rb %><br>
@@ -23,6 +13,7 @@
       </p>
     </div>
     <div class="col-sm-4 col-md-4">
+      <h6><u>Wide Receivers</u></h6>
       <p>
         <% @onTeamWRs.each do |wr| %>
           <%= link_to wr.display_name, wr %><br>
@@ -30,6 +21,7 @@
       </p>
     </div>
     <div class="col-sm-4 col-md-4">  
+      <h6><u>Tight Ends</u></h6>
       <p>
         <% @onTeamTEs.each do |te| %>
           <%= link_to te.display_name, te %><br>

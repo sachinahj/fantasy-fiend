@@ -42,7 +42,7 @@ class BreakdownController < ApplicationController
         @others << player
       end
     end
-    
+
   end
 
 

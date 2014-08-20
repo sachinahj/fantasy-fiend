@@ -2,16 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono|Brawler);
+
 /* show#players css */
 div.show-search-box {
   margin-top: 20px;
 }
-div.show-player-name {
+.show-player-name {
   margin-top: 20px;
+  display: none;
 }
-div.show-quick-stats {
+.show-quick-stats {
   margin-top: 40px;
   font-size: 0.9em;
+  display: none;
 }
 div.row-fluid.show-logo-container {
   position: relative;
@@ -26,9 +30,11 @@ div.show-logo-column {
 img.show-logo-img {
   width: 100%;
   border-radius: 30%;
+  border: 2px solid #110B35;
 }
 div.show-projections-and-stats p {
   font-size: 0.8em;
+  margin: 1px auto; 
 }
 div.throwToHeader {
   font-size: 1em;
@@ -38,12 +44,57 @@ div.throwToPlayers {
   font-size: 0.8em;
   margin-top: 0px;
 }
-
+.stats-divider {
+  margin: 5px 0px 2px 0px;
+}
+.stat-category {
+  margin: 2px;
+}
 
 /* index#player ROOT css */
+
 div.index-background-img {
-  background: url("saints.jpg");
-  background-size: 100% auto;
-  background-repeat: repeat;
+  background: url("stadium-day.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   height: 100%;
 }
+.main-page-title {
+  font: 7.0em 'ChangaOneRegular';
+  color: white;
+  text-transform: uppercase;
+  margin-top: 30%;
+}
+.background-image-container-container, .background-image-container {
+  height: 100%;
+}
+div.index-search-box {
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+#news-divider {
+  margin: 5px auto;
+}
+.league-news {
+  font: 1.0em 'Brawler';
+  /*font: 1.2em 'Ubuntu Mono';*/
+  /*font: 1.0em times;*/
+}
+#news-header {
+  font: 1.1em 'Brawler';
+}
+.reference-logos {
+  height: 50px;
+}
+.reference-logo-container {
+  margin-top: 100px;
+}
+
+
+
+
+
+
+
+
+
