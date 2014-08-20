@@ -2,9 +2,6 @@ class PlayersController < ApplicationController
   before_action :get_positions, only: [:show, :index]
 
   def index
-    puts "---------------------"
-    puts "test #{ENV["ESPNKEY"]}"
-    
 
   end
 
