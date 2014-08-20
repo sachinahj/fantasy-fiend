@@ -67,16 +67,17 @@ div#breakdown-player-quick-info p {
 h5.breakdown-player-info-name {
   font-size: 0.3em;
 }
-h6#breakdown-player-delete_tag {
+img#breakdown-player-delete_tag {
   margin-right: 5px;
-  line-height: 100%;
-  font-size: 1em;
+  height: 1.3em;
+  margin: 1em 0em 0em 0em;
+
   display: inline-block;
 }
-h6#breakdown-player-delete_tag:hover {
+img#breakdown-player-delete_tag:hover {
   cursor: pointer;
   color: white;
-  background-color: black;
+  background-color: white;
   border-radius:30%;
 }
 .breakdown-player-extra-info {
