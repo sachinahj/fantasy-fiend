@@ -6,6 +6,8 @@ The latest information was gathered on August 9, 2014. The projections and stats
 
 Tech Stack: AppleScript, Rails, JavaScript, and Twitter Bootstrap.
 
+Live Site: <a href="http://fantasy-football-force.herokuapp.com/">Fantasy Fiend</a>
+
 ## Developers
 
 ### Install
