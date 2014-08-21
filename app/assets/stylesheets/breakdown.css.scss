@@ -60,12 +60,13 @@ div#breakdown-player-quick-info {
   -moz-user-select: none; /* mozilla browsers */
   -webkit-user-select: none; /* webkit browsers */
 }
-div#breakdown-player-quick-info p {
+div#breakdown-player-quick-info, .selectedText p {
   margin: 0px 0px 0px 2px;
-  font-size: 0.6em;
+  font-size: 0.8em;
 }
-h5.breakdown-player-info-name {
-  font-size: 0.3em;
+h5.breakdown-player-info-name, .selectedText {
+  font-size: 1.3em;
+  color: #110B35;
 }
 img#breakdown-player-delete_tag {
   margin-right: 5px;

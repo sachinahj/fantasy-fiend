@@ -54,16 +54,24 @@ div.throwToPlayers {
 /* index#player ROOT css */
 
 div.index-background-img {
-  background: url("stadium-day.jpg");
+  background: url("simulated-stadium.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   height: 100%;
 }
 .main-page-title {
   font: 7.0em 'ChangaOneRegular';
-  color: white;
+  color: #9cb0d1;
   text-transform: uppercase;
-  margin-top: 30%;
+  margin-top: 40%;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #110B35;
+}
+#main-title-step {
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  
 }
 .background-image-container-container, .background-image-container {
   height: 100%;
@@ -71,24 +79,33 @@ div.index-background-img {
 div.index-search-box {
   margin-top: 30px;
   margin-bottom: 40px;
+  padding: 5px 0px;
+  border: 2px solid #110B35;
+  border-radius: 50px;
 }
 #news-divider {
   margin: 5px auto;
   border-top: 1px solid #110B35;
 }
-.league-news {
-  font: 1.0em 'Brawler';
-  /*font: 1.2em 'Ubuntu Mono';*/
-  /*font: 1.0em times;*/
+div.league-news{
+  /*font: 1.0em 'Brawler' #110B35;*/
+  font-color: #110B35;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding-bottom: 10px;
+  border-radius: 10px;
+}
+h6.headline {
+  font: 1.0em 'Brawler' #110B35;
 }
 #news-header {
   font: 1.1em 'Brawler';
+  color: #110B35;
 }
 .reference-logos {
   height: 50px;
 }
 .reference-logo-container {
-  margin-top: 100px;
+  margin-top: 0.9em;
 }
 
 
