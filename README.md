@@ -21,12 +21,7 @@ Uses Rails 4 with bundler
     bundle exec rake db:migrate
     rails s
 
-Go to http://0.0.0.0:3000/
-
-
-
-
-### Documentation 
+Go to http://0.0.0.0:3000/ or http://localhost:3000/
 
 ## Thank You!
 
