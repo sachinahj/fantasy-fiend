@@ -9,7 +9,23 @@ Tech Stack: AppleScript, Rails, JavaScript, and Twitter Bootstrap.
 ## Developers
 
 ### Install
+Uses Rails 4 with bundler 
+
+    cd /tmp
+    git clone https://github.com/sachinahj/fantasy-fiend.git
+    cd fantasy-fiend
+    bundle install
+    bundle exec rake db:create
+    bundle exec rake db:migrate
+    rails s
+
+Go to http://0.0.0.0:3000/
+
+
+
 
 ### Documentation 
 
 ## Thank You!
+
+Special thanks to MakerSquare for all the help!
